@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- THIS FILE LISTS ALL THE DATA ASSOCIATED WITH Level 1 FOR THE BUGS GAME -->
+
+<level level_name="Color Crazy">
+  
+  <!-- MAP TO BE USED FOR THIS LEVEL -->
+  <level_map map_dir="data/maps/ColorCrazy/" map_file="ColorCrazy.tmx" />
+  
+  <!-- COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME -->
+  <level_sprite_types sprite_types_dir="data/sprite_types/" sprite_types_file="MantisMania.xml" />
+  
+  <!-- THESE ARE THE BOT TYPES THE LEVEL WILL BE SPAWNING -->
+  <level_bot_types>
+    <bot type="crazy_mantis"      sprite_type="big_praying_mantis"    MOVING="deterministic"   DYING="respawn" SPAWNING="random" max_velocity="10" />
+    <bot type="lumbering_mantis"  sprite_type="devils_flower_mantis"  MOVING="random_interval" DYING="recycle" SPAWNING="random" max_velocity="10" />
+    <bot type="stupid_mantis"     sprite_type="flower_mantis"         MOVING="deterministic"   DYING="recycle" SPAWNING="random" max_velocity="10" />
+    <bot type="staring_mantis"    sprite_type="praying_mantis"        MOVING="random_interval" DYING="respawn" SPAWNING="random" max_velocity="10" />
+  </level_bot_types>
+  
+  <!-- INITIAL BOTS WHEN THE LEVEL STARTS -->
+  <bots_list>
+    <bot type="crazy_mantis"      init_x="200"  init_y="100" init_vx="2"    init_vy="2"   init_bot_state="MOVING" init_sprite_state="WALKING" />
+    <bot type="lumbering_mantis"  init_x="400"  init_y="300" init_vx="-2"   init_vy="2"   init_bot_state="MOVING" init_sprite_state="WALKING" />
+    <bot type="stupid_mantis"     init_x="600"  init_y="500" init_vx="1"    init_vy="2"   init_bot_state="MOVING" init_sprite_state="WALKING" />
+    <bot type="staring_mantis"    init_x="800"  init_y="700" init_vx="-1"   init_vy="3"   init_bot_state="MOVING" init_sprite_state="WALKING" />
+  </bots_list>
+  
+  <!-- WE CAN EVEN SPECIFY BOT SPAWN LOCATIONS -->
+  <spawning_pools>
+    <spawning_pool x="384"  y="384"   type="crazy_mantis"     interval_time="250"   interval_type="scheduled" />
+    <spawning_pool x="384"  y="2752"   type="lumbering_mantis" interval_time="250"   interval_type="random"    />
+    <spawning_pool x="2752"  y="384"   type="stupid_mantis"    interval_time="250"   interval_type="scheduled" />
+    <spawning_pool x="2752" y="2752"  type="staring_mantis"   interval_time="250"  interval_type="random"    />
+  </spawning_pools>
+</level>

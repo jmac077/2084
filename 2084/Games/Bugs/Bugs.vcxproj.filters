@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{eaaecd34-ed99-4856-bf86-037892d695cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\bugs">
+      <UniqueIdentifier>{dbc5bd72-2c4e-4ef7-8060-46f090ce1522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\bugs_VS">
+      <UniqueIdentifier>{78e59404-09f1-49cd-909c-54625f0f12b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{bc0c65f3-b266-4260-906c-3fb6ecc6bc0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\maps">
+      <UniqueIdentifier>{2b39f0c2-7106-42a5-975f-bd7bb15e8938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\maps\TopDownDesert">
+      <UniqueIdentifier>{22812127-3af9-4743-bdde-01ef6ef60bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\levels">
+      <UniqueIdentifier>{e12b0f03-a6f2-475b-82bc-066db03198bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\sprite_types">
+      <UniqueIdentifier>{aeffe975-88c4-48d7-b2bb-1a70f2dfc675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\sprite_types\black_ant">
+      <UniqueIdentifier>{531b4ede-17b8-4148-9858-c8d88da7c47c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\gui">
+      <UniqueIdentifier>{ae636bb2-66c4-4cf5-9ba8-a9463cd22f2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\gui\buttons">
+      <UniqueIdentifier>{7576d26b-beea-4a5d-8beb-37524f6e402e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\gui\overlays">
+      <UniqueIdentifier>{08a4e42f-48d8-4486-8c58-244c554fd038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\gui\cursors">
+      <UniqueIdentifier>{01a0ce08-7014-42b3-8fa2-94fae580b8ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\sprite_types\aphid">
+      <UniqueIdentifier>{bd7e519f-25f5-45ac-ad74-b4b8b6711b6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\sprite_types\big_praying_mantis">
+      <UniqueIdentifier>{e4d1af1c-af12-40ad-bb12-fc291023b2e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\sprite_types\devils_flower_mantis">
+      <UniqueIdentifier>{e259aefb-bb7a-41f9-9a8c-d8203cdccbc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\sprite_types\flower_mantis">
+      <UniqueIdentifier>{4aca8bee-7fdd-44f4-8d07-f85af17ee056}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\sprite_types\praying_mantis">
+      <UniqueIdentifier>{ad67f02f-6b42-47f5-bc80-12057d7216c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\maps\ColorCrazy">
+      <UniqueIdentifier>{0b4711ed-a980-4e40-aa00-ba60b2f79fd0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\bugs\BugsButtonEventHandler.cpp">
+      <Filter>src\bugs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bugs\BugsKeyEventHandler.cpp">
+      <Filter>src\bugs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bugs\BugsMouseEventHandler.cpp">
+      <Filter>src\bugs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bugs\BugsTextGenerator.cpp">
+      <Filter>src\bugs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bugs_VS\stdafx.cpp">
+      <Filter>src\bugs_VS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bugs\BugsApp.cpp">
+      <Filter>src\bugs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bugs\BugsStateMachine.cpp">
+      <Filter>src\bugs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\bugs\BugsButtonEventHandler.h">
+      <Filter>src\bugs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bugs\BugsKeyEventHandler.h">
+      <Filter>src\bugs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bugs\BugsMouseEventHandler.h">
+      <Filter>src\bugs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bugs\BugsTextGenerator.h">
+      <Filter>src\bugs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bugs_VS\Resource.h">
+      <Filter>src\bugs_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bugs_VS\stdafx.h">
+      <Filter>src\bugs_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bugs_VS\targetver.h">
+      <Filter>src\bugs_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bugs\BugsApp.h">
+      <Filter>src\bugs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bugs\BugsStateMachine.h">
+      <Filter>src\bugs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\bugs_VS\ReadMe.txt">
+      <Filter>src\bugs_VS</Filter>
+    </Text>
+    <Text Include="..\..\Apps\Bugs\data\gui\bugs_gui.xml">
+      <Filter>data\gui</Filter>
+    </Text>
+    <Text Include="..\..\Apps\Bugs\DebugOutput.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Apps\Bugs\data\maps\TopDownDesert\TopDownDesert.tmx">
+      <Filter>data\maps\TopDownDesert</Filter>
+    </None>
+    <None Include="..\..\Apps\Bugs\data\mg_engine.config">
+      <Filter>data</Filter>
+    </None>
+    <None Include="..\..\Apps\Bugs\data\maps\ColorCrazy\ColorCrazy.tmx">
+      <Filter>data\maps\ColorCrazy</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Apps\Bugs\data\levels\Level1.xml">
+      <Filter>data\levels</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Bugs\data\sprite_types\black_ant\black_ant.xml">
+      <Filter>data\sprite_types\black_ant</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Bugs\data\sprite_types\BeginnerBugs.xml">
+      <Filter>data\sprite_types</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Bugs\data\sprite_types\aphid\aphid.xml">
+      <Filter>data\sprite_types\aphid</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Bugs\data\sprite_types\MantisMania.xml">
+      <Filter>data\sprite_types</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Bugs\data\sprite_types\big_praying_mantis\big_praying_mantis.xml">
+      <Filter>data\sprite_types\big_praying_mantis</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Bugs\data\sprite_types\devils_flower_mantis\devils_flower_mantis.xml">
+      <Filter>data\sprite_types\devils_flower_mantis</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Bugs\data\sprite_types\flower_mantis\flower_mantis.xml">
+      <Filter>data\sprite_types\flower_mantis</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Bugs\data\sprite_types\praying_mantis\praying_mantis.xml">
+      <Filter>data\sprite_types\praying_mantis</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Bugs\data\levels\Level2.xml">
+      <Filter>data\levels</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="..\..\Apps\Bugs\data\sprite_types\sprite_type.xsd">
+      <Filter>data\sprite_types</Filter>
+    </Xsd>
+    <Xsd Include="..\..\Apps\Bugs\data\sprite_types\sprite_type_list.xsd">
+      <Filter>data\sprite_types</Filter>
+    </Xsd>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Apps\Bugs\data\sprite_types\black_ant\black_ant_IDLE_1.png">
+      <Filter>data\sprite_types\black_ant</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\sprite_types\black_ant\black_ant_IDLE_2.png">
+      <Filter>data\sprite_types\black_ant</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\sprite_types\black_ant\black_ant_IDLE_3.png">
+      <Filter>data\sprite_types\black_ant</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\sprite_types\black_ant\black_ant_WALKING_1.png">
+      <Filter>data\sprite_types\black_ant</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\sprite_types\black_ant\black_ant_WALKING_2.png">
+      <Filter>data\sprite_types\black_ant</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\sprite_types\black_ant\black_ant_WALKING_3.png">
+      <Filter>data\sprite_types\black_ant</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\buttons\exit_game.png">
+      <Filter>data\gui\buttons</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\buttons\exit_game_mo.png">
+      <Filter>data\gui\buttons</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\buttons\quit.png">
+      <Filter>data\gui\buttons</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\buttons\quit_mo.png">
+      <Filter>data\gui\buttons</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\buttons\start_game.png">
+      <Filter>data\gui\buttons</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\buttons\start_game_mo.png">
+      <Filter>data\gui\buttons</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\cursors\green_cursor.png">
+      <Filter>data\gui\cursors</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\cursors\red_cursor.png">
+      <Filter>data\gui\cursors</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\overlays\bugs_main_menu_overlay.png">
+      <Filter>data\gui\overlays</Filter>
+    </Image>
+    <Image Include="..\..\Apps\Bugs\data\gui\overlays\bugs_splash_screen_overlay.png">
+      <Filter>data\gui\overlays</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

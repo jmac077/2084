@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sprite_type>
+ <width>82</width>
+ <height>82</height>
+ <images_list>
+  <image_file id="0"  file_name="walking_up1.png"/>
+  <image_file id="1"  file_name="walking_up2.png"/>
+  <image_file id="2"  file_name="walking_up3.png"/>
+  <image_file id="3"  file_name="walking_up4.png"/>
+  <image_file id="4"  file_name="walking_down1.png"/>
+  <image_file id="5"  file_name="walking_down2.png"/>
+  <image_file id="6"  file_name="walking_down3.png"/>
+  <image_file id="7"  file_name="walking_down4.png"/>
+  <image_file id="8"  file_name="walking_left1.png"/>
+  <image_file id="9"  file_name="walking_left2.png"/>
+  <image_file id="10"  file_name="walking_left3.png"/>
+  <image_file id="11"  file_name="walking_left4.png"/>
+  <image_file id="12"  file_name="walking_left5.png"/>
+  <image_file id="13"  file_name="walking_left6.png"/>
+  <image_file id="14"  file_name="walking_right1.png"/>
+  <image_file id="15"  file_name="walking_right2.png"/>
+  <image_file id="16"  file_name="walking_right3.png"/>
+  <image_file id="17"  file_name="walking_right4.png"/>
+  <image_file id="18"  file_name="walking_right5.png"/>
+  <image_file id="19"  file_name="walking_right6.png"/>
+  <image_file id="20"  file_name="talking_left1.png"/>
+  <image_file id="21"  file_name="talking_left2.png"/>
+  <image_file id="22"  file_name="talking_right1.png"/>
+  <image_file id="23"  file_name="talking_right2.png"/>
+  <image_file id="24"  file_name="bending_back1.png"/>
+  <image_file id="25"  file_name="bending_back2.png"/>
+  <image_file id="26"  file_name="bending_front1.png"/>
+  <image_file id="27"  file_name="bending_front2.png"/>
+  <image_file id="28"  file_name="bending_left1.png"/>
+  <image_file id="29"  file_name="bending_left2.png"/>
+  <image_file id="30"  file_name="bending_left3.png"/>
+  <image_file id="31"  file_name="bending_right1.png"/>
+  <image_file id="32"  file_name="bending_right2.png"/>
+  <image_file id="33"  file_name="bending_right3.png"/>
+  <image_file id="34"  file_name="deactivate_cam_left.png"/>
+  <image_file id="35"  file_name="deactivate_cam_right.png"/>
+ </images_list>
+ <animations_list>
+  <animation_state>
+   <state>IDLE</state>
+   <animation_sequence>
+    <pose image_id="0" duration="12"/>
+   </animation_sequence>
+  </animation_state>
+  <animation_state>
+   <state>WALKING_UP</state>
+   <animation_sequence>
+    <pose image_id="0" duration="6"/>
+    <pose image_id="1" duration="6"/>
+    <pose image_id="2" duration="6"/>
+    <pose image_id="3" duration="6"/>
+   </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>WALKING_DOWN</state>
+      <animation_sequence>
+          <pose image_id="4" duration="6"/>
+          <pose image_id="5" duration="6"/>
+          <pose image_id="6" duration="6"/>
+          <pose image_id="7" duration="6"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>WALKING_LEFT</state>
+      <animation_sequence>
+          <pose image_id="8" duration="6"/>
+          <pose image_id="9" duration="6"/>
+          <pose image_id="10" duration="6"/>
+          <pose image_id="11" duration="6"/>
+          <pose image_id="12" duration="6"/>
+          <pose image_id="13" duration="6"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>WALKING_RIGHT</state>
+      <animation_sequence>
+          <pose image_id="14" duration="6"/>
+          <pose image_id="15" duration="6"/>
+          <pose image_id="16" duration="6"/>
+          <pose image_id="17" duration="6"/>
+          <pose image_id="18" duration="6"/>
+          <pose image_id="19" duration="6"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>TALKING_LEFT</state>
+      <animation_sequence>
+          <pose image_id="20" duration="12"/>
+          <pose image_id="21" duration="12"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>TALKING_RIGHT</state>
+      <animation_sequence>
+          <pose image_id="22" duration="12"/>
+          <pose image_id="23" duration="12"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>BENDING_BACK</state>
+      <animation_sequence>
+          <pose image_id="24" duration="12"/>
+          <pose image_id="25" duration="12"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>BENDING_FRONT</state>
+      <animation_sequence>
+          <pose image_id="26" duration="12"/>
+          <pose image_id="27" duration="12"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>BENDING_LEFT</state>
+      <animation_sequence>
+          <pose image_id="28" duration="9"/>
+          <pose image_id="29" duration="9"/>
+          <pose image_id="30" duration="9"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>BENDING_RIGHT</state>
+      <animation_sequence>
+          <pose image_id="31" duration="9"/>
+          <pose image_id="32" duration="9"/>
+          <pose image_id="33" duration="9"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>DEACTIVATE_CAM_LEFT</state>
+      <animation_sequence>
+          <pose image_id="34" duration="12"/>
+      </animation_sequence>
+  </animation_state>
+  <animation_state>
+      <state>DEACTIVATE_CAM_RIGHT</state>
+      <animation_sequence>
+          <pose image_id="35" duration="12"/>
+      </animation_sequence>
+  </animation_state>
+ </animations_list>  
+</sprite_type>
