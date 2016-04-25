@@ -1,9 +1,9 @@
 #pragma once
 
 #include "mg_VS\stdafx.h"
-#include "mg\game\Game.h"
 #include "mg\gsm\ai\behaviors\BotBehavior.h"
 #include "mg\gsm\sprite\AnimatedSprite.h"
+#include "mg\game\Game.h"
 
 enum BotState
 {

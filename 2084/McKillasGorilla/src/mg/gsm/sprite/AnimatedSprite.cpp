@@ -12,6 +12,7 @@
 #include "mg\game\Game.h"
 #include "mg\gsm\sprite\AnimatedSprite.h"
 #include "mg\gsm\sprite\AnimatedSpriteType.h"
+#include "mg\gsm\state\GameStateManager.h"
 
 /*
 	AnimatedSprite - Default constructor, just sets everything to 0.
@@ -89,8 +90,15 @@ void AnimatedSprite::setCurrentState(wstring newState)
 void AnimatedSprite::updateSprite()
 {
 	Game *game = Game::getSingleton();
-	if (m_contacting && currentPathToFollow != NULL && currentPathToFollow->size()>0) {
-		game->getPathFinder()->updatePath(this);
+	if (currentPathToFollow->size()>0) {
+		float playerX = game->getGSM()->getSpriteManager()->getPlayer()->getB2Body()->GetLinearVelocity().x;
+		float playerY = game->getGSM()->getSpriteManager()->getPlayer()->getB2Body()->GetLinearVelocity().y;
+		if ((abs((myBody->GetPosition().x*16) - (currentPathNode->column*32+16)) <= abs(playerX*(1/60))) && (abs((myBody->GetPosition().y*16) - (currentPathNode->row * 32 + 16)) <= abs(playerY*(1/60)))) {
+			game->getPathFinder()->updatePath(this);
+		}
+	}
+	if (m_contacting && collisionBehavior != NULL ) {
+		(this->*(collisionBehavior))();
 	}
 
 	unsigned int duration = spriteType->getDuration(currentState, frameIndex);
@@ -140,5 +148,19 @@ void AnimatedSprite::updateSprite()
 	}
 }
 
-void AnimatedSprite::startContact() { m_contacting = true; }
-void AnimatedSprite::endContact() { m_contacting = false; }
+void AnimatedSprite::startContact() {
+	m_contacting = true;
+}
+void AnimatedSprite::endContact() { m_contacting = true; }
+
+
+void AnimatedSprite::teleportPlayer() {
+	if (destPos == 1) {
+		getB2Body()->SetTransform(b2Vec2(65.0f, 93.0f), 0.0f);
+	}
+	if (destPos == 2) {
+		getB2Body()->SetTransform(b2Vec2(142.0f, 194.0f), 0.0f);
+	}
+	m_contacting = false;
+	getB2Body()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+}

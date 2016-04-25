@@ -33,6 +33,7 @@ private:
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
 	AnimatedSprite *player;
 
+	AnimatedSprite *tv;
 	// THE BotRecycler MAKES SURE WE DON'T HAVE TO CONSTRUCT BOTS WHENEVER
 	// WE NEED TO SPAWN THEM, INSTEAD IT WILL RECYCLE THEM FOR US
 	BotRecycler botRecycler;
@@ -42,13 +43,17 @@ private:
 
 public:
 	// NOTHING TO INIT OR DESTROY
-	SpriteManager() { player = nullptr; }
+	SpriteManager() { 
+		player = nullptr;
+		tv = nullptr;
+	}
 	~SpriteManager()	{}
 
 	// INLINED ACCESSOR METHODS
 	BotRecycler*			getBotRecycler()		{ return &botRecycler;		}
 	int						getNumberOfBots()		{ return bots.size();		}
 	AnimatedSprite*			getPlayer()				{ return player;			}
+	AnimatedSprite*			getTv() { return tv; }
 	list<Bot*>::iterator	getBotsIterator()		{ return bots.begin();		}
 	list<Bot*>::iterator	getEndOfBotsIterator()	{ return bots.end();		}
 	vector<BotSpawningPool*>*  getSpawningPools()		{ return &spawningPools;		}
@@ -61,6 +66,10 @@ public:
 	void setPlayer(AnimatedSprite *initPlayer)
 	{
 		player = initPlayer;
+	}
+	void setTv(AnimatedSprite *initTv)
+	{
+		tv = initTv;
 	}
 
 	// METHODS DEFINED IN SpriteManager.cpp

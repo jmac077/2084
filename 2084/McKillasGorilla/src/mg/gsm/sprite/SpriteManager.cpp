@@ -73,7 +73,8 @@ void SpriteManager::addSpriteItemsToRenderList()
 		// ADD THE PLAYER SPRITE, IF THERE IS ONE
 		if (player != nullptr)
 			addSpriteToRenderList(player, renderList, viewport);
-
+		if (tv != nullptr)
+			addSpriteToRenderList(tv, renderList, viewport);
 		// NOW ADD THE REST OF THE SPRITES
 		list<Bot*>::iterator botIterator;
 		botIterator = bots.begin();
@@ -203,6 +204,8 @@ void SpriteManager::update()
 	// UPDATE THE PLAYER SPRITE ANIMATION FRAME/STATE/ROTATION
 	if (player != nullptr)
 		player->updateSprite();
+	if (tv != nullptr)
+		tv->updateSprite();
 
 	// NOW UPDATE THE REST OF THE SPRITES ANIMATION FRAMES/STATES/ROTATIONS
 	list<Bot*>::iterator botIterator = bots.begin();

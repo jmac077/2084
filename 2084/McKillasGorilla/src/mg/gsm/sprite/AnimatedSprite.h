@@ -15,6 +15,7 @@
 #include "mg\gui\Viewport.h"
 #include "mg\gsm\ai\pathfinding\OrthographicGridPathfinder.h"
 #include "Box2D.h"
+class GameStateManager;
 
 class AnimatedSprite
 {
@@ -49,12 +50,13 @@ protected:
 
 	list<PathNode>::iterator currentPathNode;
 
-	b2Body* currentNodeBody;
-
 	b2Body* myBody;
 
 	bool m_contacting = false;
 
+	void (AnimatedSprite::*collisionBehavior)() = NULL;
+
+	int destPos;
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()				{ return alpha;					}
@@ -64,7 +66,7 @@ public:
 	AnimatedSpriteType*	getSpriteType()			{ return spriteType;			}
 	bool				isMarkedForRemoval() { return markedForRemoval; }
 	b2Body*				getB2Body()				{ return myBody; }
-	b2Body*				getCurrentNodeBody() { return currentNodeBody; }
+	void				(AnimatedSprite::*getTeleportPlayer())(){ return &AnimatedSprite::teleportPlayer; }
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)
@@ -80,8 +82,11 @@ public:
 	void setB2Body(b2Body* initBody) {
 		myBody = initBody;
 	}
-	void setCurrentNodeBody(b2Body* initBody) {
-		currentNodeBody = initBody;
+	void setCollisionBehavior(void (AnimatedSprite::*input)()) {
+		collisionBehavior = input;
+	}
+	void setDestPos(int i) {
+		destPos = i;
 	}
 
 	// METHODS DEFINED IN AnimatedSprite.cpp
@@ -99,4 +104,6 @@ public:
 	void resetCurrentPathNode() { currentPathNode = currentPathToFollow->begin(); }
 	void startContact();
 	void endContact();
+	void teleportPlayer();
+
 };

@@ -98,7 +98,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		spriteManager->setPlayer(player);
 		b2BodyDef bodyDef;
 		bodyDef.type = b2_dynamicBody;
-		bodyDef.position.Set(57.0f,3.0f);
+		bodyDef.position.Set(57.0f,51.0f);
 		bodyDef.fixedRotation = true;
 		b2Body* body = gsm->getB2World()->CreateBody(&bodyDef);
 		b2PolygonShape dynamicBox;
@@ -110,6 +110,47 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		body->CreateFixture(&fixtureDef);
 		player->setB2Body(body);
 		body->SetUserData(player);
+		player->setCollisionBehavior(player->getTeleportPlayer());
+
+		//TV
+		AnimatedSprite* tv = new AnimatedSprite();
+		tv->setSpriteType(spriteManager->getSpriteType(L"TV"));
+		tv->setAlpha(255);
+		tv->setCurrentState(L"IDLE");
+		tv->setRotationInRadians(0);
+		spriteManager->setTv(tv);
+		bodyDef.type = b2_kinematicBody;
+		bodyDef.position.Set(58.0f, 38.0f);
+		bodyDef.fixedRotation = true;
+		body = gsm->getB2World()->CreateBody(&bodyDef);
+		dynamicBox.SetAsBox(4.0f, 4.0f);
+		fixtureDef.shape = &dynamicBox;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.0f;
+		body->CreateFixture(&fixtureDef);
+		tv->setB2Body(body);
+		
+		bodyDef.type = b2_staticBody;
+		bodyDef.position.Set(58.0f,5.0f);
+		body = gsm->getB2World()->CreateBody(&bodyDef);
+		dynamicBox.SetAsBox(6.0f, 1.0f);
+		fixtureDef.shape = &dynamicBox;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.0f;
+		fixtureDef.isSensor = true;
+		body->CreateFixture(&fixtureDef);
+		body->SetUserData((void*)1);
+
+		bodyDef.type = b2_staticBody;
+		bodyDef.position.Set(82.0f, 193.0f);
+		body = gsm->getB2World()->CreateBody(&bodyDef);
+		dynamicBox.SetAsBox(8.0f, 1.0f);
+		fixtureDef.shape = &dynamicBox;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.0f;
+		fixtureDef.isSensor = true;
+		body->CreateFixture(&fixtureDef);
+		body->SetUserData((void*)2);
 
 		// level_bot_types
 		TiXmlElement *botTypesList = levelSpriteTypes->NextSiblingElement();

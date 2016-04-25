@@ -336,9 +336,8 @@ void OrthographicGridPathfinder::updatePath(AnimatedSprite *sprite)
 			sprite->setCurrentState(L"IDLE");
 			return;
 		}
-		b2Body* body = sprite->getCurrentNodeBody();
+		list<PathNode>::iterator currentNode = sprite->getCurrentPathNode();
 		PathNode node = *currentNode;
-		body->SetTransform(b2Vec2(1+node.column*2,1+node.row*2),0.0f);
 		int gridCellWidth = this->getGridWidth();
 		int gridCellHeight = this->getGridHeight();
 		float diffX = getColumnCenterX(node.column) - sprite->getB2Body()->GetPosition().x*16;
@@ -373,21 +372,7 @@ void OrthographicGridPathfinder::mapPath(AnimatedSprite *sprite, float worldX, f
 	list<PathNode> *path = sprite->getCurrentPathToFollow();
 	buildPath(path, sprite->getB2Body()->GetPosition().x*16, sprite->getB2Body()->GetPosition().y*16, worldX, worldY);
 	sprite->resetCurrentPathNode();
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_staticBody;
-	bodyDef.allowSleep = false;
-	bodyDef.position.Set(1 + (sprite->getCurrentPathNode()->column)* 2, 1 + (sprite->getCurrentPathNode()->row) * 2);
-	b2Body* body = gsm->getB2World()->CreateBody(&bodyDef);
-	sprite->setCurrentNodeBody(body);
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(1.0f, 1.0f);
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.isSensor = true;
-	body->CreateFixture(&fixtureDef);
-	this->updatePath(sprite);
+	updatePath(sprite);
 }
 
 int OrthographicGridPathfinder::getGridWidth()
