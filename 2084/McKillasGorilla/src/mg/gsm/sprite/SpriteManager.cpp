@@ -143,7 +143,6 @@ void SpriteManager::unloadSprites()
 	// CLEAR OUT THE PLAYER, BUT NOT ITS SpriteType
 	if (player != nullptr)
 		delete player;
-
 	// CLEAR OUT THE BOTS, BUT NOT THEIR SpriteTypes
 	list<Bot*>::iterator botsIt = bots.begin();
 	while (botsIt != bots.end())

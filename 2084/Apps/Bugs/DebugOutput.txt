@@ -1,9 +1,0 @@
-SUCCEEDED
-
-D3DXCreateSprite(): 
-SUCCEEDED
-Level Name: Dangerous Desert
-Map Dir: data/maps/damndaniel/
-Map File: 2084_level_1.tmx
-Sprite Types Dir: data/sprite_types/
-Sprite Types File: BeginnerBugs.xml

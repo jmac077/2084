@@ -93,7 +93,7 @@ void AnimatedSprite::updateSprite()
 	if (currentPathToFollow->size()>0) {
 		float playerX = game->getGSM()->getSpriteManager()->getPlayer()->getB2Body()->GetLinearVelocity().x;
 		float playerY = game->getGSM()->getSpriteManager()->getPlayer()->getB2Body()->GetLinearVelocity().y;
-		if ((abs((myBody->GetPosition().x*16) - (currentPathNode->column*32+16)) <= abs(playerX*(1/60))) && (abs((myBody->GetPosition().y*16) - (currentPathNode->row * 32 + 16)) <= abs(playerY*(1/60)))) {
+		if ((abs((myBody->GetPosition().x) - (currentPathNode->column*2+1)) <= abs(playerX*(1/60.0f))) && (abs((myBody->GetPosition().y) - (currentPathNode->row*2+1)) <= abs(playerY*(1/60.0f)))) {
 			game->getPathFinder()->updatePath(this);
 		}
 	}

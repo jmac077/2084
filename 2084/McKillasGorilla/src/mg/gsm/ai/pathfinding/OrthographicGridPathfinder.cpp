@@ -334,6 +334,7 @@ void OrthographicGridPathfinder::updatePath(AnimatedSprite *sprite)
 			sprite->getB2Body()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
 			sprite->clearPath();
 			sprite->setCurrentState(L"IDLE");
+			//sprite->getB2Body()->SetTransform(b2Vec2(currentNode->column*2+1,currentNode->row*2+1),0.0f);
 			return;
 		}
 		list<PathNode>::iterator currentNode = sprite->getCurrentPathNode();
@@ -372,7 +373,6 @@ void OrthographicGridPathfinder::mapPath(AnimatedSprite *sprite, float worldX, f
 	list<PathNode> *path = sprite->getCurrentPathToFollow();
 	buildPath(path, sprite->getB2Body()->GetPosition().x*16, sprite->getB2Body()->GetPosition().y*16, worldX, worldY);
 	sprite->resetCurrentPathNode();
-	updatePath(sprite);
 }
 
 int OrthographicGridPathfinder::getGridWidth()
