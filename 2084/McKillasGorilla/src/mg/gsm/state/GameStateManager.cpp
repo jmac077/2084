@@ -269,4 +269,6 @@ void GameStateManager::update()
 	spriteManager->update();
 	world.update();
 	myWorld->Step(timeStep, velocityIterations, positionIterations);
+	// update viewport to follow player
+	game->getGUI()->getViewport()->centerOnBody(spriteManager->getPlayer()->getB2Body(), world.getWorldWidth(), world.getWorldHeight());
 }

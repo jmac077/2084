@@ -1,11 +1,11 @@
 /*
-	Author: Richard McKenna
-			Stony Brook University
-			Computer Science Department
+Author: Richard McKenna
+Stony Brook University
+Computer Science Department
 
-	BugsKeyEventHandler.cpp
+BugsKeyEventHandler.cpp
 
-	See BugsKeyEventHandler.h for a class description.
+See BugsKeyEventHandler.h for a class description.
 */
 
 #include "bugs_VS\stdafx.h"
@@ -23,10 +23,10 @@
 #include "mg\input\GameInput.h"
 
 /*
-	handleKeyEvent - this method handles all keyboard interactions. Note that every frame this method
-	gets called and it can respond to key interactions in any custom way. Ask the GameInput class for
-	key states since the last frame, which can allow us to respond to key presses, including when keys
-	are held down for multiple frames.
+handleKeyEvent - this method handles all keyboard interactions. Note that every frame this method
+gets called and it can respond to key interactions in any custom way. Ask the GameInput class for
+key states since the last frame, which can allow us to respond to key presses, including when keys
+are held down for multiple frames.
 */
 void BugsKeyEventHandler::handleKeyEvents()
 {
@@ -39,7 +39,7 @@ void BugsKeyEventHandler::handleKeyEvents()
 	GameStateManager *gsm = game->getGSM();
 	AnimatedSprite *player = gsm->getSpriteManager()->getPlayer();
 	Viewport *viewport = game->getGUI()->getViewport();
-	
+
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
 	{
@@ -51,61 +51,67 @@ void BugsKeyEventHandler::handleKeyEvents()
 		{
 
 		}
-		if (input->isKeyDown(D_KEY))
-		{
-			SpriteManager* spriteManager = game->getGSM()->getSpriteManager();
-			AnimatedSprite* player = spriteManager->getPlayer();
-			player->getB2Body()->SetLinearVelocity(b2Vec2(10.0f, 0));
-		}
 		if (input->isKeyDown(R_KEY))
 		{
 			viewport->toggleDebugView();
 			game->getGraphics()->toggleDebugTextShouldBeRendered();
 		}
+
+		// HANDLE MOVEMENT INPUT
+		// FIST GET DESIRED VELOCITY
+		float xVel = 0, yVel = 0;
+		float playerVelocity = 10.0f;
+		if (input->isKeyDown(W_KEY)) yVel -= 1;
+		if (input->isKeyDown(A_KEY)) xVel -= 1;
+		if (input->isKeyDown(S_KEY)) yVel += 1;
+		if (input->isKeyDown(D_KEY)) xVel += 1;
+		// THEN CALCULATE FINAL VELOCITIES, SCALE BY MAGNITUDE AND VELOCITY SCALAR
+		float magnitude = sqrt(xVel*xVel + yVel*yVel);
+		if (magnitude > 0) {
+			float xVelocity = playerVelocity * xVel / magnitude, yVelocity = playerVelocity * yVel / magnitude;
+			player->getB2Body()->SetLinearVelocity(b2Vec2(xVelocity, yVelocity));
+			if (xVelocity > 0)
+				player->setCurrentState(WALKING_RIGHT);
+			else if (xVelocity < 0)
+				player->setCurrentState(WALKING_LEFT);
+			else if (yVelocity > 0)
+				player->setCurrentState(WALKING_DOWN);
+			else if (yVelocity < 0)
+				player->setCurrentState(WALKING_UP);
+		}
+		else {
+			player->getB2Body()->SetLinearVelocity(b2Vec2(0, 0));
+			player->setCurrentState(L"IDLE");
+		}
+
+		// VIEWPORT MOVEMENT
+		/*
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;
 		float viewportVy = 0.0f;
 		if (input->isKeyDown(UP_KEY))
 		{
-			viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
-			viewportMoved = true;
+		viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
+		viewportMoved = true;
 		}
 		if (input->isKeyDown(DOWN_KEY))
 		{
-			viewportVy += MAX_VIEWPORT_AXIS_VELOCITY;
-			viewportMoved = true;
-		}
-		if (input->isKeyDown(W_KEY))
-		{
-			SpriteManager* spriteManager = game->getGSM()->getSpriteManager();
-			AnimatedSprite* player = spriteManager->getPlayer();
-			player->getB2Body()->SetLinearVelocity(b2Vec2(0.0f,-10.0f));
-		}
-		if (input->isKeyDown(A_KEY))
-		{
-			SpriteManager* spriteManager = game->getGSM()->getSpriteManager();
-			AnimatedSprite* player = spriteManager->getPlayer();
-			player->getB2Body()->SetLinearVelocity(b2Vec2(-10.0f, 0));
-		}
-		if (input->isKeyDown(S_KEY))
-		{
-			SpriteManager* spriteManager = game->getGSM()->getSpriteManager();
-			AnimatedSprite* player = spriteManager->getPlayer();
-			player->getB2Body()->SetLinearVelocity(b2Vec2(0.0f, 10.0f));
+		viewportVy += MAX_VIEWPORT_AXIS_VELOCITY;
+		viewportMoved = true;
 		}
 		if (input->isKeyDown(LEFT_KEY))
 		{
-			viewportVx -= MAX_VIEWPORT_AXIS_VELOCITY;
-			viewportMoved = true;
+		viewportVx -= MAX_VIEWPORT_AXIS_VELOCITY;
+		viewportMoved = true;
 		}
 		if (input->isKeyDown(RIGHT_KEY))
 		{
-			viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
-			viewportMoved = true;
+		viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
+		viewportMoved = true;
 		}
 		if (viewportMoved)
-			viewport->moveViewport((int)floor(viewportVx+0.5f), (int)floor(viewportVy+0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-		
+		viewport->moveViewport((int)floor(viewportVx+0.5f), (int)floor(viewportVy+0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
+		*/
 	}
 
 	// 0X43 is HEX FOR THE 'C' VIRTUAL KEY
@@ -117,7 +123,7 @@ void BugsKeyEventHandler::handleKeyEvents()
 		unsigned int id = cursor->getActiveCursorID();
 		id++;
 		if (id == cursor->getNumCursorIDs())
-			id = 0;		
+			id = 0;
 		cursor->setActiveCursorID(id);
 	}
 

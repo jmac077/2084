@@ -154,6 +154,14 @@ void Viewport::moveViewport(int incX,
 		viewportY = worldHeight - viewportHeight - 1;
 }
 
+void Viewport::centerOnBody(b2Body *body, int worldWidth, int worldHeight) {
+	int centerX = viewportWidth / 2 + viewportX;
+	int centerY = viewportHeight / 2 + viewportY;
+	int bodyCenterX = body->GetWorldCenter().x * 16;
+	int bodyCenterY = body->GetWorldCenter().y * 16;
+	moveViewport(bodyCenterX - centerX, bodyCenterY - centerY, worldWidth, worldHeight);
+	
+}
 
 bool Viewport::areScreenCoordinatesInViewport(int x, int y)
 {

@@ -15,6 +15,13 @@
 #include "mg\gui\Viewport.h"
 #include "mg\gsm\ai\pathfinding\OrthographicGridPathfinder.h"
 #include "Box2D.h"
+
+// ANIMATION STATES
+static const wstring WALKING_DOWN = L"WALKING_DOWN";
+static const wstring WALKING_RIGHT = L"WALKING_RIGHT";
+static const wstring WALKING_UP = L"WALKING_UP";
+static const wstring WALKING_LEFT = L"WALKING_LEFT";
+
 class GameStateManager;
 
 class AnimatedSprite
