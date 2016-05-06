@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sprite_type>
+ <width>82</width>
+ <height>82</height>
+ <images_list>
+  <image_file id="0"  file_name="computer1.png"/>
+  <image_file id="1"  file_name="computer1.png"/>
+  <image_file id="2"  file_name="computer1.png"/>
+ </images_list>
+ <animations_list>
+  <animation_state>
+   <state>IDLE</state>
+   <animation_sequence>
+    <pose image_id="0" duration="4"/>
+    <pose image_id="1" duration="4"/>
+    <pose image_id="2" duration="4"/>
+   </animation_sequence>
+  </animation_state>
+ </animations_list>  
+</sprite_type>

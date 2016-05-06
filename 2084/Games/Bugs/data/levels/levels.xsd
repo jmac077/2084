@@ -1,0 +1,183 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="level_data">
+
+    <xs:annotation>
+
+      <xs:documentation>THIS FILE LISTS ALL THE DATA ASSOCIATED WITH Level 1 FOR THE BUGS GAME</xs:documentation>
+
+    </xs:annotation>
+
+    <xs:complexType>
+
+      <xs:sequence>
+
+        <xs:element name="level_map">
+
+          <xs:annotation>
+
+            <xs:documentation>MAP TO BE USED FOR THIS LEVEL</xs:documentation>
+
+          </xs:annotation>
+
+          <xs:complexType>
+
+            <xs:simpleContent>
+
+              <xs:extension base="xs:string">
+
+                <xs:attribute type="xs:string" name="dir"/>
+
+                <xs:attribute type="xs:string" name="tmx_file"/>
+
+              </xs:extension>
+
+            </xs:simpleContent>
+
+          </xs:complexType>
+
+        </xs:element>
+
+        <xs:element name="sprite_type_list">
+
+          <xs:annotation>
+
+            <xs:documentation>COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME</xs:documentation>
+
+          </xs:annotation>
+
+          <xs:complexType>
+
+            <xs:sequence>
+
+              <xs:element name="sprite_type" maxOccurs="unbounded" minOccurs="0">
+
+                <xs:complexType>
+
+                  <xs:simpleContent>
+
+                    <xs:extension base="xs:string">
+
+                      <xs:attribute type="xs:string" name="dir" use="optional"/>
+
+                      <xs:attribute type="xs:string" name="pst_file" use="optional"/>
+
+                    </xs:extension>
+
+                  </xs:simpleContent>
+
+                </xs:complexType>
+
+              </xs:element>
+
+            </xs:sequence>
+
+          </xs:complexType>
+
+        </xs:element>
+
+        <xs:element name="sprites_list">
+
+          <xs:annotation>
+
+            <xs:documentation>INITIAL SPRITES WHEN THE LEVEL STARTS</xs:documentation>
+
+          </xs:annotation>
+
+          <xs:complexType>
+
+            <xs:sequence>
+
+              <xs:element name="sprite" maxOccurs="unbounded" minOccurs="0">
+
+                <xs:complexType>
+
+                  <xs:simpleContent>
+
+                    <xs:extension base="xs:string">
+
+                      <xs:attribute type="xs:string" name="type" use="optional"/>
+
+                      <xs:attribute type="xs:short" name="initX" use="optional"/>
+
+                      <xs:attribute type="xs:short" name="initY" use="optional"/>
+
+                      <xs:attribute type="xs:byte" name="initVx" use="optional"/>
+
+                      <xs:attribute type="xs:byte" name="initVy" use="optional"/>
+
+                      <xs:attribute type="xs:string" name="initState" use="optional"/>
+
+                      <xs:attribute type="xs:string" name="movementBehavior" use="optional"/>
+
+                      <xs:attribute type="xs:string" name="deathBehavior" use="optional"/>
+
+                    </xs:extension>
+
+                  </xs:simpleContent>
+
+                </xs:complexType>
+
+              </xs:element>
+
+            </xs:sequence>
+
+          </xs:complexType>
+
+        </xs:element>
+
+        <xs:element name="spawning_pools">
+
+          <xs:annotation>
+
+            <xs:documentation>WE CAN EVEN SPECIFY BOT SPAWN LOCATIONS</xs:documentation>
+
+          </xs:annotation>
+
+          <xs:complexType>
+
+            <xs:sequence>
+
+              <xs:element name="spawning_pool" maxOccurs="unbounded" minOccurs="0">
+
+                <xs:complexType>
+
+                  <xs:simpleContent>
+
+                    <xs:extension base="xs:string">
+
+                      <xs:attribute type="xs:short" name="x" use="optional"/>
+
+                      <xs:attribute type="xs:short" name="y" use="optional"/>
+
+                      <xs:attribute type="xs:string" name="sprite_type" use="optional"/>
+
+                      <xs:attribute type="xs:byte" name="intervalTime" use="optional"/>
+
+                      <xs:attribute type="xs:string" name="intervalType" use="optional"/>
+
+                      <xs:attribute type="xs:string" name="movementBehavior" use="optional"/>
+
+                      <xs:attribute type="xs:string" name="deathBehavior" use="optional"/>
+
+                    </xs:extension>
+
+                  </xs:simpleContent>
+
+                </xs:complexType>
+
+              </xs:element>
+
+            </xs:sequence>
+
+          </xs:complexType>
+
+        </xs:element>
+
+      </xs:sequence>
+
+    </xs:complexType>
+
+  </xs:element>
+
+</xs:schema>

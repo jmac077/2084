@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<sprite_type_list>
+  <sprite_type>Guy</sprite_type>
+  <sprite_type>TV</sprite_type>
+  <sprite_type>Drone</sprite_type>
+</sprite_type_list>
