@@ -19,7 +19,7 @@ void BugsMouseEventHandler::handleMousePressEvent(int mouseX, int mouseY)
 		//build player path
 		SpriteManager* spriteManager = game->getGSM()->getSpriteManager();
 		AnimatedSprite* player = spriteManager->getPlayer();
-		game->getPathFinder()->mapPath(player,worldCoordinateX, worldCoordinateY);
+		//game->getPathFinder()->mapPath(player,worldCoordinateX, worldCoordinateY);
 	}
 }
 

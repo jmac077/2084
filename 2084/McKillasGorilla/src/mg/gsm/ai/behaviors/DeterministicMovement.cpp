@@ -4,7 +4,10 @@
 
 void DeterministicMovement::behave(Bot *bot)
 {
-
+	Game *game = Game::getSingleton();
+	if (bot->getCurrentPathToFollow()->size() <= 0) {
+		game->getPathFinder()->mapPath(bot,1095,2024);
+	}
 }
 
 BotBehavior* DeterministicMovement::clone()

@@ -91,9 +91,9 @@ void AnimatedSprite::updateSprite()
 {
 	Game *game = Game::getSingleton();
 	if (currentPathToFollow->size()>0) {
-		float playerX = game->getGSM()->getSpriteManager()->getPlayer()->getB2Body()->GetLinearVelocity().x;
-		float playerY = game->getGSM()->getSpriteManager()->getPlayer()->getB2Body()->GetLinearVelocity().y;
-		if ((abs((myBody->GetPosition().x) - (currentPathNode->column*2+1)) <= abs(playerX*(1/60.0f))) && (abs((myBody->GetPosition().y) - (currentPathNode->row*2+1)) <= abs(playerY*(1/60.0f)))) {
+		float playerX = getB2Body()->GetLinearVelocity().x;
+		float playerY = getB2Body()->GetLinearVelocity().y;
+		if ((abs((getB2Body()->GetPosition().x) - (getCurrentPathNode()->column * 2 + 1)) <= abs(playerX*(1 / 60.0f))) && (abs((getB2Body()->GetPosition().y) - (getCurrentPathNode()->row * 2 + 1)) <= abs(playerY*(1 / 60.0f)))) {
 			game->getPathFinder()->updatePath(this);
 		}
 	}

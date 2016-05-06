@@ -49,14 +49,8 @@
     <Filter Include="src\mg\text">
       <UniqueIdentifier>{965cd6ef-b454-468d-aca4-155237352899}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\mg_VS">
-      <UniqueIdentifier>{95d788b8-61d4-47da-a105-b1f1ddea73c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\mg\clock">
       <UniqueIdentifier>{2f8ef929-e555-4356-9543-70b00a846520}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="data">
-      <UniqueIdentifier>{1b88a068-9367-47b2-a206-fbe64c113646}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\mg\resources">
       <UniqueIdentifier>{f40bf683-f26e-43d0-b72a-c245009e0be3}</UniqueIdentifier>
@@ -69,6 +63,9 @@
     </Filter>
     <Filter Include="src\mg\gsm\ai\pathfinding">
       <UniqueIdentifier>{8184255a-59e3-441b-a51c-fcc87a250624}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\mg_VS">
+      <UniqueIdentifier>{95d788b8-61d4-47da-a105-b1f1ddea73c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -388,8 +385,5 @@
     <Text Include="src\mg_VS\ReadMe.txt">
       <Filter>src\mg_VS</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -321,8 +321,8 @@ void OrthographicGridPathfinder::updatePath(AnimatedSprite *sprite)
 {
 	list<PathNode> *currentPath = sprite->getCurrentPathToFollow();
 	list<PathNode>::iterator currentNode = sprite->getCurrentPathNode();
-	//int column = currentNode->column;
-	//int row = currentNode->row;
+	int column = currentNode->column;
+	int row = currentNode->row;
 	// IF THERE IS A PATH WE SHOULD BE FOLLOWING, FOLLOW IT
 	if ((currentPath->size() > 0) && (currentNode != currentPath->end()))
 	{
@@ -335,15 +335,22 @@ void OrthographicGridPathfinder::updatePath(AnimatedSprite *sprite)
 			sprite->getB2Body()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
 			sprite->clearPath();
 			sprite->setCurrentState(L"IDLE");
-			//sprite->getB2Body()->SetTransform(b2Vec2(column*2+1,row*2+1),0.0f);
+			sprite->getB2Body()->SetTransform(b2Vec2(column*2+1,row*2+1),0.0f);
 			return;
 		}
 		list<PathNode>::iterator currentNode = sprite->getCurrentPathNode();
 		PathNode node = *currentNode;
+		sprite->getB2Body()->SetTransform(b2Vec2(column * 2 + 1, row * 2 + 1), 0.0f);
 		int gridCellWidth = this->getGridWidth();
 		int gridCellHeight = this->getGridHeight();
 		float diffX = getColumnCenterX(node.column) - sprite->getB2Body()->GetPosition().x*16;
 		float diffY = getRowCenterY(node.row) - sprite->getB2Body()->GetPosition().y*16;
+		if (diffY<32.0f && diffY>-32.0f) {
+			diffY = 0;
+		}
+		if (diffX<32.0f && diffX>-32.0f) {
+			diffX = 0;
+		}
 		float distance = sqrt((diffX * diffX) + (diffY * diffY));
 		float unitX = diffX/distance;
 		float unitY = diffY/distance;

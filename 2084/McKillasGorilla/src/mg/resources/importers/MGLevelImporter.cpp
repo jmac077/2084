@@ -265,20 +265,21 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			BotState botState = botToSpawn->getBotStateForString(initialBotState);
 			botToSpawn->setBotState(botState);
 			botToSpawn->setCurrentState(wInitialSpriteState);
-			botToSpawn->setRotationInRadians(PI / 2);
+			botToSpawn->setRotationInRadians(0.0f);
 			b2BodyDef bodyDef;
 			bodyDef.type = b2_dynamicBody;
-			bodyDef.position.Set(initX/32, initY/32);
+			bodyDef.position.Set(initX, initY);
+			bodyDef.fixedRotation = true;
 			b2Body* body = gsm->getB2World()->CreateBody(&bodyDef);
 			b2PolygonShape dynamicBox;
-			dynamicBox.SetAsBox(1.0f, 1.0f);
+			dynamicBox.SetAsBox(.2f, .2f);
 			b2FixtureDef fixtureDef;
 			fixtureDef.shape = &dynamicBox;
 			fixtureDef.density = 1.0f;
 			fixtureDef.friction = 0.3f;
 			body->CreateFixture(&fixtureDef);
 			botToSpawn->setB2Body(body);
-			body->SetUserData(botToSpawn);
+			//body->SetUserData(botToSpawn);
 			body->SetLinearVelocity(b2Vec2(initVx, initVy));
 
 

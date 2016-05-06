@@ -120,9 +120,6 @@
   <ItemGroup>
     <Text Include="src\mg_VS\ReadMe.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6A8E84CB-7249-4DD5-AD55-E152664974FD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

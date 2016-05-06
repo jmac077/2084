@@ -44,7 +44,7 @@
   <animation_state>
    <state>IDLE</state>
    <animation_sequence>
-    <pose image_id="0" duration="12"/>
+    <pose image_id="26" duration="12"/>
    </animation_sequence>
   </animation_state>
   <animation_state>
