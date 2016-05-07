@@ -69,6 +69,19 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		TiXmlElement *levelSection = levelSections->FirstChildElement();
 		while (levelSection != nullptr)
 		{
+			int id = xmlReader.extractIntAtt(levelSection, MG_ID_ATT);
+			int x = xmlReader.extractIntAtt(levelSection, MG_X_ATT);
+			int y = xmlReader.extractIntAtt(levelSection, MG_Y_ATT);
+			int width = xmlReader.extractIntAtt(levelSection, MG_WIDTH_ATT);
+			if (width == -1)
+				width = gsm->getWorld()->getWorldWidth() - x;
+			int height = xmlReader.extractIntAtt(levelSection, MG_HEIGHT_ATT);
+			if (height == -1)
+				height = gsm->getWorld()->getWorldHeight() - y;
+
+			LevelSection *section = new LevelSection(x, y, width, height);
+			gsm->getWorld()->addLevelSection(id, section);
+
 			levelSection = levelSection->NextSiblingElement();
 		}
 

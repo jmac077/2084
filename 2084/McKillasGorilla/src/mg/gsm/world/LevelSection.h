@@ -9,7 +9,7 @@ private:
 	int width;
 	int height;
 public:
-	LevelSection(int id, int x, int y, int width, int height)
+	LevelSection(int x, int y, int width, int height)
 	{
 		this->x = x;
 		this->y = y;

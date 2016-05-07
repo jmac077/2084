@@ -158,4 +158,5 @@ void AnimatedSprite::teleportPlayer() {
 	getB2Body()->SetTransform(b2Vec2(teleportTarget->getDestX(), teleportTarget->getDestY()), 0.0f);
 	m_contacting = false;
 	getB2Body()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+	Game::getSingleton()->getGSM()->getWorld()->setCurrentLevelSection(teleportTarget->getTargetSection());
 }

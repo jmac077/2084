@@ -83,35 +83,6 @@ void BugsKeyEventHandler::handleKeyEvents()
 			player->getB2Body()->SetLinearVelocity(b2Vec2(0, 0));
 			player->setCurrentState(L"IDLE");
 		}
-
-		// VIEWPORT MOVEMENT
-		/*
-		bool viewportMoved = false;
-		float viewportVx = 0.0f;
-		float viewportVy = 0.0f;
-		if (input->isKeyDown(UP_KEY))
-		{
-		viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
-		viewportMoved = true;
-		}
-		if (input->isKeyDown(DOWN_KEY))
-		{
-		viewportVy += MAX_VIEWPORT_AXIS_VELOCITY;
-		viewportMoved = true;
-		}
-		if (input->isKeyDown(LEFT_KEY))
-		{
-		viewportVx -= MAX_VIEWPORT_AXIS_VELOCITY;
-		viewportMoved = true;
-		}
-		if (input->isKeyDown(RIGHT_KEY))
-		{
-		viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
-		viewportMoved = true;
-		}
-		if (viewportMoved)
-		viewport->moveViewport((int)floor(viewportVx+0.5f), (int)floor(viewportVy+0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-		*/
 	}
 
 	// 0X43 is HEX FOR THE 'C' VIRTUAL KEY

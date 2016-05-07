@@ -122,6 +122,8 @@ bool Viewport::areWorldCoordinatesInViewport(	float x,
 */
 void Viewport::moveViewport(int incX, 
 							int incY,
+							int worldX,
+							int worldY,
 							int worldWidth, 
 							int worldHeight)
 {
@@ -131,13 +133,13 @@ void Viewport::moveViewport(int incX,
 
 	// DON'T LET IT GO OFF THE LEFT-MOST EDGE
 	// OF THE GAME WORLD. CLAMP INSTEAD.
-	if (viewportX < 0)				
-		viewportX = 0;
+	if (viewportX < worldX)				
+		viewportX = worldX;
 
 	// DON'T LET IT GO OFF THE RIGHT-MOST EDGE
 	// OF THE GAME WORLD. CLAMP INSTEAD.
-	else if (viewportX >= (worldWidth - viewportWidth))
-		viewportX = worldWidth - viewportWidth - 1;
+	else if (viewportX + viewportWidth >= worldX + worldWidth)
+		viewportX = worldX + worldWidth - viewportWidth - 1;
 	
 	// MOVE THE VIEWPORT IN Y AXIS ACCORDING
 	// TO PROVIDED INCREMENT.
@@ -145,22 +147,21 @@ void Viewport::moveViewport(int incX,
 
 	// DON'T LET IT GO OFF THE TOP-MOST EDGE
 	// OF THE GAME WORLD. CLAMP INSTEAD.
-	if (viewportY < 0)				
-		viewportY = 0;
+	if (viewportY < worldY)				
+		viewportY = worldY;
 
 	// DON'T LET IT GO OFF THE BOTTOM-MOST EDGE
 	// OF THE GAME WORLD. CLAMP INSTEAD.
-	else if (viewportY >= worldHeight - viewportHeight)
-		viewportY = worldHeight - viewportHeight - 1;
+	else if (viewportY + viewportHeight >= worldY + worldHeight)
+		viewportY = worldY + worldHeight - viewportHeight - 1;
 }
 
-void Viewport::centerOnBody(b2Body *body, int worldWidth, int worldHeight) {
+void Viewport::centerOnBody(b2Body *body, LevelSection *currentSection) {
 	int centerX = viewportWidth / 2 + viewportX;
 	int centerY = viewportHeight / 2 + viewportY;
 	int bodyCenterX = body->GetWorldCenter().x * 16;
 	int bodyCenterY = body->GetWorldCenter().y * 16;
-	moveViewport(bodyCenterX - centerX, bodyCenterY - centerY, worldWidth, worldHeight);
-	
+	moveViewport(bodyCenterX - centerX, bodyCenterY - centerY, currentSection->getX(), currentSection->getY(), currentSection->getWidth(), currentSection->getHeight());
 }
 
 bool Viewport::areScreenCoordinatesInViewport(int x, int y)

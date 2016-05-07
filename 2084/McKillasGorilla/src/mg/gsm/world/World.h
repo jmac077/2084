@@ -50,6 +50,7 @@ public:
 	int						getNumLayers() { return layers->size(); }
 	int						getWorldHeight()	{ return worldHeight;			}
 	int						getWorldWidth()		{ return worldWidth;			}
+	LevelSection*			getCurrentLevelSection() { return currentLevelSection; }
 
 	// INLINED MUTATOR METHODS
 	void setWorldHeight(int initWorldHeight)
@@ -57,7 +58,11 @@ public:
 	void setWorldWidth(int initWorldWidth)
 	{ worldWidth = initWorldWidth;			}
 	void addLevelSection(int id, LevelSection* section)
-	{ levelSections[id] = section; }
+	{
+		levelSections[id] = section;
+		if (levelSections.size() == 1)
+			currentLevelSection = levelSections[id];
+	}
 	void setCurrentLevelSection(int id)
 	{ currentLevelSection = levelSections[id]; }
 

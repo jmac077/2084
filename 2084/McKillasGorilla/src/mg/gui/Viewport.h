@@ -18,6 +18,7 @@ values.
 */
 #pragma once
 #include "mg_VS\stdafx.h"
+#include "mg\gsm\world\LevelSection.h"
 #include "Box2D.h"
 
 class Viewport
@@ -91,7 +92,7 @@ public:
 	bool areWorldCoordinatesInViewport(float x, float y, int width, int height);
 	bool areViewportCoordinatesInViewport(int x, int y, int width, int height);
 	bool areScreenCoordinatesInViewport(int x, int y);
-	void moveViewport(int incX, int incY, int worldWidth, int worldHeight);
-	void centerOnBody(b2Body *body, int worldWidth, int worldHeight);
+	void moveViewport(int incX, int incY, int worldX, int worldY, int worldWidth, int worldHeight);
+	void centerOnBody(b2Body *body, LevelSection* currentSection);
 	void toggleDebugView();
 };
