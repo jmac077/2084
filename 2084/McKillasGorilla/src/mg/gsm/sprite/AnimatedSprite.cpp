@@ -155,12 +155,7 @@ void AnimatedSprite::endContact() { m_contacting = true; }
 
 
 void AnimatedSprite::teleportPlayer() {
-	if (destPos == 1) {
-		getB2Body()->SetTransform(b2Vec2(65.0f, 93.0f), 0.0f);
-	}
-	if (destPos == 2) {
-		getB2Body()->SetTransform(b2Vec2(142.0f, 194.0f), 0.0f);
-	}
+	getB2Body()->SetTransform(b2Vec2(teleportTarget->getDestX(), teleportTarget->getDestY()), 0.0f);
 	m_contacting = false;
 	getB2Body()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
 }

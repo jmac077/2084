@@ -64,8 +64,58 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		TMXMapImporter *mapImporter = (TMXMapImporter*)resources->getMapImporter();
 		mapImporter->load(wDir, wFile);
 
+		// level_sections
+		TiXmlElement *levelSections = levelMap->NextSiblingElement();
+		TiXmlElement *levelSection = levelSections->FirstChildElement();
+		while (levelSection != nullptr)
+		{
+			levelSection = levelSection->NextSiblingElement();
+		}
+
+		// Relevant box2d objects to be reused
+		b2BodyDef bodyDef;
+		b2Body* body;
+		b2PolygonShape dynamicBox;
+		b2FixtureDef fixtureDef;
+
+		// teleports
+		TiXmlElement *teleports = levelSections->NextSiblingElement();
+		TiXmlElement *teleport = teleports->FirstChildElement();
+		while (teleport != nullptr)
+		{
+			int x = xmlReader.extractIntAtt(teleport, MG_X_ATT);
+			int y = xmlReader.extractIntAtt(teleport, MG_Y_ATT);
+			int width = xmlReader.extractIntAtt(teleport, MG_WIDTH_ATT);
+			int height = xmlReader.extractIntAtt(teleport, MG_HEIGHT_ATT);
+			int destX = xmlReader.extractIntAtt(teleport, MG_DEST_X);
+			int destY = xmlReader.extractIntAtt(teleport, MG_DEST_Y);
+			int targetSection = xmlReader.extractIntAtt(teleport, MG_TARGET_SECTION_ATT);
+
+			Teleporter *teleportTarget = new Teleporter(destX, destY, targetSection);
+			bodyDef.type = b2_staticBody;
+			bodyDef.position.Set(x, y);
+			body = gsm->getB2World()->CreateBody(&bodyDef);
+			dynamicBox.SetAsBox(width, height);
+			fixtureDef.shape = &dynamicBox;
+			fixtureDef.density = 1.0f;
+			fixtureDef.friction = 0.0f;
+			fixtureDef.isSensor = true;
+			body->CreateFixture(&fixtureDef);
+			body->SetUserData(teleportTarget);
+
+			teleport = teleport->NextSiblingElement();
+		}
+
+		// checkpoints
+		TiXmlElement *checkpoints = teleports->NextSiblingElement();
+		TiXmlElement *checkpoint = checkpoints->FirstChildElement();
+		while (checkpoint != nullptr)
+		{
+			checkpoint = checkpoint->NextSiblingElement();
+		}
+
 		// level_sprite_types
-		TiXmlElement *levelSpriteTypes = levelMap->NextSiblingElement();
+		TiXmlElement *levelSpriteTypes = checkpoints->NextSiblingElement();
 
 		// sprite_types DIR
 		const char* spriteTypesDir = levelSpriteTypes->Attribute(MG_SPRITE_TYPES_DIR_ATT.c_str());
@@ -96,17 +146,15 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		player->setCurrentState(L"WALKING_DOWN");
 		player->setRotationInRadians(0);
 		spriteManager->setPlayer(player);
-		b2BodyDef bodyDef;
 		bodyDef.type = b2_dynamicBody;
 		bodyDef.position.Set(57.0f,51.0f);
 		bodyDef.fixedRotation = true;
-		b2Body* body = gsm->getB2World()->CreateBody(&bodyDef);
-		b2PolygonShape dynamicBox;
+		body = gsm->getB2World()->CreateBody(&bodyDef);
 		dynamicBox.SetAsBox(.8125f,.8125f);
-		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &dynamicBox;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
+		fixtureDef.isSensor = false;
 		body->CreateFixture(&fixtureDef);
 		player->setB2Body(body);
 		body->SetUserData(player);
@@ -129,28 +177,6 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		fixtureDef.friction = 0.0f;
 		body->CreateFixture(&fixtureDef);
 		tv->setB2Body(body);
-		
-		bodyDef.type = b2_staticBody;
-		bodyDef.position.Set(58.0f,5.0f);
-		body = gsm->getB2World()->CreateBody(&bodyDef);
-		dynamicBox.SetAsBox(6.0f, 1.0f);
-		fixtureDef.shape = &dynamicBox;
-		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.0f;
-		fixtureDef.isSensor = true;
-		body->CreateFixture(&fixtureDef);
-		body->SetUserData((void*)1);
-
-		bodyDef.type = b2_staticBody;
-		bodyDef.position.Set(82.0f, 193.0f);
-		body = gsm->getB2World()->CreateBody(&bodyDef);
-		dynamicBox.SetAsBox(8.0f, 1.0f);
-		fixtureDef.shape = &dynamicBox;
-		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.0f;
-		fixtureDef.isSensor = true;
-		body->CreateFixture(&fixtureDef);
-		body->SetUserData((void*)2);
 
 		// level_bot_types
 		TiXmlElement *botTypesList = levelSpriteTypes->NextSiblingElement();

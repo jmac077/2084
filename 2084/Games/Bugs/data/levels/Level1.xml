@@ -6,6 +6,20 @@
   
   <!-- MAP TO BE USED FOR THIS LEVEL -->
   <level_map map_dir="data/maps/damndaniel/" map_file="2084_level_1.tmx" />
+
+  <!-- SECTIONS OF THE LEVEL FOR THE VIEWPORT TO CLAMP TO -->
+  <level_sections>
+    <level_section id="1" x="0" y="0" width="1000" height="1000" />
+  </level_sections>
+
+  <teleports>
+    <teleport x="58" y="5" width="6" height="1" dest_x="65" dest_y="93" target_section = "2"/>
+    <teleport x="82" y="193" width="8" height="1" dest_x="142" dest_y="194" target_section = "3"/>
+  </teleports>
+
+  <checkpoints>
+    <checkpoint/>
+  </checkpoints>
   
   <!-- COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME -->
   <level_sprite_types sprite_types_dir="data/sprite_types/" sprite_types_file="BeginnerBugs.xml" />

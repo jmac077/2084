@@ -195,6 +195,15 @@
     <ClCompile Include="src\mg\gsm\MyContactListener.cpp">
       <Filter>src\mg\gsm</Filter>
     </ClCompile>
+    <ClCompile Include="src\mg\gsm\world\LevelSection.cpp">
+      <Filter>src\mg\gsm\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mg\gsm\world\Checkpoint.cpp">
+      <Filter>src\mg\gsm\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mg\gsm\world\Teleporter.cpp">
+      <Filter>src\mg\gsm\world</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\mg\game\Game.h">
@@ -379,6 +388,15 @@
     </ClInclude>
     <ClInclude Include="src\mg\gsm\MyContactListener.h">
       <Filter>src\mg\gsm</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mg\gsm\world\LevelSection.h">
+      <Filter>src\mg\gsm\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mg\gsm\world\Checkpoint.h">
+      <Filter>src\mg\gsm\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mg\gsm\world\Teleporter.h">
+      <Filter>src\mg\gsm\world</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

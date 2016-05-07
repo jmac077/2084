@@ -1,5 +1,6 @@
 #include "mg\gsm\sprite\AnimatedSprite.h"
 #include "mg\gsm\MyContactListener.h"
+#include "mg\gsm\world\Teleporter.h"
 
 void MyContactListener::BeginContact(b2Contact* contact) {
 
@@ -7,16 +8,16 @@ void MyContactListener::BeginContact(b2Contact* contact) {
 		void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
 		if (bodyUserData && contact->GetFixtureB()->IsSensor()) {
 			static_cast<AnimatedSprite*>(bodyUserData)->startContact();
-			int i = (int)(contact->GetFixtureB()->GetBody()->GetUserData());
-			static_cast<AnimatedSprite*>(bodyUserData)->setDestPos(i);
+			Teleporter *tel = (Teleporter*)(contact->GetFixtureB()->GetBody()->GetUserData());
+			static_cast<AnimatedSprite*>(bodyUserData)->setTeleportTarget(tel);
 		}
 
 		//check if fixture B was a ball
 		bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
 		if (bodyUserData && contact->GetFixtureA()->IsSensor()) {
 			static_cast<AnimatedSprite*>(bodyUserData)->startContact();
-			int i = (int)(contact->GetFixtureA()->GetBody()->GetUserData());
-			static_cast<AnimatedSprite*>(bodyUserData)->setDestPos(i);
+			Teleporter *tel = (Teleporter*)(contact->GetFixtureA()->GetBody()->GetUserData());
+			static_cast<AnimatedSprite*>(bodyUserData)->setTeleportTarget(tel);
 		}
 
 }

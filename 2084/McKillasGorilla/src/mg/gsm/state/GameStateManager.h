@@ -24,6 +24,7 @@
 #include "mg\gsm\state\GameStateMachine.h"
 #include "mg\gsm\world\World.h"
 #include "mg\gsm\world\WorldLayer.h"
+#include "mg\gsm\world\Checkpoint.h"
 #include "Box2D.h"
 
 class Game;
@@ -55,6 +56,8 @@ private:
 	// TILES, PLATFORMS, etc. BASICALLY THINGS THAT ARE NOT ANIMATED
 	// AND DO NOT MOVE
 	World world;
+
+	vector<Checkpoint*> checkpoints;
 
 	// FOR MANAGING DYNAMIC GAME OBJECTS FOR CURRENT LEVEL
 	// NOTE THAT WE CALL THE DYNAMIC OBJECTS "SPRITES"

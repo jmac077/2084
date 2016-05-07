@@ -20,6 +20,7 @@
 #include "mg_VS\stdafx.h"
 #include "mg\graphics\RenderList.h"
 #include "mg\gsm\world\WorldLayer.h"
+#include "mg\gsm\world\LevelSection.h"
 
 class Game;
 class SpriteManager;
@@ -37,6 +38,12 @@ private:
 	// THESE ARE THE BACKGROUND LAYERS
 	vector<WorldLayer*> *layers;
 
+	// SECTIONS FOR THIS LEVEL
+	map<int, LevelSection*> levelSections;
+
+	// CURRENT SECTION PLAYER IS IN
+	LevelSection* currentLevelSection;
+
 public:
 	// INLINED ACCESSOR METHODS
 	vector<WorldLayer*>*	getLayers()	{ return layers;				}
@@ -49,6 +56,10 @@ public:
 	{ worldHeight = initWorldHeight;		}
 	void setWorldWidth(int initWorldWidth)
 	{ worldWidth = initWorldWidth;			}
+	void addLevelSection(int id, LevelSection* section)
+	{ levelSections[id] = section; }
+	void setCurrentLevelSection(int id)
+	{ currentLevelSection = levelSections[id]; }
 
 	// METHODS DEFINED in GameStateManager.cpp
 	World();

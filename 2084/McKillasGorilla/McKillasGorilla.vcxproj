@@ -31,7 +31,10 @@
     <ClCompile Include="src\mg\gsm\sprite\AnimatedSpriteType.cpp" />
     <ClCompile Include="src\mg\gsm\sprite\SpriteManager.cpp" />
     <ClCompile Include="src\mg\gsm\state\GameStateManager.cpp" />
+    <ClCompile Include="src\mg\gsm\world\Checkpoint.cpp" />
+    <ClCompile Include="src\mg\gsm\world\LevelSection.cpp" />
     <ClCompile Include="src\mg\gsm\world\SparseLayer.cpp" />
+    <ClCompile Include="src\mg\gsm\world\Teleporter.cpp" />
     <ClCompile Include="src\mg\gsm\world\TiledLayer.cpp" />
     <ClCompile Include="src\mg\gsm\world\World.cpp" />
     <ClCompile Include="src\mg\gui\Button.cpp" />
@@ -82,7 +85,10 @@
     <ClInclude Include="src\mg\gsm\state\GameState.h" />
     <ClInclude Include="src\mg\gsm\state\GameStateMachine.h" />
     <ClInclude Include="src\mg\gsm\state\GameStateManager.h" />
+    <ClInclude Include="src\mg\gsm\world\Checkpoint.h" />
+    <ClInclude Include="src\mg\gsm\world\LevelSection.h" />
     <ClInclude Include="src\mg\gsm\world\SparseLayer.h" />
+    <ClInclude Include="src\mg\gsm\world\Teleporter.h" />
     <ClInclude Include="src\mg\gsm\world\Tile.h" />
     <ClInclude Include="src\mg\gsm\world\TiledLayer.h" />
     <ClInclude Include="src\mg\gsm\world\World.h" />

@@ -14,6 +14,7 @@
 #include "mg\gsm\sprite\AnimatedSpriteType.h"
 #include "mg\gui\Viewport.h"
 #include "mg\gsm\ai\pathfinding\OrthographicGridPathfinder.h"
+#include "mg\gsm\world\Teleporter.h"
 #include "Box2D.h"
 
 // ANIMATION STATES
@@ -63,7 +64,8 @@ protected:
 
 	void (AnimatedSprite::*collisionBehavior)() = NULL;
 
-	int destPos;
+	// THE TELEPORT INFO FOR WHEN THIS SPRITE IS TELEPORTED
+	Teleporter *teleportTarget;
 public:
 	// INLINED ACCESSOR METHODS
 	int					getAlpha()				{ return alpha;					}
@@ -92,8 +94,8 @@ public:
 	void setCollisionBehavior(void (AnimatedSprite::*input)()) {
 		collisionBehavior = input;
 	}
-	void setDestPos(int i) {
-		destPos = i;
+	void setTeleportTarget(Teleporter *tel) {
+		teleportTarget = tel;
 	}
 
 	// METHODS DEFINED IN AnimatedSprite.cpp
@@ -112,5 +114,4 @@ public:
 	void startContact();
 	void endContact();
 	void teleportPlayer();
-
 };

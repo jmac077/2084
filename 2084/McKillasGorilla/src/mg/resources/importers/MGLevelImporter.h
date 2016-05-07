@@ -7,6 +7,12 @@
 // ELEMNETS
 static const string	MG_LEVEL_ELEMENT = "level";
 static const string	MG_LEVEL_MAP_ELEMENT = "level_map";
+static const string MG_LEVEL_SECTIONS_ELEMENT = "level_sections";
+static const string MG_LEVEL_SECTION_ELEMENT = "level_section";
+static const string MG_TELEPORTS_ELEMENT = "teleports";
+static const string MG_TELEPORT_ELEMENT = "teleport";
+static const string MG_CHECKPOINTS_ELEMENT = "checkpoints";
+static const string MG_CHECKPOINT_ELEMENT = "checkpoint";
 static const string MG_LEVEL_SPRITE_TYPES_ELEMENT = "level_sprite_types";
 static const string MG_BOTS_LIST_ELEMENT = "bots_list";
 static const string MG_BOT_ELEMENT = "bot";
@@ -29,9 +35,15 @@ static const string MG_INIT_BOT_STATE_ATT = "init_bot_state";
 static const string MG_INIT_SPRITE_STATE_ATT = "init_sprite_state";
 static const string MG_X_ATT = "x";
 static const string MG_Y_ATT = "y";
+static const string MG_DEST_X = "dest_x";
+static const string MG_DEST_Y = "dest_y";
+static const string MG_WIDTH_ATT = "width";
+static const string MG_HEIGHT_ATT = "height";
 static const string MG_INTERVAL_TIME_ATT = "interval_time";
 static const string MG_INTERVAL_TYPE_ATT = "interval_type";
 static const string MG_MAX_VELOCITY = "max_velocity";
+static const string MG_ID_ATT = "id";
+static const string MG_TARGET_SECTION_ATT = "target_section";
 
 // VALUES
 static const string MG_DETERMINISTIC_VALUE = "deterministic";
