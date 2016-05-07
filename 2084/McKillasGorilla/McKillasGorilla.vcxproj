@@ -86,6 +86,7 @@
     <ClInclude Include="src\mg\gsm\state\GameStateMachine.h" />
     <ClInclude Include="src\mg\gsm\state\GameStateManager.h" />
     <ClInclude Include="src\mg\gsm\world\Checkpoint.h" />
+    <ClInclude Include="src\mg\gsm\world\CollidableZone.h" />
     <ClInclude Include="src\mg\gsm\world\LevelSection.h" />
     <ClInclude Include="src\mg\gsm\world\SparseLayer.h" />
     <ClInclude Include="src\mg\gsm\world\Teleporter.h" />

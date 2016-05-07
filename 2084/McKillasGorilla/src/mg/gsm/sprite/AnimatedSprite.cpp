@@ -148,15 +148,48 @@ void AnimatedSprite::updateSprite()
 	}
 }
 
-void AnimatedSprite::startContact() {
-	m_contacting = true;
-}
+void AnimatedSprite::startContact() { m_contacting = true; }
 void AnimatedSprite::endContact() { m_contacting = true; }
 
+void AnimatedSprite::handleCollision() {
+	if (collisionZone->getType() == TeleporterFlag)
+	{
+		teleportPlayer((Teleporter*)collisionZone->getZone());
+	}
+	else if (collisionZone->getType() == CheckpointFlag)
+	{
+		hitCheckpoint((Checkpoint*)collisionZone->getZone());
+	}
+}
 
-void AnimatedSprite::teleportPlayer() {
+void AnimatedSprite::teleportPlayer(Teleporter *teleportTarget) {
+	// MOVE PLAYER TO TELEPORT LOCATION
 	getB2Body()->SetTransform(b2Vec2(teleportTarget->getDestX(), teleportTarget->getDestY()), 0.0f);
 	m_contacting = false;
 	getB2Body()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+	// SWITCH CURRENT LEVEL SECTION
 	Game::getSingleton()->getGSM()->getWorld()->setCurrentLevelSection(teleportTarget->getTargetSection());
+}
+
+void AnimatedSprite::hitCheckpoint(Checkpoint *checkpoint) {
+	// IF CHECKPOINT HASN'T ALREADY BEEN ACTIVATED, SET AS CURRENT CHECKPOINT
+	if (!checkpoint->getActivated()) {
+		checkpoint->setPlayerPos(getB2Body()->GetPosition().x, getB2Body()->GetPosition().y);
+		Game::getSingleton()->getGSM()->getWorld()->setCurrentCheckpoint(checkpoint);
+	}
+}
+
+void AnimatedSprite::killSprite() {
+	respawnAtLastCheckpoint();
+}
+
+void AnimatedSprite::respawnAtLastCheckpoint() {
+	Checkpoint *lastCheckpoint = Game::getSingleton()->getGSM()->getWorld()->getCurrentCheckpoint();
+	if (lastCheckpoint == nullptr)
+		return;
+	// MOVE PLAYER TO WHERE THEY HIT THE LAST CHECKPOINT
+	getB2Body()->SetTransform(b2Vec2(lastCheckpoint->getPlayerX(), lastCheckpoint->getPlayerY()), 0.0f);
+	getB2Body()->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+	// SWITCH CURRENT LEVEL SECTION
+	Game::getSingleton()->getGSM()->getWorld()->setCurrentLevelSection(lastCheckpoint->getLevelSection());
 }

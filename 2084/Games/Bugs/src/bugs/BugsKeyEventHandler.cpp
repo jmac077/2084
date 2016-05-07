@@ -51,10 +51,14 @@ void BugsKeyEventHandler::handleKeyEvents()
 		{
 
 		}
-		if (input->isKeyDown(R_KEY))
+		if (input->isKeyDownForFirstTime(R_KEY))
 		{
 			viewport->toggleDebugView();
 			game->getGraphics()->toggleDebugTextShouldBeRendered();
+		}
+		if (input->isKeyDownForFirstTime(K_KEY))
+		{
+			player->killSprite();
 		}
 
 		// HANDLE MOVEMENT INPUT

@@ -57,8 +57,6 @@ private:
 	// AND DO NOT MOVE
 	World world;
 
-	vector<Checkpoint*> checkpoints;
-
 	// FOR MANAGING DYNAMIC GAME OBJECTS FOR CURRENT LEVEL
 	// NOTE THAT WE CALL THE DYNAMIC OBJECTS "SPRITES"
 	SpriteManager *spriteManager;

@@ -4,25 +4,21 @@
 class Checkpoint
 {
 private:
-	int x;
-	int y;
-	int width;
-	int height;
-	int playerX;
-	int playerY;
+	// LOCATION OF PLAYER WHEN CHECKPOINT WAS HIT
+	int playerX, playerY;
+	// THE LEVEL SECTION THAT THIS CHECKPOINT IS IN
+	int levelSection;
+	// IF THIS CHECKPOINT HAS BEEN HIT
+	bool activated;
 public:
-	Checkpoint(int x, int y, int width, int height)
+	Checkpoint(int levelSection)
 	{
-		this->x = x;
-		this->y = y;
-		this->width = width;
-		this->height = height;
+		this->levelSection = levelSection;
+		activated = false;
 	}
-	int getX() { return x; }
-	int getY() { return y; }
-	int getWidth() { return width; }
-	int getHeight() { return height; }
 	int getPlayerX() { return playerX; }
 	int getPlayerY() { return playerY; }
-	void setPlayerPos(int px, int py) { playerX = px; playerY = py; }
+	int getLevelSection() { return levelSection; }
+	bool getActivated() { return activated; }
+	void setPlayerPos(int px, int py) { playerX = px; playerY = py; activated = true; }
 };

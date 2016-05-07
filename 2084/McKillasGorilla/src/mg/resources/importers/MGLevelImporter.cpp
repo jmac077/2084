@@ -103,8 +103,9 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			int destX = xmlReader.extractIntAtt(teleport, MG_DEST_X);
 			int destY = xmlReader.extractIntAtt(teleport, MG_DEST_Y);
 			int targetSection = xmlReader.extractIntAtt(teleport, MG_TARGET_SECTION_ATT);
-
 			Teleporter *teleportTarget = new Teleporter(destX, destY, targetSection);
+
+			// CREATE TELEPORTER ZONE AS BOX2D SENSOR BOX
 			bodyDef.type = b2_staticBody;
 			bodyDef.position.Set(x, y);
 			body = gsm->getB2World()->CreateBody(&bodyDef);
@@ -114,7 +115,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			fixtureDef.friction = 0.0f;
 			fixtureDef.isSensor = true;
 			body->CreateFixture(&fixtureDef);
-			body->SetUserData(teleportTarget);
+			body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
 
 			teleport = teleport->NextSiblingElement();
 		}
@@ -124,6 +125,25 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		TiXmlElement *checkpoint = checkpoints->FirstChildElement();
 		while (checkpoint != nullptr)
 		{
+			int x = xmlReader.extractIntAtt(checkpoint, MG_X_ATT);
+			int y = xmlReader.extractIntAtt(checkpoint, MG_Y_ATT);
+			int width = xmlReader.extractIntAtt(checkpoint, MG_WIDTH_ATT);
+			int height = xmlReader.extractIntAtt(checkpoint, MG_HEIGHT_ATT);
+			int levelSection = xmlReader.extractIntAtt(checkpoint, MG_TARGET_SECTION_ATT);
+			Checkpoint *check = new Checkpoint(levelSection);
+
+			// CREATE TELEPORTER ZONE AS BOX2D SENSOR BOX
+			bodyDef.type = b2_staticBody;
+			bodyDef.position.Set(x, y);
+			body = gsm->getB2World()->CreateBody(&bodyDef);
+			dynamicBox.SetAsBox(width, height);
+			fixtureDef.shape = &dynamicBox;
+			fixtureDef.density = 1.0f;
+			fixtureDef.friction = 0.0f;
+			fixtureDef.isSensor = true;
+			body->CreateFixture(&fixtureDef);
+			body->SetUserData(new CollidableZone(check, CheckpointFlag));
+			
 			checkpoint = checkpoint->NextSiblingElement();
 		}
 
@@ -171,7 +191,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		body->CreateFixture(&fixtureDef);
 		player->setB2Body(body);
 		body->SetUserData(player);
-		player->setCollisionBehavior(player->getTeleportPlayer());
+		player->setCollisionBehavior(player->getCollisionHandler());
 
 		//TV
 		AnimatedSprite* tv = new AnimatedSprite();

@@ -21,6 +21,7 @@
 #include "mg\graphics\RenderList.h"
 #include "mg\gsm\world\WorldLayer.h"
 #include "mg\gsm\world\LevelSection.h"
+#include "mg\gsm\world\Checkpoint.h"
 
 class Game;
 class SpriteManager;
@@ -44,13 +45,17 @@ private:
 	// CURRENT SECTION PLAYER IS IN
 	LevelSection* currentLevelSection;
 
+	// THE LAST CHECKPOINT HIT BY THE PLAYER
+	Checkpoint *currentCheckpoint;
+
 public:
 	// INLINED ACCESSOR METHODS
-	vector<WorldLayer*>*	getLayers()	{ return layers;				}
-	int						getNumLayers() { return layers->size(); }
-	int						getWorldHeight()	{ return worldHeight;			}
-	int						getWorldWidth()		{ return worldWidth;			}
+	vector<WorldLayer*>*	getLayers()			{ return layers; }
+	int						getNumLayers()		{ return layers->size(); }
+	int						getWorldHeight()	{ return worldHeight; }
+	int						getWorldWidth()		{ return worldWidth; }
 	LevelSection*			getCurrentLevelSection() { return currentLevelSection; }
+	Checkpoint*				getCurrentCheckpoint()	 { return currentCheckpoint; }
 
 	// INLINED MUTATOR METHODS
 	void setWorldHeight(int initWorldHeight)
@@ -65,6 +70,8 @@ public:
 	}
 	void setCurrentLevelSection(int id)
 	{ currentLevelSection = levelSections[id]; }
+	void setCurrentCheckpoint(Checkpoint *checkpoint)
+	{ currentCheckpoint = checkpoint; }
 
 	// METHODS DEFINED in GameStateManager.cpp
 	World();

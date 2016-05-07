@@ -8,16 +8,16 @@ void MyContactListener::BeginContact(b2Contact* contact) {
 		void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
 		if (bodyUserData && contact->GetFixtureB()->IsSensor()) {
 			static_cast<AnimatedSprite*>(bodyUserData)->startContact();
-			Teleporter *tel = (Teleporter*)(contact->GetFixtureB()->GetBody()->GetUserData());
-			static_cast<AnimatedSprite*>(bodyUserData)->setTeleportTarget(tel);
+			CollidableZone *zone = (CollidableZone*)(contact->GetFixtureB()->GetBody()->GetUserData());
+			static_cast<AnimatedSprite*>(bodyUserData)->setCollisionZone(zone);
 		}
 
 		//check if fixture B was a ball
 		bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
 		if (bodyUserData && contact->GetFixtureA()->IsSensor()) {
 			static_cast<AnimatedSprite*>(bodyUserData)->startContact();
-			Teleporter *tel = (Teleporter*)(contact->GetFixtureA()->GetBody()->GetUserData());
-			static_cast<AnimatedSprite*>(bodyUserData)->setTeleportTarget(tel);
+			CollidableZone *zone = (CollidableZone*)(contact->GetFixtureA()->GetBody()->GetUserData());
+			static_cast<AnimatedSprite*>(bodyUserData)->setCollisionZone(zone);
 		}
 
 }

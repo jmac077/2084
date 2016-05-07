@@ -23,6 +23,7 @@ const unsigned int A_KEY = (unsigned int)'A';
 const unsigned int S_KEY = (unsigned int)'S';
 const unsigned int D_KEY = (unsigned int)'D';
 const unsigned int R_KEY = (unsigned int)'R';
+const unsigned int K_KEY = (unsigned int)'K';
 const unsigned int P_KEY = (unsigned int)'P';
 const unsigned int T_KEY = (unsigned int)'T';
 const unsigned int L_KEY = (unsigned int)'L';

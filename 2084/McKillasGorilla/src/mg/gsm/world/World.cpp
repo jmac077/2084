@@ -28,6 +28,7 @@ World::World()
 	layers = new vector<WorldLayer*>();
 	worldWidth = 0;
 	worldHeight = 0;
+	currentCheckpoint = nullptr;
 }
 
 /*

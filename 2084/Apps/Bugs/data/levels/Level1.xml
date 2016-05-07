@@ -15,12 +15,13 @@
   </level_sections>
 
   <teleports>
-    <teleport x="58" y="5" width="6" height="1" dest_x="65" dest_y="93" target_section = "2"/>
-    <teleport x="82" y="193" width="8" height="1" dest_x="142" dest_y="194" target_section = "3"/>
+    <teleport x="58" y="5" width="6" height="1" dest_x="65" dest_y="93" target_section="2" />
+    <teleport x="82" y="193" width="8" height="1" dest_x="142" dest_y="194" target_section="3" />
   </teleports>
 
   <checkpoints>
-    <checkpoint/>
+    <checkpoint x="60" y="98" width="10" height="1" target_section="2" />
+    <checkpoint x="138" y="188" width="12" height="1" target_section="3" />
   </checkpoints>
   
   <!-- COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME -->
