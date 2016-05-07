@@ -75,7 +75,7 @@ void SpriteManager::addSpriteItemsToRenderList()
 
 		// ADD THE PLAYER SPRITE, IF THERE IS ONE
 		if (player != nullptr)
-			addSpriteToRenderList(player, renderList, viewport, 0, -26);
+			addSpriteToRenderList(player, renderList, viewport, 0, -28);
 		if (tv != nullptr)
 			addSpriteToRenderList(tv, renderList, viewport, 0, 0);
 		// NOW ADD THE REST OF THE SPRITES

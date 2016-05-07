@@ -412,7 +412,7 @@ void initViewport()
 	Viewport *viewport = gui->getViewport();
 
 	int viewportWidth = graphics->getScreenWidth() - VIEWPORT_OFFSET_X;
-	int viewportHeight = graphics->getScreenHeight() - VIEWPORT_OFFSET_Y;
+	int viewportHeight = graphics->getScreenHeight();// -VIEWPORT_OFFSET_Y;
 	viewport->setViewportWidth(viewportWidth);
 	viewport->setViewportHeight(viewportHeight);
 	viewport->setToggleOffsetY(TOGGLE_OFFSET_Y);

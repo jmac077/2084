@@ -94,8 +94,7 @@ void TiledLayer::addRenderItemsToRenderList(RenderList *renderList,
 		startCol = 0;
 
 	// columns - 1 IS THE LARGEST COLUMN, SO CLAMP THERE
-	int endCol = calculateViewportEndColumn(viewportX, 
-											viewportWidth);
+	int endCol = calculateViewportEndColumn(viewportX, viewportWidth);
 	if (endCol >= columns)
 		endCol = columns - 1;
 
@@ -105,8 +104,7 @@ void TiledLayer::addRenderItemsToRenderList(RenderList *renderList,
 		startRow = 0;
 
 	// rows - 1 IS THE LARGEST ROW, SO CLAMP THERE
-	int endRow = calculateViewportEndRow(	viewportY, 
-											viewportHeight);
+	int endRow = calculateViewportEndRow(viewportY, viewportHeight);
 	if (endRow >= rows)
 		endRow = rows - 1;
 
@@ -205,7 +203,7 @@ int TiledLayer::calculateViewportEndRow(int viewportY,
 {
 	// APPLY PARALLAX SCROLLING FACTOR TO VIEWPORT VALUE
 	float parallaxY = (float)(viewportY * (((float)(layerHeight-viewportHeight))/((float)(worldHeight-viewportHeight))));
-	float parallaxBottom = (float)(viewportY + viewportHeight);
+	float parallaxBottom = (float)(parallaxY + viewportHeight);
 	return (int)(parallaxBottom/tileHeight);
 }
 
