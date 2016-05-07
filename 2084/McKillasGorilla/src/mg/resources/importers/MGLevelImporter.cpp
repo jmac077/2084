@@ -102,7 +102,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		bodyDef.fixedRotation = true;
 		b2Body* body = gsm->getB2World()->CreateBody(&bodyDef);
 		b2PolygonShape dynamicBox;
-		dynamicBox.SetAsBox(.8125f,2.5625f);
+		dynamicBox.SetAsBox(.8125f,.8125f);
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &dynamicBox;
 		fixtureDef.density = 1.0f;

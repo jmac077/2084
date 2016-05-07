@@ -25,17 +25,20 @@
 */
 void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 										  RenderList *renderList,
-										  Viewport *viewport)
+										  Viewport *viewport,
+										  int offsetX, int offsetY)
 {
 	// GET THE SPRITE TYPE INFO FOR THIS SPRITE
 	AnimatedSpriteType *spriteType = sprite->getSpriteType();
 	b2Body* b2Body = sprite->getB2Body();
 	float rotation = sprite->getRotationInRadians();
+	int spriteX = b2Body->GetPosition().x * 16 - sprite->getSpriteType()->getTextureWidth() / 2 + offsetX;
+	int spriteY = b2Body->GetPosition().y * 16 - sprite->getSpriteType()->getTextureHeight() / 2 + offsetY;
 
 	// IS THE SPRITE VIEWABLE?
 	if (viewport->areWorldCoordinatesInViewport(	
-									b2Body->GetPosition().x*16-sprite->getSpriteType()->getTextureWidth()/2,
-									b2Body->GetPosition().y*16-sprite->getSpriteType()->getTextureHeight()/2,
+									spriteX,
+									spriteY,
 									spriteType->getTextureWidth(),
 									spriteType->getTextureHeight()))
 	{
@@ -44,8 +47,8 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 		//itemToAdd.id = sprite->getFrameIndex();
 		unsigned int currentImageId = sprite->getCurrentImageID();
 		renderList->addRenderItem(	currentImageId,
-									round(b2Body->GetPosition().x*16-viewport->getViewportX()- sprite->getSpriteType()->getTextureWidth() / 2),
-									round(b2Body->GetPosition().y*16-viewport->getViewportY()-sprite->getSpriteType()->getTextureHeight() / 2),
+									round(spriteX - viewport->getViewportX()),
+									round(spriteY - viewport->getViewportY()),
 									100,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
@@ -72,16 +75,16 @@ void SpriteManager::addSpriteItemsToRenderList()
 
 		// ADD THE PLAYER SPRITE, IF THERE IS ONE
 		if (player != nullptr)
-			addSpriteToRenderList(player, renderList, viewport);
+			addSpriteToRenderList(player, renderList, viewport, 0, -26);
 		if (tv != nullptr)
-			addSpriteToRenderList(tv, renderList, viewport);
+			addSpriteToRenderList(tv, renderList, viewport, 0, 0);
 		// NOW ADD THE REST OF THE SPRITES
 		list<Bot*>::iterator botIterator;
 		botIterator = bots.begin();
 		while (botIterator != bots.end())
 		{			
 			Bot *bot = (*botIterator);
-			addSpriteToRenderList(bot, renderList, viewport);
+			addSpriteToRenderList(bot, renderList, viewport, 0, 0);
 			botIterator++;
 		}
 	}
