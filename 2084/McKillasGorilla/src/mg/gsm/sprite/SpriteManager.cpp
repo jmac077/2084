@@ -76,9 +76,16 @@ void SpriteManager::addSpriteItemsToRenderList()
 		// ADD THE PLAYER SPRITE, IF THERE IS ONE
 		if (player != nullptr)
 			addSpriteToRenderList(player, renderList, viewport, 0, -28);
-		if (tv != nullptr)
-			addSpriteToRenderList(tv, renderList, viewport, 0, 0);
 		// NOW ADD THE REST OF THE SPRITES
+		list<WorldItem*>::iterator worldItem = worldItems.begin();
+		while (worldItem != worldItems.end())
+		{
+			WorldItem *item = (*worldItem);
+			// DO NOT RENDER ITEM IF IT IS INACTIVE AND A COLLECTIBLE
+			if (item->getActive() || !item->getCollectible())
+				addSpriteToRenderList(item->getSprite(), renderList, viewport, 0, 0);
+			worldItem++;
+		}
 		list<Bot*>::iterator botIterator;
 		botIterator = bots.begin();
 		while (botIterator != bots.end())
@@ -146,6 +153,15 @@ void SpriteManager::unloadSprites()
 	// CLEAR OUT THE PLAYER, BUT NOT ITS SpriteType
 	if (player != nullptr)
 		delete player;
+	// CLEAR OUT worldItems BUT NOT SpriteTypes
+	list<WorldItem*>::iterator item = worldItems.begin();
+	while (item != worldItems.end())
+	{
+		list<WorldItem*>::iterator tempIt = item;
+		item++;
+		delete (*tempIt);
+	}
+	worldItems.clear();
 	// CLEAR OUT THE BOTS, BUT NOT THEIR SpriteTypes
 	list<Bot*>::iterator botsIt = bots.begin();
 	while (botsIt != bots.end())
@@ -206,10 +222,15 @@ void SpriteManager::update()
 	// UPDATE THE PLAYER SPRITE ANIMATION FRAME/STATE/ROTATION
 	if (player != nullptr)
 		player->updateSprite();
-	if (tv != nullptr)
-		tv->updateSprite();
 
 	// NOW UPDATE THE REST OF THE SPRITES ANIMATION FRAMES/STATES/ROTATIONS
+	list<WorldItem*>::iterator item = worldItems.begin();
+	while (item != worldItems.end())
+	{
+		(*item)->getSprite()->updateSprite();
+		item++;
+	}
+
 	list<Bot*>::iterator botIterator = bots.begin();
 	list<Bot*> markedBots;
 	while (botIterator != bots.end())

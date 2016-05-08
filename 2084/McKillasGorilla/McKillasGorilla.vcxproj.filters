@@ -401,6 +401,9 @@
     <ClInclude Include="src\mg\gsm\world\CollidableZone.h">
       <Filter>src\mg\gsm\world</Filter>
     </ClInclude>
+    <ClInclude Include="src\mg\gsm\world\WorldItem.h">
+      <Filter>src\mg\gsm\world</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\mg_VS\ReadMe.txt">

@@ -33,7 +33,9 @@ private:
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
 	AnimatedSprite *player;
 
-	AnimatedSprite *tv;
+	// THE LIST OF WORLD ITEMS (COLLECTIBLES, INTERACTIBLES, ETC.) IN THIS LEVEL
+	list<WorldItem*> worldItems;
+
 	// THE BotRecycler MAKES SURE WE DON'T HAVE TO CONSTRUCT BOTS WHENEVER
 	// WE NEED TO SPAWN THEM, INSTEAD IT WILL RECYCLE THEM FOR US
 	BotRecycler botRecycler;
@@ -45,18 +47,18 @@ public:
 	// NOTHING TO INIT OR DESTROY
 	SpriteManager() { 
 		player = nullptr;
-		tv = nullptr;
 	}
 	~SpriteManager()	{}
 
 	// INLINED ACCESSOR METHODS
-	BotRecycler*			getBotRecycler()		{ return &botRecycler;		}
-	int						getNumberOfBots()		{ return bots.size();		}
-	AnimatedSprite*			getPlayer()				{ return player;			}
-	AnimatedSprite*			getTv() { return tv; }
-	list<Bot*>::iterator	getBotsIterator()		{ return bots.begin();		}
-	list<Bot*>::iterator	getEndOfBotsIterator()	{ return bots.end();		}
-	vector<BotSpawningPool*>*  getSpawningPools()		{ return &spawningPools;		}
+	BotRecycler*			getBotRecycler()			{ return &botRecycler;		}
+	int						getNumberOfBots()			{ return bots.size();		}
+	AnimatedSprite*			getPlayer()					{ return player;			}
+	list<WorldItem*>::iterator getWorldItems()			{ return worldItems.begin();}
+	list<WorldItem*>::iterator getEndOfWorldItems()		{ return worldItems.end();  }
+	list<Bot*>::iterator	getBotsIterator()			{ return bots.begin();		}
+	list<Bot*>::iterator	getEndOfBotsIterator()		{ return bots.end();		}
+	vector<BotSpawningPool*>*  getSpawningPools()		{ return &spawningPools;	}
 
 	// INLINED METHOD FOR ADDING A SPAWNING POOL
 	void addSpawningPool(BotSpawningPool *poolToAdd)
@@ -67,9 +69,9 @@ public:
 	{
 		player = initPlayer;
 	}
-	void setTv(AnimatedSprite *initTv)
+	void addWorldItem(WorldItem *item)
 	{
-		tv = initTv;
+		worldItems.push_back(item);
 	}
 
 	// METHODS DEFINED IN SpriteManager.cpp

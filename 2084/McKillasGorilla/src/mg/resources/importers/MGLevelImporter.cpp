@@ -193,13 +193,58 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		body->SetUserData(player);
 		player->setCollisionBehavior(player->getCollisionHandler());
 
+		// world_items
+		TiXmlElement *worldItems = levelSpriteTypes->NextSiblingElement();
+		TiXmlElement *worldItem = worldItems->FirstChildElement();
+		while (worldItem != nullptr)
+		{
+			// GET ITEM ATTRIBUTES
+			int x = xmlReader.extractIntAtt(worldItem, MG_X_ATT);
+			int y = xmlReader.extractIntAtt(worldItem, MG_Y_ATT);
+			int width = xmlReader.extractIntAtt(worldItem, MG_WIDTH_ATT);
+			int height = xmlReader.extractIntAtt(worldItem, MG_HEIGHT_ATT);
+			int flag = xmlReader.extractIntAtt(worldItem, MG_FLAG_ATT);
+			bool collectible = xmlReader.extractBoolAtt(worldItem, MG_COLLECTIBLE_ATT);
+
+			const char* itemType = xmlReader.extractCharAtt(worldItem, MG_BOT_TYPE_ATT);
+			string strItemType(itemType);
+			wstring wItemType(strItemType.begin(), strItemType.end());
+			text->writeDebugOutput(L"Item Type: " + wItemType);
+
+			// CREATE ANIMATED SPRITE FOR ITEM
+			AnimatedSprite *itemSprite = new AnimatedSprite();
+			itemSprite->setSpriteType(spriteManager->getSpriteType(wItemType));
+			itemSprite->setAlpha(255);
+			itemSprite->setCurrentState(L"IDLE");
+			itemSprite->setRotationInRadians(0);
+			WorldItem *item = new WorldItem(itemSprite, flag, collectible);
+
+			// CREATE WORLD ITEM ZONE AS BOX2D SENSOR BOX
+			bodyDef.type = b2_kinematicBody;
+			bodyDef.position.Set(x, y);
+			bodyDef.fixedRotation = true;
+			body = gsm->getB2World()->CreateBody(&bodyDef);
+			dynamicBox.SetAsBox(width, height);
+			fixtureDef.shape = &dynamicBox;
+			fixtureDef.density = 1.0f;
+			fixtureDef.friction = 0.0f;
+			fixtureDef.isSensor = true;
+			body->CreateFixture(&fixtureDef);
+			body->SetUserData(new CollidableZone(item, WorldItemFlag));
+			itemSprite->setB2Body(body);
+
+			spriteManager->addWorldItem(item);
+
+			worldItem = worldItem->NextSiblingElement();
+		}
+
 		//TV
+		/*
 		AnimatedSprite* tv = new AnimatedSprite();
 		tv->setSpriteType(spriteManager->getSpriteType(L"TV"));
 		tv->setAlpha(255);
 		tv->setCurrentState(L"IDLE");
 		tv->setRotationInRadians(0);
-		spriteManager->setTv(tv);
 		bodyDef.type = b2_kinematicBody;
 		bodyDef.position.Set(58.0f, 38.0f);
 		bodyDef.fixedRotation = true;
@@ -210,9 +255,10 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		fixtureDef.friction = 0.0f;
 		body->CreateFixture(&fixtureDef);
 		tv->setB2Body(body);
+		*/
 
 		// level_bot_types
-		TiXmlElement *botTypesList = levelSpriteTypes->NextSiblingElement();
+		TiXmlElement *botTypesList = worldItems->NextSiblingElement();
 		TiXmlElement *botType = botTypesList->FirstChildElement();
 		while (botType != nullptr)
 		{
