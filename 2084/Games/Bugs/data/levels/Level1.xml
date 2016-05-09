@@ -31,7 +31,9 @@
 
   <!-- LIST OF WORLD ITEMS (COLLECTIBLES, INTERACTIBLES, STATICS OBJECTS) IN THE LEVEL -->
   <world_items>
-    <world_item type="TV" x="58" y="38" width="4" height="4" flag="0" collectible="false" />
+    <world_item type="TV" x="50" y="38" width="4" height="4" flag="0" collectible="false" />
+    <world_item type="KeyCard" x="20" y="176" width="2" height="2" flag="1" collectible="true" />
+    <world_item type="Computer" x="144" y="124" width="4" height="4" flag="2" collectible="false" />
   </world_items>
   
   <!-- THESE ARE THE BOT TYPES THE LEVEL WILL BE SPAWNING -->

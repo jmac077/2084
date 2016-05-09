@@ -165,13 +165,17 @@ void AnimatedSprite::handleCollision() {
 	{
 		hitCheckpoint((Checkpoint*)collisionZone->getZone());
 	}
+	else if (collisionZone->getType() == WorldItemFlag)
+	{
+		interactWithItem((WorldItem*)collisionZone->getZone());
+	}
 }
 
 void AnimatedSprite::teleportPlayer(Teleporter *teleportTarget) {
 	// MOVE PLAYER TO TELEPORT LOCATION
 	getB2Body()->SetTransform(b2Vec2(teleportTarget->getDestX(), teleportTarget->getDestY()), 0.0f);
 	m_contacting = false;
-	getB2Body()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+	getB2Body()->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 	// SWITCH CURRENT LEVEL SECTION
 	Game::getSingleton()->getGSM()->getWorld()->setCurrentLevelSection(teleportTarget->getTargetSection());
 }
@@ -181,6 +185,14 @@ void AnimatedSprite::hitCheckpoint(Checkpoint *checkpoint) {
 	if (!checkpoint->getActivated()) {
 		checkpoint->setPlayerPos(getB2Body()->GetPosition().x, getB2Body()->GetPosition().y);
 		Game::getSingleton()->getGSM()->getWorld()->setCurrentCheckpoint(checkpoint);
+	}
+}
+
+void AnimatedSprite::interactWithItem(WorldItem *item) {
+	if (item->getActive()) {
+		item->setActive(false);
+		Game::getSingleton()->getGSM()->setFlag(item->getFlag());
+		// TODO: PLAY SOUND
 	}
 }
 
@@ -194,6 +206,7 @@ void AnimatedSprite::respawnAtLastCheckpoint() {
 		return;
 	// MOVE PLAYER TO WHERE THEY HIT THE LAST CHECKPOINT
 	getB2Body()->SetTransform(b2Vec2(lastCheckpoint->getPlayerX(), lastCheckpoint->getPlayerY()), 0.0f);
+	m_contacting = false;
 	getB2Body()->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 	// SWITCH CURRENT LEVEL SECTION
 	Game::getSingleton()->getGSM()->getWorld()->setCurrentLevelSection(lastCheckpoint->getLevelSection());
