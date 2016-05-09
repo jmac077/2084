@@ -31,6 +31,16 @@ void BugsButtonEventHandler::handleButtonEvents(	wstring command)
 		GameStateManager *gsm = game->getGSM();
 		gsm->goToMainMenu();
 	}
+	else if (command.compare(ABOUT_SCREEN_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToAboutMenu();
+	}
+	else if (command.compare(HELP_SCREEN_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToHelpMenu();
+	}
 	// THE USER PRESSED THE Start BUTTON ON THE MAIN MENU,
 	// SO LET'S START THE GAME FROM THE FIRST LEVEL
 	else if (command.compare(START_COMMAND) == 0)

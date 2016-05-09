@@ -106,6 +106,8 @@ public:
 	void			goToGame();
 	void			goToLoadLevel();
 	void			goToMainMenu();
+	void			goToAboutMenu();
+	void			goToHelpMenu();
 	void			goToPreGame();
 
 	// METHODS DEFINED in GameStateManager.cpp
