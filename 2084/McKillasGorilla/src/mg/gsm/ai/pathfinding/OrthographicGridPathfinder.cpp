@@ -333,7 +333,6 @@ void OrthographicGridPathfinder::updatePath(AnimatedSprite *sprite)
 		if (sprite->hasReachedDestination())
 		{
 			sprite->getB2Body()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
-			sprite->clearPath();
 			sprite->setCurrentState(L"IDLE");
 			sprite->getB2Body()->SetTransform(b2Vec2(column*2+1,row*2+1),0.0f);
 			return;

@@ -5,8 +5,13 @@
 void DeterministicMovement::behave(Bot *bot)
 {
 	Game *game = Game::getSingleton();
-	if (bot->getCurrentPathToFollow()->size() <= 0) {
-		game->getPathFinder()->mapPath(bot,1095,2024);
+	if (bot->getCurrentDest() != bot->getBotPath().end()) {
+		game->getPathFinder()->mapPath(bot, (*bot->getCurrentDest())[0], (*bot->getCurrentDest())[1]);
+		bot->nextWayPoint();
+	}
+	else {
+		bot->getCurrentDest() = bot->getBotPath().begin();
+		game->getPathFinder()->mapPath(bot, (*bot->getCurrentDest())[0], (*bot->getCurrentDest())[1]);
 	}
 }
 

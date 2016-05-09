@@ -331,16 +331,25 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			bodyDef.fixedRotation = true;
 			b2Body* body = gsm->getB2World()->CreateBody(&bodyDef);
 			b2PolygonShape dynamicBox;
-			dynamicBox.SetAsBox(.2f, .2f);
+			dynamicBox.SetAsBox(2.0f, 2.0f);
 			b2FixtureDef fixtureDef;
 			fixtureDef.shape = &dynamicBox;
 			fixtureDef.density = 1.0f;
 			fixtureDef.friction = 0.3f;
+			fixtureDef.isSensor = true;
 			body->CreateFixture(&fixtureDef);
 			botToSpawn->setB2Body(body);
-			//body->SetUserData(botToSpawn);
 			body->SetLinearVelocity(b2Vec2(initVx, initVy));
-
+			vector<float> *wayPoint = new vector<float>(0);
+			//to be loaded from xml
+			wayPoint->push_back(1095.0f);
+			wayPoint->push_back(2024.0f);
+			botToSpawn->addBotWayPoint(*wayPoint);
+			wayPoint = new vector<float>(0);
+			//to be loaded from xml
+			wayPoint->push_back(816.0f);
+			wayPoint->push_back(2320.0f);
+			botToSpawn->addBotWayPoint(*wayPoint);
 
 			// AND GIVE IT TO THE SPRITE MANAGER
 			spriteManager->addBot(botToSpawn);

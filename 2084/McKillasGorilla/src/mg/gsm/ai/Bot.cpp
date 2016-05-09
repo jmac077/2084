@@ -35,8 +35,9 @@ Bot* Bot::clone()
 
 void Bot::think()
 {
-	if (botState == BotState::MOVING)
+	if ((currentPathToFollow->size()==0 && botPath.size()!=0) || hasReachedDestination())
 	{
+		clearPath();
 		behaviors[BotState::MOVING]->behave(this);
 	}
 	else if (botState == BotState::DYING)

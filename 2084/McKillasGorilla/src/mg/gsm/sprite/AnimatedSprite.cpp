@@ -149,10 +149,15 @@ void AnimatedSprite::updateSprite()
 }
 
 void AnimatedSprite::startContact() { m_contacting = true; }
-void AnimatedSprite::endContact() { m_contacting = true; }
+void AnimatedSprite::endContact() { m_contacting = false; }
 
 void AnimatedSprite::handleCollision() {
-	if (collisionZone->getType() == TeleporterFlag)
+	if(collisionZone == NULL){
+		//player collided with drone sensor
+		killSprite();
+		endContact();
+	}
+	else if (collisionZone->getType() == TeleporterFlag)
 	{
 		teleportPlayer((Teleporter*)collisionZone->getZone());
 	}

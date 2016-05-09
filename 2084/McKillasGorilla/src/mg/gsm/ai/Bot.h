@@ -32,6 +32,8 @@ private:
 	wstring type;
 	BotState botState;
 	map<BotState, BotBehavior*> behaviors;
+	vector<vector<float>> botPath;
+	std::vector<vector<float>>::iterator currentDest = botPath.begin();
 
 public:
 	Bot()	{}
@@ -53,6 +55,13 @@ public:
 	{
 		behaviors[state] = behavior;
 	}
+	void addBotWayPoint(vector<float> path) {
+		botPath.push_back(path);
+		currentDest = botPath.begin();
+	}
+	void nextWayPoint() {
+		currentDest++;
+	}
 	wstring getWstringForState(BotState state)
 	{
 		if (state == DEAD) return wstring(MG_DEAD_BEHAVIOR.begin(), MG_DEAD_BEHAVIOR.end());
@@ -69,7 +78,12 @@ public:
 		else if (state.compare(MG_SPAWNING_BEHAVIOR) == 0) return BotState::SPAWNING;
 		else return BotState::NONE;
 	}
-
+	vector<vector<float>>& getBotPath() {
+		return botPath;
+	}
+	std::vector<vector<float>>::iterator& getCurrentDest() {
+		return currentDest;
+	}
 	// DEFINED IN Bot.cpp
 	Bot* clone();
 	void think();
