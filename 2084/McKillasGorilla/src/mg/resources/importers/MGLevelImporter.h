@@ -44,6 +44,8 @@ static const string MG_INTERVAL_TYPE_ATT = "interval_type";
 static const string MG_MAX_VELOCITY = "max_velocity";
 static const string MG_ID_ATT = "id";
 static const string MG_TARGET_SECTION_ATT = "target_section";
+static const string MG_FLAG_ATT = "flag";
+static const string MG_COLLECTIBLE_ATT = "collectible";
 
 // VALUES
 static const string MG_DETERMINISTIC_VALUE = "deterministic";

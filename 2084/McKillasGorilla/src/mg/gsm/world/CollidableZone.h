@@ -4,7 +4,8 @@
 enum CollidableZoneType
 {
 	TeleporterFlag,
-	CheckpointFlag
+	CheckpointFlag,
+	WorldItemFlag
 };
 
 class CollidableZone

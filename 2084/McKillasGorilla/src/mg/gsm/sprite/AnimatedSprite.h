@@ -17,6 +17,7 @@
 #include "mg\gsm\world\CollidableZone.h"
 #include "mg\gsm\world\Teleporter.h"
 #include "mg\gsm\world\Checkpoint.h"
+#include "mg\gsm\world\WorldItem.h"
 #include "Box2D.h"
 
 // ANIMATION STATES
@@ -118,6 +119,7 @@ public:
 	void handleCollision();
 	void teleportPlayer(Teleporter *teleportTarget);
 	void hitCheckpoint(Checkpoint *checkpoint);
+	void interactWithItem(WorldItem *item);
 	void killSprite();
 	void respawnAtLastCheckpoint();
 };
