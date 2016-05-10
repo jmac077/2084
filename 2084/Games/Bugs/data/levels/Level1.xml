@@ -12,6 +12,7 @@
     <level_section id="1" x="0" y="0" width="-1" height="1440" />
     <level_section id="2" x="0" y="1408" width="1728" height="-1" />
     <level_section id="3" x="1728" y="1536" width="-1" height="-1" />
+    <level_section id="4" x="0" y="0" width="3200" height="3200" />
   </level_sections>
 
   <!-- TELEPORTERS AND THEIR TARGETS -->

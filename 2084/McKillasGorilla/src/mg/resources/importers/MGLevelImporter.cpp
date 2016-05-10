@@ -20,6 +20,7 @@
 #include "tinyxml\tinystr.h";
 #include "tinyxml\tinyxml.h";
 #include "Box2D.h"
+#include "mg\gsm\world\HiddenWall.h"
 
 bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 {
@@ -146,7 +147,18 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			
 			checkpoint = checkpoint->NextSiblingElement();
 		}
-
+		HiddenWall *hidden = new HiddenWall(1,1,1,1);
+		//camera sensor to be added in xml
+		bodyDef.type = b2_staticBody;
+		bodyDef.position.Set(143,147);
+		body = gsm->getB2World()->CreateBody(&bodyDef);
+		dynamicBox.SetAsBox(7, 2);
+		fixtureDef.shape = &dynamicBox;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.0f;
+		fixtureDef.isSensor = true;
+		body->CreateFixture(&fixtureDef);
+		body->SetUserData(new CollidableZone(hidden, HiddenWallFlag));
 		// level_sprite_types
 		TiXmlElement *levelSpriteTypes = checkpoints->NextSiblingElement();
 

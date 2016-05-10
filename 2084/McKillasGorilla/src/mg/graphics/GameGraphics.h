@@ -28,7 +28,7 @@
 #include "mg\text\TextFileWriter.h"
 
 const static unsigned int DEFAULT_INIT_GUI_RENDER_LIST_SIZE = 100;
-const static unsigned int DEFAULT_INIT_LEVEL_RENDER_LIST_SIZE = 3000;
+const static unsigned int DEFAULT_INIT_LEVEL_RENDER_LIST_SIZE = 6000;
 
 class TextureManager;
 

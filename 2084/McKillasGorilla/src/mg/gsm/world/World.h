@@ -48,6 +48,7 @@ private:
 	// THE LAST CHECKPOINT HIT BY THE PLAYER
 	Checkpoint *currentCheckpoint;
 
+	bool renderHiddenStuff = false;
 public:
 	// INLINED ACCESSOR METHODS
 	vector<WorldLayer*>*	getLayers()			{ return layers; }
@@ -72,7 +73,9 @@ public:
 	{ currentLevelSection = levelSections[id]; }
 	void setCurrentCheckpoint(Checkpoint *checkpoint)
 	{ currentCheckpoint = checkpoint; }
-
+	void setRenderHiddenStuff(bool cameraTriggered){
+		renderHiddenStuff = cameraTriggered;
+	}
 	// METHODS DEFINED in GameStateManager.cpp
 	World();
 	~World();

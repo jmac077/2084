@@ -165,6 +165,10 @@ void AnimatedSprite::handleCollision() {
 	{
 		hitCheckpoint((Checkpoint*)collisionZone->getZone());
 	}
+	else if (collisionZone->getType() == HiddenWallFlag)
+	{
+		raiseWall();
+	}
 }
 
 void AnimatedSprite::teleportPlayer(Teleporter *teleportTarget) {
@@ -182,6 +186,128 @@ void AnimatedSprite::hitCheckpoint(Checkpoint *checkpoint) {
 		checkpoint->setPlayerPos(getB2Body()->GetPosition().x, getB2Body()->GetPosition().y);
 		Game::getSingleton()->getGSM()->getWorld()->setCurrentCheckpoint(checkpoint);
 	}
+}
+
+void AnimatedSprite::raiseWall() {
+	//get dimensions of wall create body and add it to wall
+	//add graphics to world renderer
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(143, 141);
+	b2Body* body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(7.0f, 2.0f);
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	body->CreateFixture(&fixtureDef);
+	//also add static tiles that teleport player
+	Teleporter *teleportTarget = new Teleporter(176, 22, 4);
+
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(168, 154);
+	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	dynamicBox.SetAsBox(2, 2);
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	fixtureDef.isSensor = true;
+	body->CreateFixture(&fixtureDef);
+	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
+
+	teleportTarget = new Teleporter(122, 74, 4);
+
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(126, 164);
+	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	dynamicBox.SetAsBox(2, 2);
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	fixtureDef.isSensor = true;
+	body->CreateFixture(&fixtureDef);
+	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
+
+	teleportTarget = new Teleporter(120, 12, 4);
+
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(148, 82);
+	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	dynamicBox.SetAsBox(4, 4);
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	fixtureDef.isSensor = true;
+	body->CreateFixture(&fixtureDef);
+	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
+
+	teleportTarget = new Teleporter(166, 175, 4);
+
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(142, 12);
+	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	dynamicBox.SetAsBox(2, 2);
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	fixtureDef.isSensor = true;
+	body->CreateFixture(&fixtureDef);
+	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
+
+	teleportTarget = new Teleporter(120, 40, 4);
+
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(122, 22);
+	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	dynamicBox.SetAsBox(2, 2);
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	fixtureDef.isSensor = true;
+	body->CreateFixture(&fixtureDef);
+	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
+
+	teleportTarget = new Teleporter(122, 180, 4);
+
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(120, 56);
+	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	dynamicBox.SetAsBox(2, 2);
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	fixtureDef.isSensor = true;
+	body->CreateFixture(&fixtureDef);
+	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
+
+	teleportTarget = new Teleporter(178, 74, 4);
+
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(176, 56);
+	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	dynamicBox.SetAsBox(2, 2);
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	fixtureDef.isSensor = true;
+	body->CreateFixture(&fixtureDef);
+	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
+
+	teleportTarget = new Teleporter(156, 122, 4);
+
+	bodyDef.type = b2_staticBody;
+	bodyDef.position.Set(178, 88);
+	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	dynamicBox.SetAsBox(2, 2);
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	fixtureDef.isSensor = true;
+	body->CreateFixture(&fixtureDef);
+	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
+
+	Game::getSingleton()->getGSM()->getWorld()->setRenderHiddenStuff(true);
 }
 
 void AnimatedSprite::killSprite() {
