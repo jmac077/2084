@@ -25,6 +25,7 @@
 #include "mg\gsm\world\World.h"
 #include "mg\gsm\world\WorldLayer.h"
 #include "mg\gsm\world\Checkpoint.h"
+#include "mg\resources\SoundManager.h"
 #include "Box2D.h"
 
 class Game;
@@ -64,6 +65,9 @@ private:
 	// THIS IS AI SYSTEM THAT MANAGES GAME STATE TRANSITIONS
 	GameStateMachine *gameStateMachine;
 
+	// THE SYSTEM THAT PLAYS SOUNDS AND MUSIC
+	SoundManager *soundManager;
+
 	// FOR DOING ALL COLLISION DETECTION AND RESOLUTION
 	b2World* myWorld;
 	float32 timeStep = 1 / 60.0;      //the length of time passed to simulate (seconds)
@@ -79,8 +83,9 @@ public:
 	unsigned int		getCurrentLevelIndex()	{ return currentLevelIndex;				}
 	unsigned int		getNumLevels()			{ return levelNames.size();				}
 	SpriteManager*		getSpriteManager()		{ return spriteManager;					}
+	SoundManager*		getSoundManager()		{ return soundManager;					}
 	World*				getWorld()				{ return &world;						}
-	GameStateMachine*	getGameStateMachine()	{ return gameStateMachine; }
+	GameStateMachine*	getGameStateMachine()	{ return gameStateMachine;				}
 	wstring				getCurrentLevelName()	{ return levelNames[currentLevelIndex];	}
 	b2World*			getB2World()			{ return myWorld;						}
 

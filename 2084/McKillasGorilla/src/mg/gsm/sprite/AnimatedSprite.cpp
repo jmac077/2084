@@ -177,12 +177,15 @@ void AnimatedSprite::handleCollision() {
 }
 
 void AnimatedSprite::teleportPlayer(Teleporter *teleportTarget) {
+	GameStateManager *gsm = Game::getSingleton()->getGSM();
+	if (gsm->getWorld()->getRenderHiddenStuff())
+		gsm->getSoundManager()->PlaySoundEffect(TELEPORT_SFX);
 	// MOVE PLAYER TO TELEPORT LOCATION
 	getB2Body()->SetTransform(b2Vec2(teleportTarget->getDestX(), teleportTarget->getDestY()), 0.0f);
 	m_contacting = false;
 	getB2Body()->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 	// SWITCH CURRENT LEVEL SECTION
-	Game::getSingleton()->getGSM()->getWorld()->setCurrentLevelSection(teleportTarget->getTargetSection());
+	gsm->getWorld()->setCurrentLevelSection(teleportTarget->getTargetSection());
 }
 
 void AnimatedSprite::hitCheckpoint(Checkpoint *checkpoint) {
@@ -194,12 +197,15 @@ void AnimatedSprite::hitCheckpoint(Checkpoint *checkpoint) {
 }
 
 void AnimatedSprite::raiseWall() {
+	GameStateManager *gsm = Game::getSingleton()->getGSM();
+	gsm->getSoundManager()->PlaySong(DETECTED_SONG);
+
 	//get dimensions of wall create body and add it to wall
 	//add graphics to world renderer
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(143, 141);
-	b2Body* body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	b2Body* body = gsm->getB2World()->CreateBody(&bodyDef);
 	b2PolygonShape dynamicBox;
 	dynamicBox.SetAsBox(7.0f, 2.0f);
 	b2FixtureDef fixtureDef;
@@ -212,7 +218,7 @@ void AnimatedSprite::raiseWall() {
 
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(168, 154);
-	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	body = gsm->getB2World()->CreateBody(&bodyDef);
 	dynamicBox.SetAsBox(2, 2);
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 1.0f;
@@ -225,7 +231,7 @@ void AnimatedSprite::raiseWall() {
 
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(126, 164);
-	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	body = gsm->getB2World()->CreateBody(&bodyDef);
 	dynamicBox.SetAsBox(2, 2);
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 1.0f;
@@ -238,7 +244,7 @@ void AnimatedSprite::raiseWall() {
 
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(148, 82);
-	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	body = gsm->getB2World()->CreateBody(&bodyDef);
 	dynamicBox.SetAsBox(4, 4);
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 1.0f;
@@ -251,7 +257,7 @@ void AnimatedSprite::raiseWall() {
 
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(142, 12);
-	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	body = gsm->getB2World()->CreateBody(&bodyDef);
 	dynamicBox.SetAsBox(2, 2);
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 1.0f;
@@ -264,7 +270,7 @@ void AnimatedSprite::raiseWall() {
 
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(122, 22);
-	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	body = gsm->getB2World()->CreateBody(&bodyDef);
 	dynamicBox.SetAsBox(2, 2);
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 1.0f;
@@ -277,7 +283,7 @@ void AnimatedSprite::raiseWall() {
 
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(120, 56);
-	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	body = gsm->getB2World()->CreateBody(&bodyDef);
 	dynamicBox.SetAsBox(2, 2);
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 1.0f;
@@ -290,7 +296,7 @@ void AnimatedSprite::raiseWall() {
 
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(176, 56);
-	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	body = gsm->getB2World()->CreateBody(&bodyDef);
 	dynamicBox.SetAsBox(2, 2);
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 1.0f;
@@ -303,7 +309,7 @@ void AnimatedSprite::raiseWall() {
 
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(178, 88);
-	body = Game::getSingleton()->getGSM()->getB2World()->CreateBody(&bodyDef);
+	body = gsm->getB2World()->CreateBody(&bodyDef);
 	dynamicBox.SetAsBox(2, 2);
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 1.0f;
@@ -312,20 +318,24 @@ void AnimatedSprite::raiseWall() {
 	body->CreateFixture(&fixtureDef);
 	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
 
-	Game::getSingleton()->getGSM()->getWorld()->setRenderHiddenStuff(true);
+	gsm->getWorld()->setRenderHiddenStuff(true);
 }
 
 void AnimatedSprite::interactWithItem(WorldItem *item) {
 	if (item->getActive()) {
 		item->setActive(false);
-		Game::getSingleton()->getGSM()->setFlag(item->getFlag());
-		// TODO: PLAY SOUND
+		GameStateManager *gsm = Game::getSingleton()->getGSM();
+		gsm->setFlag(item->getFlag());
+		gsm->getSoundManager()->PlaySoundEffect(PICK_UP_ITEM_SFX);
 	}
 }
 
 void AnimatedSprite::killSprite() {
 	dead = true;
-	Game::getSingleton()->getGSM()->goToGameOver();
+	GameStateManager *gsm = Game::getSingleton()->getGSM();
+	gsm->goToGameOver();
+	setCurrentState(L"BENDING_FRONT");
+	gsm->getSoundManager()->PlaySong(CENSORED_SONG);
 }
 
 void AnimatedSprite::respawnAtLastCheckpoint() {

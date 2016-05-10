@@ -53,6 +53,7 @@
     <ClCompile Include="src\mg\resources\importers\MGLevelImporter.cpp" />
     <ClCompile Include="src\mg\resources\importers\PoseurSpriteTypeImporter.cpp" />
     <ClCompile Include="src\mg\resources\importers\TMXMapImporter.cpp" />
+    <ClCompile Include="src\mg\resources\SoundManager.cpp" />
     <ClCompile Include="src\mg\text\TextFileReader.cpp" />
     <ClCompile Include="src\mg\text\GameText.cpp" />
     <ClCompile Include="src\mg\text\TextFileWriter.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="src\mg\resources\importers\MGLevelImporter.h" />
     <ClInclude Include="src\mg\resources\importers\PoseurSpriteTypeImporter.h" />
     <ClInclude Include="src\mg\resources\importers\TMXMapImporter.h" />
+    <ClInclude Include="src\mg\resources\SoundManager.h" />
     <ClInclude Include="src\mg\text\TextFileReader.h" />
     <ClInclude Include="src\mg\text\GameText.h" />
     <ClInclude Include="src\mg\text\TextFileWriter.h" />

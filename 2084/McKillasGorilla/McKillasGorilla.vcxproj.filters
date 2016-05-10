@@ -207,6 +207,9 @@
     <ClCompile Include="src\mg\gsm\world\HiddenWall.cpp">
       <Filter>src\mg\gsm\world</Filter>
     </ClCompile>
+    <ClCompile Include="src\mg\resources\SoundManager.cpp">
+      <Filter>src\mg\resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\mg\game\Game.h">
@@ -409,6 +412,9 @@
     </ClInclude>
     <ClInclude Include="src\mg\gsm\world\HiddenWall.h">
       <Filter>src\mg\gsm\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mg\resources\SoundManager.h">
+      <Filter>src\mg\resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

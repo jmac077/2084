@@ -76,6 +76,8 @@ public:
 	void setRenderHiddenStuff(bool cameraTriggered){
 		renderHiddenStuff = cameraTriggered;
 	}
+	bool getRenderHiddenStuff() { return renderHiddenStuff; }
+
 	// METHODS DEFINED in GameStateManager.cpp
 	World();
 	~World();

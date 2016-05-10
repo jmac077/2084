@@ -73,6 +73,7 @@ void BugsKeyEventHandler::handleKeyEvents()
 		// THEN CALCULATE FINAL VELOCITIES, SCALE BY MAGNITUDE AND VELOCITY SCALAR
 		float magnitude = sqrt(xVel*xVel + yVel*yVel);
 		if (magnitude > 0) {
+			gsm->getSoundManager()->PlaySoundEffectLoop(WALKING_SFX);
 			float xVelocity = playerVelocity * xVel / magnitude, yVelocity = playerVelocity * yVel / magnitude;
 			player->getB2Body()->SetLinearVelocity(b2Vec2(xVelocity, yVelocity));
 			if (xVelocity > 0)
@@ -85,6 +86,7 @@ void BugsKeyEventHandler::handleKeyEvents()
 				player->setCurrentState(WALKING_UP);
 		}
 		else {
+			gsm->getSoundManager()->StopSoundEffect();
 			player->getB2Body()->SetLinearVelocity(b2Vec2(0, 0));
 			player->setCurrentState(L"IDLE");
 		}

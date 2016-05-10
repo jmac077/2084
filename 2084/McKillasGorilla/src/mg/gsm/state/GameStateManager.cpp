@@ -39,6 +39,8 @@ GameStateManager::~GameStateManager()
 void GameStateManager::startUp()
 {
 	spriteManager = new SpriteManager();
+	soundManager = new SoundManager();
+	soundManager->LoadFiles();
 	currentGameState = GS_SPLASH_SCREEN;
 	currentLevelIndex = NO_LEVEL_LOADED;
 	b2Vec2 gravity(0, 0);
@@ -74,6 +76,7 @@ void GameStateManager::goToGame()
 
 void GameStateManager::goToInGame()
 {
+	soundManager->PlaySong(WANDERER_SONG);
 	currentGameState = GS_GAME_IN_PROGRESS;
 }
 
@@ -95,6 +98,7 @@ void GameStateManager::goToMainMenu()
 	currentGameState = GS_MAIN_MENU;
 	currentLevelIndex = NO_LEVEL_LOADED;
 	this->unloadCurrentLevel();
+	soundManager->PlaySong(THE_DEEP_SONG);
 }
 
 void GameStateManager::goToAboutMenu()
@@ -114,6 +118,7 @@ void GameStateManager::goToPreGame()
 
 void GameStateManager::goToGameOver()
 {
+	soundManager->StopSoundEffect();
 	currentGameState = GS_GAME_OVER;
 }
 
@@ -258,6 +263,7 @@ void GameStateManager::shutDown()
 {
 	// MAKE SURE THE GAME LOOP DOESN'T GO AROUND AGAIN
 	currentGameState = GS_EXIT_GAME;
+	soundManager->CloseFiles();
 }
 
 /*

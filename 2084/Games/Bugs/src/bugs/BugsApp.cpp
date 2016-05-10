@@ -34,6 +34,7 @@
 #include "mg\input\GameInput.h"
 #include "mg\os\GameOS.h"
 #include "mg\text\GameText.h"
+#include "mg\resources\SoundManager.h"
 
 // WINDOWS PLATFORM INCLUDES
 #include "mg\platforms\Windows\WindowsOS.h"
@@ -210,8 +211,8 @@ void initGameOverGUI()
 	Button *buttonToAdd = new Button();
 	buttonToAdd->initButton(normalTextureID,
 		mouseOverTextureID,
-		graphics->getScreenWidth() / 2 - 100,
-		graphics->getScreenHeight() / 2 + 100,
+		graphics->getScreenWidth() / 2 - 205,
+		graphics->getScreenHeight() / 2,
 		0,
 		255,
 		200,
@@ -226,8 +227,8 @@ void initGameOverGUI()
 	buttonToAdd = new Button();
 	buttonToAdd->initButton(normalTextureID,
 		mouseOverTextureID,
-		graphics->getScreenWidth() / 2 - 100,
-		graphics->getScreenHeight() / 2 + 210,
+		graphics->getScreenWidth() / 2 + 105,
+		graphics->getScreenHeight() / 2,
 		0,
 		255,
 		200,
