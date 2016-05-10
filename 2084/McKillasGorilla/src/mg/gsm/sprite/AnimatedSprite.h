@@ -122,4 +122,5 @@ public:
 	void interactWithItem(WorldItem *item);
 	void killSprite();
 	void respawnAtLastCheckpoint();
+	void raiseWall();
 };

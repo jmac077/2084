@@ -65,10 +65,14 @@ void World::addWorldRenderItemsToRenderList()
 		GameGraphics *graphics = game->getGraphics();
 		RenderList *renderList = graphics->getWorldRenderList();
 		Viewport *viewport = gui->getViewport();
-		for (unsigned int i = 0; i < layers->size(); i++)
+		for (unsigned int i = 0; i < layers->size()-1; i++)
 		{
 			layers->at(i)->addRenderItemsToRenderList(	renderList,
 														viewport);
+		}
+		if (renderHiddenStuff) {
+			layers->back()->addRenderItemsToRenderList(renderList,
+				viewport);
 		}
 	}
 }
