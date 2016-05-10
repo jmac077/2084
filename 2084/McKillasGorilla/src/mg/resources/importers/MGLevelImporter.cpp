@@ -250,25 +250,6 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			worldItem = worldItem->NextSiblingElement();
 		}
 
-		//TV
-		/*
-		AnimatedSprite* tv = new AnimatedSprite();
-		tv->setSpriteType(spriteManager->getSpriteType(L"TV"));
-		tv->setAlpha(255);
-		tv->setCurrentState(L"IDLE");
-		tv->setRotationInRadians(0);
-		bodyDef.type = b2_kinematicBody;
-		bodyDef.position.Set(58.0f, 38.0f);
-		bodyDef.fixedRotation = true;
-		body = gsm->getB2World()->CreateBody(&bodyDef);
-		dynamicBox.SetAsBox(4.0f, 4.0f);
-		fixtureDef.shape = &dynamicBox;
-		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.0f;
-		body->CreateFixture(&fixtureDef);
-		tv->setB2Body(body);
-		*/
-
 		// level_bot_types
 		TiXmlElement *botTypesList = worldItems->NextSiblingElement();
 		TiXmlElement *botType = botTypesList->FirstChildElement();
@@ -353,6 +334,10 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			int initY = xmlReader.extractIntAtt(bot, MG_INIT_Y_ATT);
 			int initVx = xmlReader.extractIntAtt(bot, MG_INIT_VX_ATT);
 			int initVy = xmlReader.extractIntAtt(bot, MG_INIT_VY_ATT);
+			int wp1X = xmlReader.extractIntAtt(bot, MG_WP_1_X_ATT);
+			int wp1Y = xmlReader.extractIntAtt(bot, MG_WP_1_Y_ATT);
+			int wp2X = xmlReader.extractIntAtt(bot, MG_WP_2_X_ATT);
+			int wp2Y = xmlReader.extractIntAtt(bot, MG_WP_2_Y_ATT);
 			wstring debugText = L"Bot x, y, vX, vY: ";
 			wstringstream wss;
 			wss << initX; wss << L", "; wss << initY; wss << initVx; wss << L","; wss << initVy;
@@ -400,13 +385,13 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			body->SetLinearVelocity(b2Vec2(initVx, initVy));
 			vector<float> *wayPoint = new vector<float>(0);
 			//to be loaded from xml
-			wayPoint->push_back(1095.0f);
-			wayPoint->push_back(2024.0f);
+			wayPoint->push_back(wp1X);
+			wayPoint->push_back(wp1Y);
 			botToSpawn->addBotWayPoint(*wayPoint);
 			wayPoint = new vector<float>(0);
 			//to be loaded from xml
-			wayPoint->push_back(816.0f);
-			wayPoint->push_back(2320.0f);
+			wayPoint->push_back(wp2X);
+			wayPoint->push_back(wp2Y);
 			botToSpawn->addBotWayPoint(*wayPoint);
 
 			// AND GIVE IT TO THE SPRITE MANAGER

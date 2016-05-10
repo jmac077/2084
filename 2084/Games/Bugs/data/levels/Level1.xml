@@ -32,7 +32,7 @@
 
   <!-- LIST OF WORLD ITEMS (COLLECTIBLES, INTERACTIBLES, STATICS OBJECTS) IN THE LEVEL -->
   <world_items>
-    <world_item type="TV" x="50" y="38" width="4" height="4" flag="0" collectible="false" />
+    <world_item type="TV" x="58" y="38" width="4" height="4" flag="0" collectible="false" />
     <world_item type="KeyCard" x="20" y="176" width="2" height="2" flag="1" collectible="true" />
     <world_item type="Computer" x="144" y="124" width="4" height="4" flag="2" collectible="false" />
   </world_items>
@@ -44,7 +44,8 @@
   
   <!-- INITIAL BOTS WHEN THE LEVEL STARTS -->
   <bots_list>
-	  <bot type="drone" init_x="51" init_y="139" init_vx="0" init_vy="0" init_bot_state="MOVING" init_sprite_state="IDLE" />
+	  <bot type="drone" init_x="51" init_y="139" init_vx="0" init_vy="0" wp1_x="1095" wp1_y="2024" wp2_x="816" wp2_y="2320" init_bot_state="MOVING" init_sprite_state="IDLE" />
+	  <bot type="drone" init_x="151" init_y="55" init_vx="0" init_vy="0" wp1_x="1920" wp1_y="880" wp2_x="2816" wp2_y="880" init_bot_state="MOVING" init_sprite_state="IDLE" />
   </bots_list>
   
   <!-- WE CAN EVEN SPECIFY BOT SPAWN LOCATIONS -->
