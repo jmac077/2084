@@ -105,6 +105,14 @@
                       <xs:attribute type="xs:byte" name="initVx" use="optional"/>
 
                       <xs:attribute type="xs:byte" name="initVy" use="optional"/>
+			
+		      <xs:attribute type="xs:short" name="wp1_x" use="optional"/>
+			
+		      <xs:attribute type="xs:short" name="wp1_y" use="optional"/>
+		
+		      <xs:attribute type="xs:short" name="wp2_x" use="optional"/>
+			
+		      <xs:attribute type="xs:short" name="wp2_y" use="optional"/>	
 
                       <xs:attribute type="xs:string" name="initState" use="optional"/>
 

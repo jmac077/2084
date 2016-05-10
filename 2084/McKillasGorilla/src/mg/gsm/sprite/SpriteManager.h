@@ -59,6 +59,14 @@ public:
 	list<Bot*>::iterator	getBotsIterator()			{ return bots.begin();		}
 	list<Bot*>::iterator	getEndOfBotsIterator()		{ return bots.end();		}
 	vector<BotSpawningPool*>*  getSpawningPools()		{ return &spawningPools;	}
+	AnimatedSprite*			getTv()						{ 
+		list<WorldItem*>::iterator it;
+		for (it = worldItems.begin(); it != worldItems.end(); it++) {
+			if ((*it)->getSprite()->getSpriteType() == getSpriteType(L"TV")) {
+				return (*it)->getSprite();
+			}
+		}
+	}
 
 	// INLINED METHOD FOR ADDING A SPAWNING POOL
 	void addSpawningPool(BotSpawningPool *poolToAdd)

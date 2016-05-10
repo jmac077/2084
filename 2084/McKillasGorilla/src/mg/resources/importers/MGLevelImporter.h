@@ -46,6 +46,10 @@ static const string MG_ID_ATT = "id";
 static const string MG_TARGET_SECTION_ATT = "target_section";
 static const string MG_FLAG_ATT = "flag";
 static const string MG_COLLECTIBLE_ATT = "collectible";
+static const string MG_WP_1_X_ATT = "wp1_x";
+static const string MG_WP_1_Y_ATT = "wp1_y";
+static const string MG_WP_2_X_ATT = "wp2_x";
+static const string MG_WP_2_Y_ATT = "wp2_y";
 
 // VALUES
 static const string MG_DETERMINISTIC_VALUE = "deterministic";

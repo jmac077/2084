@@ -19,3 +19,7 @@ Bot x, y, vX, vY: 51, 1390,0
 init bot state: MOVING
 init sprite state: IDLE
 Bot Type: drone
+Bot x, y, vX, vY: 151, 550,0
+init bot state: MOVING
+init sprite state: IDLE
+Bot Type: drone
