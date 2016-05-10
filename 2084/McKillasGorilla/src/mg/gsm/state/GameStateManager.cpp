@@ -92,6 +92,16 @@ void GameStateManager::goToMainMenu()
 	this->unloadCurrentLevel();
 }
 
+void GameStateManager::goToAboutMenu()
+{
+	currentGameState = GS_MENU_ABOUT_MENU;
+}
+
+void GameStateManager::goToHelpMenu()
+{
+	currentGameState = GS_MENU_HELP_MENU;
+}
+
 void GameStateManager::goToPreGame()
 {
 	currentGameState = GS_PRE_GAME;

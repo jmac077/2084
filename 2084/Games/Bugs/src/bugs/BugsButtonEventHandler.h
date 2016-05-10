@@ -19,6 +19,8 @@ class Game;
 
 const wstring	GO_TO_MM_COMMAND = L"Go To Main Menu";
 const wstring	START_COMMAND = L"Start";
+const wstring	ABOUT_SCREEN_COMMAND = L"About";
+const wstring	HELP_SCREEN_COMMAND = L"Help";
 const wstring	EXIT_COMMAND = L"Exit";
 const wstring	QUIT_COMMAND = L"Quit";
 

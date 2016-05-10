@@ -70,6 +70,9 @@ private:
 	int32 velocityIterations = 8;   //how strongly to correct velocity
 	int32 positionIterations = 3;
 
+	// THE BITWISE FLAGS FOR THE CURRENT LEVEL
+	unsigned int levelFlags = 0;
+
 public:
 	// INLINED ACCESSOR METHODS
 	GameState			getCurrentGameState()	{ return currentGameState;				}
@@ -81,10 +84,14 @@ public:
 	wstring				getCurrentLevelName()	{ return levelNames[currentLevelIndex];	}
 	b2World*			getB2World()			{ return myWorld;						}
 
-	// INLINED MUTATOR METHOD
+	// INLINED MUTATOR METHODS
 	void setGameStateMachine(GameStateMachine *initBotStateManager)
 	{
 		gameStateMachine = initBotStateManager;
+	}
+	void setFlag(int flag)
+	{
+		levelFlags = levelFlags | flag;
 	}
 
 	// METHODS FOR TESTING THE CURRENT GAME STATE
@@ -99,6 +106,8 @@ public:
 	void			goToGame();
 	void			goToLoadLevel();
 	void			goToMainMenu();
+	void			goToAboutMenu();
+	void			goToHelpMenu();
 	void			goToPreGame();
 
 	// METHODS DEFINED in GameStateManager.cpp

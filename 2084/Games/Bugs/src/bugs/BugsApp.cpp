@@ -48,6 +48,8 @@ void initCursor();
 void initInGameGUI();
 void initMainMenu();
 void initSplashScreen();
+void initAboutScreen();
+void initHelpScreen();
 void initLoadingLevel();
 void initViewport();
 
@@ -75,6 +77,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	initViewport();
 	initCursor();
 	initSplashScreen();
+	initAboutScreen();
+	initHelpScreen();
 	initMainMenu();
 	initInGameGUI();
 	initLoadingLevel();
@@ -272,7 +276,7 @@ void initMainMenu()
 		buttonWidth,
 		buttonHeight,
 		false,
-		EXIT_COMMAND);
+		ABOUT_SCREEN_COMMAND);
 
 	// AND NOW LOAD IT INTO A ScreenGUI
 	mainMenuGUI->addButton(buttonToAdd);
@@ -294,7 +298,7 @@ void initMainMenu()
 		buttonWidth,
 		buttonHeight,
 		false,
-		EXIT_COMMAND);
+		HELP_SCREEN_COMMAND);
 
 	// AND NOW LOAD IT INTO A ScreenGUI
 	mainMenuGUI->addButton(buttonToAdd);
@@ -394,6 +398,82 @@ void initSplashScreen()
 	// AND REGISTER IT WITH THE GUI
 	GameGUI *gui = game->getGUI();
 	gui->addScreenGUI(GS_SPLASH_SCREEN, splashScreenGUI);
+}
+
+/*
+initAboutScreen - initializes the game's about screen gui.
+*/
+void initAboutScreen()
+{
+	Game *game = Game::getSingleton();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	// NOW, FIRST LET'S ADD A SPLASH SCREEN GUI
+	ScreenGUI *aboutScreenGUI = new ScreenGUI();
+
+	// WE'LL ONLY HAVE ONE IMAGE FOR OUR GIANT BUTTON
+	unsigned int normalTextureID = guiTextureManager->loadTexture(ABOUT_SCREEN_PATH);
+	unsigned int mouseOverTextureID = normalTextureID;
+
+	int imageWidth = 1500;
+	int imageHeight = 1120;
+
+	// INIT THE QUIT BUTTON
+	Button *buttonToAdd = new Button();
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		(game->getGraphics()->getScreenWidth() / 2) - (imageWidth / 2),
+		(game->getGraphics()->getScreenHeight() / 2) - (imageHeight / 2),
+		0,
+		255,
+		imageWidth,
+		imageHeight,
+		false,
+		GO_TO_MM_COMMAND);
+	aboutScreenGUI->addButton(buttonToAdd);
+
+	// AND REGISTER IT WITH THE GUI
+	GameGUI *gui = game->getGUI();
+	gui->addScreenGUI(GS_MENU_ABOUT_MENU, aboutScreenGUI);
+}
+
+/*
+initHelpScreen - initializes the game's help screen gui.
+*/
+void initHelpScreen()
+{
+	Game *game = Game::getSingleton();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	// NOW, FIRST LET'S ADD A SPLASH SCREEN GUI
+	ScreenGUI *helpScreenGUI = new ScreenGUI();
+
+	// WE'LL ONLY HAVE ONE IMAGE FOR OUR GIANT BUTTON
+	unsigned int normalTextureID = guiTextureManager->loadTexture(HELP_SCREEN_PATH);
+	unsigned int mouseOverTextureID = normalTextureID;
+
+	int imageWidth = 1500;
+	int imageHeight = 1120;
+
+	// INIT THE QUIT BUTTON
+	Button *buttonToAdd = new Button();
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		(game->getGraphics()->getScreenWidth() / 2) - (imageWidth / 2),
+		(game->getGraphics()->getScreenHeight() / 2) - (imageHeight / 2),
+		0,
+		255,
+		imageWidth,
+		imageHeight,
+		false,
+		GO_TO_MM_COMMAND);
+	helpScreenGUI->addButton(buttonToAdd);
+
+	// AND REGISTER IT WITH THE GUI
+	GameGUI *gui = game->getGUI();
+	gui->addScreenGUI(GS_MENU_HELP_MENU, helpScreenGUI);
 }
 
 /*

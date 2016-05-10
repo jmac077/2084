@@ -3,4 +3,6 @@
   <sprite_type>Guy</sprite_type>
   <sprite_type>TV</sprite_type>
   <sprite_type>Drone</sprite_type>
+  <sprite_type>KeyCard</sprite_type>
+  <sprite_type>Computer</sprite_type>
 </sprite_type_list>
