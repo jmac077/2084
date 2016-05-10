@@ -104,11 +104,13 @@ public:
 
 	// METHODS FOR TRANSITIONING TO OTHER GAME STATES
 	void			goToGame();
+	void			goToInGame();
 	void			goToLoadLevel();
 	void			goToMainMenu();
 	void			goToAboutMenu();
 	void			goToHelpMenu();
 	void			goToPreGame();
+	void			goToGameOver();
 
 	// METHODS DEFINED in GameStateManager.cpp
 	GameStateManager();

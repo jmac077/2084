@@ -46,6 +46,7 @@
 // FORWARD DECLARATIONS
 void initCursor();
 void initInGameGUI();
+void initGameOverGUI();
 void initMainMenu();
 void initSplashScreen();
 void initAboutScreen();
@@ -81,6 +82,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	initHelpScreen();
 	initMainMenu();
 	initInGameGUI();
+	initGameOverGUI();
 	initLoadingLevel();
 
 	// SPECIFY WHO WILL HANDLE BUTTON EVENTS
@@ -187,6 +189,56 @@ void initInGameGUI()
 	// AND LET'S ADD OUR SCREENS
 	GameGUI *gui = game->getGUI();
 	gui->addScreenGUI(GS_GAME_IN_PROGRESS, inGameGUI);
+}
+
+/*
+initGameOverGUI - initializes the game's game over gui.
+*/
+void initGameOverGUI()
+{
+	Game *game = Game::getSingleton();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	// NOW ADD THE IN-GAME GUI
+	ScreenGUI *inGameGUI = new ScreenGUI();
+
+	unsigned int normalTextureID = guiTextureManager->loadTexture(RETRY_IMAGE_PATH);
+	unsigned int mouseOverTextureID = guiTextureManager->loadTexture(RETRY_IMAGE_PATH);
+
+	// INIT THE QUIT BUTTON
+	Button *buttonToAdd = new Button();
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		graphics->getScreenWidth() / 2 - 100,
+		graphics->getScreenHeight() / 2 + 100,
+		0,
+		255,
+		200,
+		100,
+		false,
+		RETRY_COMMAND);
+	inGameGUI->addButton(buttonToAdd);
+
+	normalTextureID = guiTextureManager->loadTexture(EXIT_IMAGE_PATH);
+	mouseOverTextureID = guiTextureManager->loadTexture(EXIT_IMAGE_MO_PATH);
+
+	buttonToAdd = new Button();
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		graphics->getScreenWidth() / 2 - 100,
+		graphics->getScreenHeight() / 2 + 210,
+		0,
+		255,
+		200,
+		100,
+		false,
+		QUIT_COMMAND);
+	inGameGUI->addButton(buttonToAdd);
+
+	// AND LET'S ADD OUR SCREENS
+	GameGUI *gui = game->getGUI();
+	gui->addScreenGUI(GS_GAME_OVER, inGameGUI);
 }
 
 /*

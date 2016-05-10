@@ -47,6 +47,11 @@ void BugsButtonEventHandler::handleButtonEvents(	wstring command)
 	{
 		game->startGame();
 	}
+	else if (command.compare(RETRY_COMMAND) == 0)
+	{
+		game->getGSM()->getSpriteManager()->getPlayer()->respawnAtLastCheckpoint();
+		game->getGSM()->goToInGame();
+	}
 	// THE USER PRESSED THE Quit BUTTON ON THE IN-GAME MENU,
 	// SO LET'S UNLOAD THE LEVEL AND RETURN TO THE MAIN MENU
 	else if (command.compare(QUIT_COMMAND) == 0)

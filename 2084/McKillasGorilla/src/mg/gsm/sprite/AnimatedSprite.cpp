@@ -22,6 +22,7 @@ AnimatedSprite::AnimatedSprite()
 	spriteType = 0;
 	frameIndex = 0;
 	animationCounter = 0;
+	dead = false;
 	markedForRemoval = false;
 	currentPathToFollow = new list<PathNode>(0);
 }
@@ -168,10 +169,11 @@ void AnimatedSprite::handleCollision() {
 	else if (collisionZone->getType() == HiddenWallFlag)
 	{
 		raiseWall();
+	}
 	else if (collisionZone->getType() == WorldItemFlag)
 	{
 		interactWithItem((WorldItem*)collisionZone->getZone());
-}
+	}
 }
 
 void AnimatedSprite::teleportPlayer(Teleporter *teleportTarget) {
@@ -322,10 +324,12 @@ void AnimatedSprite::interactWithItem(WorldItem *item) {
 }
 
 void AnimatedSprite::killSprite() {
-	respawnAtLastCheckpoint();
+	dead = true;
+	Game::getSingleton()->getGSM()->goToGameOver();
 }
 
 void AnimatedSprite::respawnAtLastCheckpoint() {
+	dead = false;
 	Checkpoint *lastCheckpoint = Game::getSingleton()->getGSM()->getWorld()->getCurrentCheckpoint();
 	if (lastCheckpoint == nullptr)
 		return;

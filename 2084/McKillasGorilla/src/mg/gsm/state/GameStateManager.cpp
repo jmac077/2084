@@ -69,6 +69,11 @@ void GameStateManager::goToGame()
 {
 	Game *game = Game::getSingleton();
 	game->setPathFinder(new OrthographicGridPathfinder(game));
+	goToInGame();
+}
+
+void GameStateManager::goToInGame()
+{
 	currentGameState = GS_GAME_IN_PROGRESS;
 }
 
@@ -105,6 +110,11 @@ void GameStateManager::goToHelpMenu()
 void GameStateManager::goToPreGame()
 {
 	currentGameState = GS_PRE_GAME;
+}
+
+void GameStateManager::goToGameOver()
+{
+	currentGameState = GS_GAME_OVER;
 }
 
 /*

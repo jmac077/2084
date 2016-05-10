@@ -57,6 +57,9 @@ protected:
 	// HELPS US KEEP TRACK OF WHEN TO REMOVE IT
 	bool markedForRemoval;
 
+	// IF THE SPRITE IS DEAD
+	bool dead = false;
+
 	list<PathNode> *currentPathToFollow;
 
 	list<PathNode>::iterator currentPathNode;
@@ -76,7 +79,8 @@ public:
 	unsigned int		getFrameIndex()			{ return frameIndex;			}
 	float				getRotationInRadians()	{ return rotationInRadians;		}
 	AnimatedSpriteType*	getSpriteType()			{ return spriteType;			}
-	bool				isMarkedForRemoval() { return markedForRemoval; }
+	bool				isMarkedForRemoval()	{ return markedForRemoval; }
+	bool				isDead()				{ return dead; }
 	b2Body*				getB2Body()				{ return myBody; }
 	void				(AnimatedSprite::*getCollisionHandler())(){ return &AnimatedSprite::handleCollision; }
 

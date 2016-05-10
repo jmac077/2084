@@ -23,6 +23,7 @@ const wstring	ABOUT_SCREEN_COMMAND = L"About";
 const wstring	HELP_SCREEN_COMMAND = L"Help";
 const wstring	EXIT_COMMAND = L"Exit";
 const wstring	QUIT_COMMAND = L"Quit";
+const wstring	RETRY_COMMAND = L"Retry";
 
 class BugsButtonEventHandler: public ButtonEventHandler
 {

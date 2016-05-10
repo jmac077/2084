@@ -8,11 +8,8 @@ Map File: 2084_level_1.tmx
 Sprite Types Dir: data/sprite_types/
 Sprite Types File: BeginnerBugs.xml
 Item Type: TV
-<<<<<<< HEAD
 Item Type: KeyCard
 Item Type: Computer
-=======
->>>>>>> efbecb46feaf69ad7e6e7e0d0e78154249142a44
 Bot Type: drone
 Bot's Sprite Type: Drone
 bot moving behavior: deterministic
