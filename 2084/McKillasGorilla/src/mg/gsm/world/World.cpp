@@ -99,6 +99,15 @@ void World::unloadWorld()
 		delete layerToDelete;
 	}
 	layers->clear();
+
+	map<int, LevelSection*>::iterator sec = levelSections.begin();
+	while (sec != levelSections.end())
+	{
+		delete sec->second;
+		sec++;
+	}
+	levelSections.clear();
+
 	worldWidth = 0;
 	worldHeight = 0;
 }
