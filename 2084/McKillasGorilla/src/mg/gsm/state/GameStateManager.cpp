@@ -41,12 +41,12 @@ void GameStateManager::startUp()
 	spriteManager = new SpriteManager();
 	soundManager = new SoundManager();
 	soundManager->LoadFiles();
-	currentGameState = GS_SPLASH_SCREEN;
-	currentLevelIndex = NO_LEVEL_LOADED;
 	b2Vec2 gravity(0, 0);
 	myWorld = new b2World(gravity);
 	MyContactListener* myContactListener = new MyContactListener();
 	myWorld->SetContactListener(myContactListener);
+	currentGameState = GS_SPLASH_SCREEN;
+	currentLevelIndex = NO_LEVEL_LOADED;
 	censorshipCountdown = 0;
 }
 
@@ -70,14 +70,14 @@ void GameStateManager::addGameRenderItemsToRenderList()
 */
 void GameStateManager::goToGame()
 {
-	Game *game = Game::getSingleton();
-	game->setPathFinder(new OrthographicGridPathfinder(game));
 	goToInGame();
 }
 
 void GameStateManager::goToInGame()
 {
 	soundManager->PlaySong(WANDERER_SONG);
+	Game *game = Game::getSingleton();
+	game->setPathFinder(new OrthographicGridPathfinder(game));
 	currentGameState = GS_GAME_IN_PROGRESS;
 }
 
@@ -98,7 +98,6 @@ void GameStateManager::goToMainMenu()
 {
 	currentGameState = GS_MAIN_MENU;
 	currentLevelIndex = NO_LEVEL_LOADED;
-	this->unloadCurrentLevel();
 	soundManager->PlaySong(THE_DEEP_SONG);
 }
 
@@ -280,6 +279,13 @@ void GameStateManager::unloadCurrentLevel()
 {
 	spriteManager->unloadSprites();
 	world.unloadWorld();
+	if (myWorld != nullptr) {
+		delete myWorld;
+	}
+	b2Vec2 gravity(0, 0);
+	myWorld = new b2World(gravity);
+	MyContactListener* myContactListener = new MyContactListener();
+	myWorld->SetContactListener(myContactListener);
 }
 
 /*
@@ -301,11 +307,5 @@ void GameStateManager::update()
 	// CHECK FOR CENSORSHIP
 	if (censoring && censorshipCountdown == 0) {
 		game->getGSM()->getSpriteManager()->getPlayer()->killSprite();
-	}
-	// CHECK FOR LEVEL COMPLETION
-	int flagCheck = levelFlags & levelCompletionFlag;
-	if (flagCheck == levelCompletionFlag) {
-		//loadNextLevel();
-		goToMainMenu();
 	}
 }

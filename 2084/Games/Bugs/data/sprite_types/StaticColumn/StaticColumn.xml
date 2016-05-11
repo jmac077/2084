@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sprite_type>
- <width>32</width>
- <height>64</height>
+ <width>48</width>
+ <height>80</height>
  <images_list>
   <image_file id="0"  file_name="static0.png"/>
   <image_file id="1"  file_name="static1.png"/>

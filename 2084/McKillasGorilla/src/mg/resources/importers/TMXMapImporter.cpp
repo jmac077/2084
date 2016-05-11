@@ -385,14 +385,27 @@ bool TMXMapImporter::buildWorldFromInfo()
 
 void TMXMapImporter::buildTiledLayer(TiledLayerInfo *tli, int idOffset, int z)
 {
-	TiledLayer *tiledLayerToAdd = new TiledLayer(	tli->width,
-													tli->height,
-													tli->tileSetInfo->tilewidth,
-													tli->tileSetInfo->tileheight,
-													z,
-													tli->collidable,
-													largestLayerWidth,
-													largestLayerHeight);
+	TiledLayer *tiledLayerToAdd;
+	if (tli->name.compare("OverNine")!=0) {
+		tiledLayerToAdd = new TiledLayer(tli->width,
+			tli->height,
+			tli->tileSetInfo->tilewidth,
+			tli->tileSetInfo->tileheight,
+			z,
+			tli->collidable,
+			largestLayerWidth,
+			largestLayerHeight);
+	}
+	else {
+		tiledLayerToAdd = new TiledLayer(tli->width,
+			tli->height,
+			tli->tileSetInfo->tilewidth,
+			tli->tileSetInfo->tileheight,
+			900,
+			tli->collidable,
+			largestLayerWidth,
+			largestLayerHeight);
+	}
 	Game *game = Game::getSingleton();
 	game->getGSM()->getWorld()->addLayer(tiledLayerToAdd);
 

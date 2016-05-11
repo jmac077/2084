@@ -12,13 +12,20 @@ void BugsStateMachine::update()
 	// IS THE GAME GOING ON?
 	if (gsm->isGameInProgress())
 	{
-		b2Filter filter  = spriteManager->getTv()->getB2Body()->GetFixtureList()->GetFilterData();
+		/*b2Filter filter  = spriteManager->getTv()->getB2Body()->GetFixtureList()->GetFilterData();
 		filter.categoryBits = 0x0000;
 		spriteManager->getTv()->getB2Body()->GetFixtureList()->SetFilterData(filter);
 		spriteManager->getTv()->getB2Body()->SetLinearVelocity(b2Vec2(-2.0f,0.0f));
 		if ((spriteManager->getTv()->getB2Body()->GetPosition().x - 50.0f) < .0333f) {
 			spriteManager->getTv()->getB2Body()->SetTransform(b2Vec2(50.0f,38.0f),0.0f);
 			spriteManager->getTv()->getB2Body()->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+		}*/
+		int flagCheck = gsm->getFlags() & gsm->getLevelCompletionFlag();
+		if (flagCheck == gsm->getLevelCompletionFlag())
+		{
+			gsm->setFlag(0);
+			gsm->setLevelCompletionFlag(0);
+			gsm->goToLoadLevel();
 		}
 	}
 	else if (gsm->isPreGame())

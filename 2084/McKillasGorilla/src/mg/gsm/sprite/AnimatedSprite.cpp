@@ -33,7 +33,7 @@ AnimatedSprite::AnimatedSprite()
 */
 AnimatedSprite::~AnimatedSprite() 
 {
-
+	currentPathToFollow->clear();
 }
 
 /*
