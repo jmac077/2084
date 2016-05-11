@@ -66,6 +66,10 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		TMXMapImporter *mapImporter = (TMXMapImporter*)resources->getMapImporter();
 		mapImporter->load(wDir, wFile);
 
+		// hidden_stuff
+		bool renderHiddenStuff = xmlReader.extractBoolAtt(levelMap, MG_RENDER_STUFF_ATT);
+		gsm->getWorld()->setRenderHiddenStuff(renderHiddenStuff);
+
 		// level_sprite_types
 		TiXmlElement *levelSpriteTypes = levelMap->NextSiblingElement();
 

@@ -5,7 +5,7 @@
 <level level_name="Home" completion_flag="2" >
   
   <!-- MAP TO BE USED FOR THIS LEVEL -->
-  <level_map map_dir="data/maps/damndaniel/" map_file="2084_level_1.tmx" />
+  <level_map map_dir="data/maps/damndaniel/" map_file="2084_level_1.tmx" render_hidden_stuff="false" />
 
   <!-- COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME -->
   <level_sprite_types sprite_types_dir="data/sprite_types/" sprite_types_file="BeginnerBugs.xml" />
