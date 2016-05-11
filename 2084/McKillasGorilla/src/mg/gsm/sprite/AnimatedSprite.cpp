@@ -174,6 +174,10 @@ void AnimatedSprite::handleCollision() {
 	{
 		interactWithItem((WorldItem*)collisionZone->getZone());
 	}
+	else if (collisionZone->getType() == SecurityCameraFlag)
+	{
+		securityCameraDetection((SecurityCamera*)collisionZone->getZone());
+	}
 }
 
 void AnimatedSprite::teleportPlayer(Teleporter *teleportTarget) {
@@ -206,7 +210,6 @@ void AnimatedSprite::raiseWall() {
 	gsm->getSoundManager()->PlaySong(DETECTED_SONG);
 	gsm->setCensorship(0, true);
 	
-	
 	//get dimensions of wall create body and add it to wall
 	//add graphics to world renderer
 	b2BodyDef bodyDef;
@@ -220,114 +223,8 @@ void AnimatedSprite::raiseWall() {
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.0f;
 	body->CreateFixture(&fixtureDef);
-	/*
-	//also add static tiles that teleport player
-	Teleporter *teleportTarget = new Teleporter(176, 22, 4);
-
-	bodyDef.type = b2_staticBody;
-	bodyDef.position.Set(168, 154);
-	body = gsm->getB2World()->CreateBody(&bodyDef);
-	dynamicBox.SetAsBox(2, 2);
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.isSensor = true;
-	body->CreateFixture(&fixtureDef);
-	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
-
-	teleportTarget = new Teleporter(122, 74, 4);
-
-	bodyDef.type = b2_staticBody;
-	bodyDef.position.Set(126, 164);
-	body = gsm->getB2World()->CreateBody(&bodyDef);
-	dynamicBox.SetAsBox(2, 2);
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.isSensor = true;
-	body->CreateFixture(&fixtureDef);
-	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
-
-	teleportTarget = new Teleporter(120, 12, 4);
-
-	bodyDef.type = b2_staticBody;
-	bodyDef.position.Set(148, 82);
-	body = gsm->getB2World()->CreateBody(&bodyDef);
-	dynamicBox.SetAsBox(4, 4);
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.isSensor = true;
-	body->CreateFixture(&fixtureDef);
-	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
-
-	teleportTarget = new Teleporter(166, 175, 4);
-
-	bodyDef.type = b2_staticBody;
-	bodyDef.position.Set(142, 12);
-	body = gsm->getB2World()->CreateBody(&bodyDef);
-	dynamicBox.SetAsBox(2, 2);
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.isSensor = true;
-	body->CreateFixture(&fixtureDef);
-	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
-
-	teleportTarget = new Teleporter(120, 40, 4);
-
-	bodyDef.type = b2_staticBody;
-	bodyDef.position.Set(122, 22);
-	body = gsm->getB2World()->CreateBody(&bodyDef);
-	dynamicBox.SetAsBox(2, 2);
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.isSensor = true;
-	body->CreateFixture(&fixtureDef);
-	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
-
-	teleportTarget = new Teleporter(122, 180, 4);
-
-	bodyDef.type = b2_staticBody;
-	bodyDef.position.Set(120, 56);
-	body = gsm->getB2World()->CreateBody(&bodyDef);
-	dynamicBox.SetAsBox(2, 2);
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.isSensor = true;
-	body->CreateFixture(&fixtureDef);
-	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
-
-	teleportTarget = new Teleporter(178, 74, 4);
-
-	bodyDef.type = b2_staticBody;
-	bodyDef.position.Set(176, 56);
-	body = gsm->getB2World()->CreateBody(&bodyDef);
-	dynamicBox.SetAsBox(2, 2);
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.isSensor = true;
-	body->CreateFixture(&fixtureDef);
-	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
-
-	teleportTarget = new Teleporter(156, 122, 4);
-
-	bodyDef.type = b2_staticBody;
-	bodyDef.position.Set(178, 88);
-	body = gsm->getB2World()->CreateBody(&bodyDef);
-	dynamicBox.SetAsBox(2, 2);
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.isSensor = true;
-	body->CreateFixture(&fixtureDef);
-	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
 
 	gsm->getWorld()->setRenderHiddenStuff(true);
-	*/
 }
 
 void AnimatedSprite::interactWithItem(WorldItem *item) {
@@ -336,6 +233,22 @@ void AnimatedSprite::interactWithItem(WorldItem *item) {
 		GameStateManager *gsm = Game::getSingleton()->getGSM();
 		gsm->setFlag(item->getFlag());
 		gsm->getSoundManager()->PlaySoundEffect(PICK_UP_ITEM_SFX);
+	}
+}
+
+void AnimatedSprite::securityCameraDetection(SecurityCamera *cam)
+{
+	if (cam->getArmed()) {
+		GameStateManager *gsm = Game::getSingleton()->getGSM();
+		gsm->getSoundManager()->PlaySong(DETECTED_SONG);
+
+		cam->setArmed(false);
+		if (cam->getDirection() > 0)
+			cam->getSprite()->setCurrentState(L"DETECTED_R");
+		else
+			cam->getSprite()->setCurrentState(L"DETECTED_L");
+
+		gsm->setCensorship(cam->getCensorshipTarget(), true);
 	}
 }
 

@@ -6,6 +6,7 @@ enum CollidableZoneType
 	TeleporterFlag,
 	CheckpointFlag,
 	WorldItemFlag,
+	SecurityCameraFlag,
 	HiddenWallFlag
 };
 

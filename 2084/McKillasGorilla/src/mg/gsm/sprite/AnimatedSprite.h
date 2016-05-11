@@ -18,6 +18,7 @@
 #include "mg\gsm\world\Teleporter.h"
 #include "mg\gsm\world\Checkpoint.h"
 #include "mg\gsm\world\WorldItem.h"
+#include "mg\gsm\world\SecurityCamera.h"
 #include "Box2D.h"
 
 // ANIMATION STATES
@@ -124,6 +125,7 @@ public:
 	void teleportPlayer(Teleporter *teleportTarget);
 	void hitCheckpoint(Checkpoint *checkpoint);
 	void interactWithItem(WorldItem *item);
+	void securityCameraDetection(SecurityCamera *cam);
 	void killSprite();
 	void respawnAtLastCheckpoint();
 	void raiseWall();

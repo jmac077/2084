@@ -39,6 +39,9 @@ private:
 	// THE LIST OF WORLD ITEMS (COLLECTIBLES, INTERACTIBLES, ETC.) IN THIS LEVEL
 	list<WorldItem*> worldItems;
 
+	// LIST OF SECURITY CAMERAS IN THIS LEVEL
+	list<SecurityCamera*> securityCameras;
+
 	// THE BotRecycler MAKES SURE WE DON'T HAVE TO CONSTRUCT BOTS WHENEVER
 	// WE NEED TO SPAWN THEM, INSTEAD IT WILL RECYCLE THEM FOR US
 	BotRecycler botRecycler;
@@ -87,6 +90,10 @@ public:
 	void addWorldItem(WorldItem *item)
 	{
 		worldItems.push_back(item);
+	}
+	void addSecurityCamera(SecurityCamera *cam)
+	{
+		securityCameras.push_back(cam);
 	}
 
 	// METHODS DEFINED IN SpriteManager.cpp

@@ -48,6 +48,7 @@ static const string MG_CENSORSHIP_ATT = "censorship";
 static const string MG_CENSORSHIP_TARGET_ATT = "censorship_target";
 static const string MG_FLAG_ATT = "flag";
 static const string MG_COLLECTIBLE_ATT = "collectible";
+static const string MG_DIRECTION_ATT = "direction";
 static const string MG_WP_1_X_ATT = "wp1_x";
 static const string MG_WP_1_Y_ATT = "wp1_y";
 static const string MG_WP_2_X_ATT = "wp2_x";

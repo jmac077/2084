@@ -73,6 +73,9 @@ void SpriteManager::addSpriteItemsToRenderList()
 		RenderList *renderList = graphics->getWorldRenderList();
 		Viewport *viewport = gui->getViewport();
 
+		// ADD THE PLAYER SPRITE, IF THERE IS ONE
+		if (player != nullptr)
+			addSpriteToRenderList(player, renderList, viewport, 0, -28);
 		// ADD TELEPORTERS
 		list<Teleporter*>::iterator teleporter = teleporters.begin();
 		while (teleporter != teleporters.end())
@@ -92,18 +95,25 @@ void SpriteManager::addSpriteItemsToRenderList()
 				addSpriteToRenderList(item->getSprite(), renderList, viewport, 0, 0);
 			worldItem++;
 		}
+		// ADD SECURITY CAMS
+		list<SecurityCamera*>::iterator cam = securityCameras.begin();
+		while (cam != securityCameras.end())
+		{
+			// DRAW CAM AT TOP LEFT OR RIGHT CORNER OF BOX
+			int xOff = -1 * (*cam)->getDirection() * ((*cam)->getWidth() * 16 / 2 + 55);
+			int yOff = -1 * (*cam)->getHeight() * 16 / 2;
+			addSpriteToRenderList((*cam)->getSprite(), renderList, viewport, xOff, yOff);
+			cam++;
+		}
 		// ADD BOTS
 		list<Bot*>::iterator botIterator;
 		botIterator = bots.begin();
 		while (botIterator != bots.end())
-		{			
+		{
 			Bot *bot = (*botIterator);
 			addSpriteToRenderList(bot, renderList, viewport, 0, 0);
 			botIterator++;
 		}
-		// ADD THE PLAYER SPRITE, IF THERE IS ONE
-		if (player != nullptr)
-			addSpriteToRenderList(player, renderList, viewport, 0, -28);
 	}
 }
 
@@ -239,6 +249,13 @@ void SpriteManager::update()
 	{
 		(*item)->getSprite()->updateSprite();
 		item++;
+	}
+
+	list<SecurityCamera*>::iterator cam = securityCameras.begin();
+	while (cam != securityCameras.end())
+	{
+		(*cam)->getSprite()->updateSprite();
+		cam++;
 	}
 
 	list<Bot*>::iterator botIterator = bots.begin();

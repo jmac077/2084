@@ -6,4 +6,5 @@
   <sprite_type>KeyCard</sprite_type>
   <sprite_type>Computer</sprite_type>
   <sprite_type>StaticColumn</sprite_type>
+  <sprite_type>SecurityCamera</sprite_type>
 </sprite_type_list>

@@ -217,6 +217,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			checkpoint = checkpoint->NextSiblingElement();
 		}
 
+		/*
 		HiddenWall *hidden = new HiddenWall(1,1,1,1);
 		//camera sensor to be added in xml
 		bodyDef.type = b2_staticBody;
@@ -229,6 +230,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		fixtureDef.isSensor = true;
 		body->CreateFixture(&fixtureDef);
 		body->SetUserData(new CollidableZone(hidden, HiddenWallFlag));
+		*/
 
 		// world_items
 		TiXmlElement *worldItems = checkpoints->NextSiblingElement();
@@ -275,8 +277,52 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			worldItem = worldItem->NextSiblingElement();
 		}
 
+		TiXmlElement *securityCameras = worldItems->NextSiblingElement();
+		TiXmlElement *securityCamera = securityCameras->FirstChildElement();
+		while (securityCamera != nullptr)
+		{
+			// GET CAM ATTRIBUTES
+			int x = xmlReader.extractIntAtt(securityCamera, MG_X_ATT);
+			int y = xmlReader.extractIntAtt(securityCamera, MG_Y_ATT);
+			int width = xmlReader.extractIntAtt(securityCamera, MG_WIDTH_ATT);
+			int height = xmlReader.extractIntAtt(securityCamera, MG_HEIGHT_ATT);
+			int censorshipTarget = xmlReader.extractIntAtt(securityCamera, MG_CENSORSHIP_TARGET_ATT);
+			int direction = xmlReader.extractIntAtt(securityCamera, MG_DIRECTION_ATT);
+
+			// CREATE ANIMATED SPRITE FOR CAMERA
+			AnimatedSprite *camSprite = new AnimatedSprite();
+			camSprite->setSpriteType(spriteManager->getSpriteType(L"SecurityCamera"));
+			camSprite->setAlpha(255);
+			if (direction > 0)
+				camSprite->setCurrentState(L"IDLE_R");
+			else
+				camSprite->setCurrentState(L"IDLE_L");
+			camSprite->setRotationInRadians(0);
+			SecurityCamera *cam = new SecurityCamera(censorshipTarget, direction, width, height, camSprite);
+
+			// CREATE CAMERA DETECTION ZONE AS BOX2D SENSOR BOX
+			bodyDef.type = b2_kinematicBody;
+			// x,y REPRESENTS CENTER OF DETECTION ZONE
+			// CAMERA WILL BE DRAWN IN TOP LEFT OR RIGHT CORNER OF ZONE, DEPENDING ON direction
+			bodyDef.position.Set(x,y);
+			bodyDef.fixedRotation = true;
+			body = gsm->getB2World()->CreateBody(&bodyDef);
+			dynamicBox.SetAsBox(width, height);
+			fixtureDef.shape = &dynamicBox;
+			fixtureDef.density = 1.0f;
+			fixtureDef.friction = 0.0f;
+			fixtureDef.isSensor = true;
+			body->CreateFixture(&fixtureDef);
+			body->SetUserData(new CollidableZone(cam, SecurityCameraFlag));
+			camSprite->setB2Body(body);
+
+			spriteManager->addSecurityCamera(cam);
+
+			securityCamera = securityCamera->NextSiblingElement();
+		}
+
 		// level_bot_types
-		TiXmlElement *botTypesList = worldItems->NextSiblingElement();
+		TiXmlElement *botTypesList = securityCameras->NextSiblingElement();
 		TiXmlElement *botType = botTypesList->FirstChildElement();
 		while (botType != nullptr)
 		{

@@ -416,6 +416,9 @@
     <ClInclude Include="src\mg\resources\SoundManager.h">
       <Filter>src\mg\resources</Filter>
     </ClInclude>
+    <ClInclude Include="src\mg\gsm\world\SecurityCamera.h">
+      <Filter>src\mg\gsm\world</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\mg_VS\ReadMe.txt">

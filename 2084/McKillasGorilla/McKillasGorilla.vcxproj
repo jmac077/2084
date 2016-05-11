@@ -89,6 +89,7 @@
     <ClInclude Include="src\mg\gsm\state\GameStateManager.h" />
     <ClInclude Include="src\mg\gsm\world\Checkpoint.h" />
     <ClInclude Include="src\mg\gsm\world\HiddenWall.h" />
+    <ClInclude Include="src\mg\gsm\world\SecurityCamera.h" />
     <ClInclude Include="src\mg\gsm\world\WorldItem.h" />
     <ClInclude Include="src\mg\gsm\world\CollidableZone.h" />
     <ClInclude Include="src\mg\gsm\world\LevelSection.h" />

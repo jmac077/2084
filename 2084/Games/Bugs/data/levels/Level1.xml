@@ -45,6 +45,11 @@
     <world_item type="Computer" x="144" y="124" width="4" height="4" flag="2" collectible="false" />
   </world_items>
   
+  <!-- LIST OF SECURITY CAMERAS IN THIS LEVEL -->
+  <security_cameras>
+    <security_camera x="143" y="147" width="8" height="4" censorship_target="0" direction="-1" />
+  </security_cameras>
+  
   <!-- THESE ARE THE BOT TYPES THE LEVEL WILL BE SPAWNING -->
   <level_bot_types>
 	  <bot type="drone" sprite_type="Drone" MOVING="deterministic" DYING="recycle" SPAWNING="random" max_velocity="5" />
