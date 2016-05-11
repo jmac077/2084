@@ -9,17 +9,17 @@ private:
 	bool dead;
 	int censorshipTarget;
 	int direction;
-	int width, height;
+	int xOffset, yOffset;
 	AnimatedSprite *sprite;
 public:
-	SecurityCamera(int censorshipTarget, int direction, int width, int height, AnimatedSprite *sprite)
+	SecurityCamera(int censorshipTarget, int direction, int xOffset, int yOffset, AnimatedSprite *sprite)
 	{
 		armed = true;
 		dead = false;
 		this->censorshipTarget = censorshipTarget;
 		this->direction = direction;
-		this->width = width;
-		this->height = height;
+		this->xOffset = xOffset;
+		this->yOffset = yOffset;
 		this->sprite = sprite;
 	}
 	void setArmed(bool armed) { this->armed = armed; }
@@ -28,7 +28,7 @@ public:
 	bool getDead() { return dead; }
 	int getCensorshipTarget() { return censorshipTarget; }
 	int getDirection() { return direction; }
-	int getWidth() { return width; }
-	int getHeight() { return height; }
+	int getXOffset() { return xOffset; }
+	int getYOffset() { return yOffset; }
 	AnimatedSprite *getSprite() { return sprite; }
 };

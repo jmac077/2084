@@ -284,6 +284,8 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			// GET CAM ATTRIBUTES
 			int x = xmlReader.extractIntAtt(securityCamera, MG_X_ATT);
 			int y = xmlReader.extractIntAtt(securityCamera, MG_Y_ATT);
+			int drawX = xmlReader.extractIntAtt(securityCamera, MG_DRAW_X_ATT);
+			int drawY = xmlReader.extractIntAtt(securityCamera, MG_DRAW_Y_ATT);
 			int width = xmlReader.extractIntAtt(securityCamera, MG_WIDTH_ATT);
 			int height = xmlReader.extractIntAtt(securityCamera, MG_HEIGHT_ATT);
 			int censorshipTarget = xmlReader.extractIntAtt(securityCamera, MG_CENSORSHIP_TARGET_ATT);
@@ -298,7 +300,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			else
 				camSprite->setCurrentState(L"IDLE_L");
 			camSprite->setRotationInRadians(0);
-			SecurityCamera *cam = new SecurityCamera(censorshipTarget, direction, width, height, camSprite);
+			SecurityCamera *cam = new SecurityCamera(censorshipTarget, direction, drawX-x, drawY-y, camSprite);
 
 			// CREATE CAMERA DETECTION ZONE AS BOX2D SENSOR BOX
 			bodyDef.type = b2_kinematicBody;

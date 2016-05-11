@@ -2,7 +2,7 @@
 
 <!-- THIS FILE LISTS ALL THE DATA ASSOCIATED WITH Level 1 FOR THE BUGS GAME -->
 
-<level level_name="Dangerous Desert">
+<level level_name="Home">
   
   <!-- MAP TO BE USED FOR THIS LEVEL -->
   <level_map map_dir="data/maps/damndaniel/" map_file="2084_level_1.tmx" />
@@ -47,7 +47,7 @@
   
   <!-- LIST OF SECURITY CAMERAS IN THIS LEVEL -->
   <security_cameras>
-    <security_camera x="143" y="147" width="8" height="4" censorship_target="0" direction="-1" />
+    <security_camera x="143" y="147" draw_x="151" draw_y="146" width="8" height="4" censorship_target="0" direction="-1" />
   </security_cameras>
   
   <!-- THESE ARE THE BOT TYPES THE LEVEL WILL BE SPAWNING -->

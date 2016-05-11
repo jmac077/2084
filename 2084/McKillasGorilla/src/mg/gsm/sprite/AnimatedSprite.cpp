@@ -243,11 +243,12 @@ void AnimatedSprite::securityCameraDetection(SecurityCamera *cam)
 		gsm->getSoundManager()->PlaySong(DETECTED_SONG);
 
 		cam->setArmed(false);
+		/*
 		if (cam->getDirection() > 0)
 			cam->getSprite()->setCurrentState(L"DETECTED_R");
 		else
 			cam->getSprite()->setCurrentState(L"DETECTED_L");
-
+		*/
 		gsm->setCensorship(cam->getCensorshipTarget(), true);
 	}
 }

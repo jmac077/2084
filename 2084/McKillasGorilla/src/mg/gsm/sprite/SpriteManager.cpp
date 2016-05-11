@@ -100,9 +100,7 @@ void SpriteManager::addSpriteItemsToRenderList()
 		while (cam != securityCameras.end())
 		{
 			// DRAW CAM AT TOP LEFT OR RIGHT CORNER OF BOX
-			int xOff = -1 * (*cam)->getDirection() * ((*cam)->getWidth() * 16 / 2 + 55);
-			int yOff = -1 * (*cam)->getHeight() * 16 / 2;
-			addSpriteToRenderList((*cam)->getSprite(), renderList, viewport, xOff, yOff);
+			addSpriteToRenderList((*cam)->getSprite(), renderList, viewport, (*cam)->getXOffset() * 16, (*cam)->getYOffset() * 16);
 			cam++;
 		}
 		// ADD BOTS
