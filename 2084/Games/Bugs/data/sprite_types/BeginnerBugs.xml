@@ -7,4 +7,8 @@
   <sprite_type>Computer</sprite_type>
   <sprite_type>StaticColumn</sprite_type>
   <sprite_type>SecurityCamera</sprite_type>
+  <sprite_type>Cola</sprite_type>
+  <sprite_type>Magazine</sprite_type>
+  <sprite_type>Remote</sprite_type>
+  <sprite_type>Diary</sprite_type>
 </sprite_type_list>

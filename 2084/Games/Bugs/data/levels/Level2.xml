@@ -2,7 +2,7 @@
 
 <!-- THIS FILE LISTS ALL THE DATA ASSOCIATED WITH Level 1 FOR THE BUGS GAME -->
 
-<level level_name="Society" completion_flag="2" >
+<level level_name="Society" completion_flag="32" >
   
   <!-- MAP TO BE USED FOR THIS LEVEL -->
   <level_map map_dir="data/maps/damndaniel2/" map_file="2084_level_2.tmx" render_hidden_stuff="true" />
@@ -15,11 +15,16 @@
   <!-- SECTIONS OF THE LEVEL FOR THE VIEWPORT TO CLAMP TO -->
   <level_sections>
     <level_section id="0" x="0" y="0" width="3008" height="3200" />
-    <level_section id="1" x="0" y="1248" width="1024" height="896" />
-    <level_section id="2" x="736" y="1248" width="1024" height="896" />
-    <level_section id="3" x="1664" y="1248" width="1024" height="896" />
-    <level_section id="4" x="2496" y="1248" width="1024" height="896" />
-    <level_section id="5" x="3488" y="1248" width="1024" height="896" />
+    <level_section id="1" x="0" y="1200" width="1300" height="1000" />
+    <level_section id="2" x="736" y="1200" width="1300" height="1000" />
+    <level_section id="3" x="1664" y="1200" width="1300" height="1000" />
+    <level_section id="4" x="2496" y="1200" width="1300" height="1000" />
+    <level_section id="5" x="3488" y="1200" width="1300" height="1000" />
+    <level_section id="6" x="0" y="2464" width="1300" height="-1" />
+    <level_section id="7" x="928" y="2464" width="1300" height="-1" />
+    <level_section id="8" x="1952" y="2464" width="1300" height="-1" />
+    <level_section id="9" x="3072" y="2464" width="1300" height="-1" />
+    <level_section id="10" x="4512" y="2464" width="-1" height="-1" />
   </level_sections>
 
   <!-- TELEPORTERS AND THEIR TARGETS -->
@@ -29,32 +34,39 @@
     <teleport x="94" y="25" width="2" height="2" dest_x="136" dest_y="117" target_section="3" censorship="false" censorship_target="-1"/>
     <teleport x="122" y="25" width="2" height="2" dest_x="188" dest_y="116" target_section="4" censorship="false" censorship_target="-1"/>
     <teleport x="150" y="25" width="2" height="2" dest_x="256" dest_y="116" target_section="5" censorship="false" censorship_target="-1"/>
-    <!--
-    <teleport x="24" y="38" width="2" height="2" dest_x="0" dest_y="0" target_section="6" censorship="false" censorship_target="-1"/>
-    <teleport x="52" y="38" width="2" height="2" dest_x="0" dest_y="0" target_section="7" censorship="false" censorship_target="-1"/>
-    <teleport x="80" y="38" width="2" height="2" dest_x="0" dest_y="0" target_section="8" censorship="false" censorship_target="-1"/>
-    <teleport x="108" y="38" width="2" height="2" dest_x="0" dest_y="0" target_section="9" censorship="false" censorship_target="-1"/>
-    <teleport x="176" y="38" width="2" height="2" dest_x="0" dest_y="0" target_section="10" censorship="false" censorship_target="-1"/>
-    -->
+    <teleport x="24" y="38" width="2" height="2" dest_x="24" dest_y="174" target_section="6" censorship="false" censorship_target="-1"/>
+    <teleport x="52" y="38" width="2" height="2" dest_x="88" dest_y="174" target_section="7" censorship="false" censorship_target="-1"/>
+    <teleport x="80" y="38" width="2" height="2" dest_x="158" dest_y="174" target_section="8" censorship="false" censorship_target="-1"/>
+    <teleport x="108" y="38" width="2" height="2" dest_x="224" dest_y="174" target_section="9" censorship="false" censorship_target="-1"/>
+    <teleport x="136" y="38" width="2" height="2" dest_x="312" dest_y="170" target_section="10" censorship="false" censorship_target="-1"/>
+    
     <teleport x="24" y="122" width="2" height="2" dest_x="38" dest_y="30" target_section="0" censorship="false" censorship_target="-1"/>
     <teleport x="82" y="122" width="2" height="2" dest_x="66" dest_y="30" target_section="0" censorship="false" censorship_target="-1"/>
     <teleport x="136" y="122" width="2" height="2" dest_x="94" dest_y="30" target_section="0" censorship="false" censorship_target="-1"/>
     <teleport x="194" y="122" width="2" height="2" dest_x="122" dest_y="30" target_section="0" censorship="false" censorship_target="-1"/>
     <teleport x="256" y="122" width="2" height="2" dest_x="150" dest_y="30" target_section="0" censorship="false" censorship_target="-1"/>
-    <teleport x="24" y="167" width="2" height="2" dest_x="0" dest_y="0" target_section="0" censorship="false" censorship_target="-1"/>
-    <teleport x="88" y="167" width="2" height="2" dest_x="0" dest_y="0" target_section="0" censorship="false" censorship_target="-1"/>
-    <teleport x="158" y="167" width="2" height="2" dest_x="0" dest_y="0" target_section="0" censorship="false" censorship_target="-1"/>
-    <teleport x="224" y="167" width="2" height="2" dest_x="0" dest_y="0" target_section="0" censorship="false" censorship_target="-1"/>
-    <teleport x="312" y="163" width="2" height="2" dest_x="0" dest_y="0" target_section="0" censorship="false" censorship_target="-1"/>
+    <teleport x="24" y="167" width="2" height="2" dest_x="24" dest_y="33" target_section="0" censorship="false" censorship_target="-1"/>
+    <teleport x="88" y="167" width="2" height="2" dest_x="52" dest_y="33" target_section="0" censorship="false" censorship_target="-1"/>
+    <teleport x="158" y="167" width="2" height="2" dest_x="80" dest_y="33" target_section="0" censorship="false" censorship_target="-1"/>
+    <teleport x="224" y="167" width="2" height="2" dest_x="108" dest_y="33" target_section="0" censorship="false" censorship_target="-1"/>
+    <teleport x="312" y="163" width="2" height="2" dest_x="136" dest_y="33" target_section="0" censorship="false" censorship_target="-1"/>
 
   </teleports>
 
   <!-- CHECKPOINTS -->
   <checkpoints>
+    <checkpoint x="9" y="28" width="2" height="2" target_section="0" />
   </checkpoints>
 
   <!-- LIST OF WORLD ITEMS (COLLECTIBLES, INTERACTIBLES, STATICS OBJECTS) IN THE LEVEL -->
   <world_items>
+    <world_item type="Cola" x="16" y="98" width="2" height="2" flag="1" collectible="true" />
+    <world_item type="Remote" x="128" y="88" width="2" height="2" flag="2" collectible="true" />
+    <world_item type="Magazine" x="254" y="88" width="2" height="2" flag="4" collectible="true" />
+    <world_item type="Diary" x="28" y="200" width="2" height="2" flag="8" collectible="true" />
+    <world_item type="Cola" x="216" y="194" width="2" height="2" flag="1" collectible="true" />
+    <world_item type="KeyCard" x="144" y="202" width="2" height="2" flag="16" collectible="true" />
+    <world_item type="Computer" x="298" y="182" width="2" height="2" flag="32" collectible="false" />
   </world_items>
   
   <!-- LIST OF SECURITY CAMERAS IN THIS LEVEL -->
@@ -75,7 +87,17 @@
   
   <!-- INITIAL BOTS WHEN THE LEVEL STARTS -->
   <bots_list>
-    <bot type="drone" init_x="124" init_y="96" init_vx="0" init_vy="0" wp1_x="1984" wp1_y="1536" wp2_x="2336" wp2_y="1536" init_bot_state="MOVING" init_sprite_state="IDLE" />
+    <!-- HOUSE 3 -->
+    <bot type="drone" init_x="123" init_y="95" init_vx="0" init_vy="0" wp1_x="1983" wp1_y="1535" wp2_x="2335" wp2_y="1535" init_bot_state="MOVING" init_sprite_state="IDLE" />
+    <!-- HOUSE 5 -->
+    <bot type="drone" init_x="241" init_y="99" init_vx="0" init_vy="0" wp1_x="3841" wp1_y="1650" wp2_x="4288" wp2_y="1650" init_bot_state="MOVING" init_sprite_state="IDLE" />
+    <!-- HOUSE 6 -->
+    <bot type="drone" init_x="13" init_y="189" init_vx="0" init_vy="0" wp1_x="160" wp1_y="3232" wp2_x="565" wp2_y="2944" init_bot_state="MOVING" init_sprite_state="IDLE" />
+    <!-- HOUSE 7 -->
+    <bot type="drone" init_x="77" init_y="189" init_vx="0" init_vy="0" wp1_x="1215" wp1_y="3020" wp2_x="1600" wp2_y="3020" init_bot_state="MOVING" init_sprite_state="IDLE" />
+    <bot type="drone" init_x="99" init_y="203" init_vx="0" init_vy="0" wp1_x="1600" wp1_y="3263" wp2_x="1215" wp2_y="3263" init_bot_state="MOVING" init_sprite_state="IDLE" />
+    <!-- HOUSE 8 -->
+    <bot type="drone" init_x="143" init_y="203" init_vx="0" init_vy="0" wp1_x="2464" wp1_y="3264" wp2_x="2688" wp2_y="3232" init_bot_state="MOVING" init_sprite_state="IDLE" />
   </bots_list>
   
   <!-- WE CAN EVEN SPECIFY BOT SPAWN LOCATIONS -->

@@ -65,7 +65,7 @@ void BugsKeyEventHandler::handleKeyEvents()
 		// HANDLE MOVEMENT INPUT
 		// FIST GET DESIRED VELOCITY
 		float xVel = 0, yVel = 0;
-		float playerVelocity = 25.0f;
+		float playerVelocity = 20.0f;
 		if (input->isKeyDown(W_KEY)) yVel -= 1;
 		if (input->isKeyDown(A_KEY)) xVel -= 1;
 		if (input->isKeyDown(S_KEY)) yVel += 1;
