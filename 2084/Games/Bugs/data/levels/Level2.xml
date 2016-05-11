@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- THIS FILE LISTS ALL THE DATA ASSOCIATED WITH Level 1 FOR THE BUGS GAME -->
+
+<level level_name="Home" completion_flag="2" >
+  
+  <!-- MAP TO BE USED FOR THIS LEVEL -->
+  <level_map map_dir="data/maps/damndaniel2/" map_file="2084_level_2.tmx" />
+
+  <!-- COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME -->
+  <level_sprite_types sprite_types_dir="data/sprite_types/" sprite_types_file="BeginnerBugs.xml" />
+
+  <!-- SECTIONS OF THE LEVEL FOR THE VIEWPORT TO CLAMP TO -->
+  <level_sections>
+    <level_section id="1" x="0" y="0" width="3200" height="3200" />
+  </level_sections>
+
+  <!-- TELEPORTERS AND THEIR TARGETS -->
+  <teleports>
+  </teleports>
+
+  <!-- CHECKPOINTS -->
+  <checkpoints>
+  </checkpoints>
+
+  <!-- LIST OF WORLD ITEMS (COLLECTIBLES, INTERACTIBLES, STATICS OBJECTS) IN THE LEVEL -->
+  <world_items>
+  </world_items>
+  
+  <!-- LIST OF SECURITY CAMERAS IN THIS LEVEL -->
+  <security_cameras>
+  </security_cameras>
+  
+  <!-- THESE ARE THE BOT TYPES THE LEVEL WILL BE SPAWNING -->
+  <level_bot_types>
+  </level_bot_types>
+  
+  <!-- INITIAL BOTS WHEN THE LEVEL STARTS -->
+  <bots_list>
+  </bots_list>
+  
+  <!-- WE CAN EVEN SPECIFY BOT SPAWN LOCATIONS -->
+  <spawning_pools>
+  </spawning_pools>
+</level>
