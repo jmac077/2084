@@ -47,6 +47,7 @@ void GameStateManager::startUp()
 	myWorld = new b2World(gravity);
 	MyContactListener* myContactListener = new MyContactListener();
 	myWorld->SetContactListener(myContactListener);
+	censorshipCountdown = 0;
 }
 
 /*
@@ -297,8 +298,14 @@ void GameStateManager::update()
 	myWorld->Step(timeStep, velocityIterations, positionIterations);
 	// UPDATE VIEWPORT TO FOLLOW PLAYER
 	game->getGUI()->getViewport()->centerOnBody(spriteManager->getPlayer()->getB2Body(), world.getCurrentLevelSection());
+	// CHECK FOR CENSORSHIP
+	if (censoring && censorshipCountdown == 0) {
+		game->getGSM()->getSpriteManager()->getPlayer()->killSprite();
+	}
 	// CHECK FOR LEVEL COMPLETION
 	int flagCheck = levelFlags & levelCompletionFlag;
-	if (flagCheck == levelCompletionFlag)
-		loadNextLevel();
+	if (flagCheck == levelCompletionFlag) {
+		//loadNextLevel();
+		goToMainMenu();
+	}
 }

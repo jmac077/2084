@@ -103,6 +103,16 @@ void BugsTextGenerator::appendClock()
 	leftTextToGenerate.append(wss.str());
 }
 
+void BugsTextGenerator::appendCensorshipCountdown()
+{
+	GameStateManager *gsm = Game::getSingleton()->getGSM();
+	if (gsm->getCensoring()) {
+		wstringstream wss;
+		wss << gsm->getCensorshipCountdown() / 1000000000;
+		rightTextToGenerate.append(wss.str());
+	}
+}
+
 /*
 	startUp - Provides an example of how to render text to our screen every frame,
 	allowing for the text to continually change. This method adds a text object
@@ -117,10 +127,11 @@ void BugsTextGenerator::startUp()
 	text->setTextGenerator((TextGenerator*)this);
 
 	// THEN GENERATE THE INITIAL TEXT TO DISPLAY
-	appendMouseCoords();
-	appendClock();
-	appendBotCount();
-	appendBotRecycler();
+	//appendMouseCoords();
+	//appendClock();
+	//appendBotCount();
+	//appendBotRecycler();
+	appendCensorshipCountdown();
 
 	// AND THEN ADD IT TO THE TEXT MANAGER, SPECIFYING WHERE IT SHOULD BE RENDERED
 	text->addRenderText(&leftTextToGenerate, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
@@ -139,9 +150,10 @@ void BugsTextGenerator::update()
 	// WHAT WE WANT.
 	leftTextToGenerate.clear();
 	rightTextToGenerate.clear();
-	appendMouseCoords();
-	appendClock();
-	appendBotCount();
-	appendBotRecycler();
+	//appendMouseCoords();
+	//appendClock();
+	//appendBotCount();
+	//appendBotRecycler();
+	appendCensorshipCountdown();
 }
 

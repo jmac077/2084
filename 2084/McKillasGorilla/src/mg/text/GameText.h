@@ -56,7 +56,7 @@ private:
 public:
 	// INLINED ACCESSOR METHODS
 	int				getRenderTextSize()				{	return renderText.size();		}
-	RenderText*		getRenderTextAtIndex(int index) { return renderText.at(index); }
+	RenderText*		getRenderTextAtIndex(int index) {	return renderText.at(index);	}
 	TextGenerator*	getTextGenerator()				{	return textGenerator;			}
 
 	// INLINED MUTATOR METHOD

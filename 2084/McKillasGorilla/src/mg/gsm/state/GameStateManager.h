@@ -74,6 +74,12 @@ private:
 	int32 velocityIterations = 8;   //how strongly to correct velocity
 	int32 positionIterations = 3;
 
+	// THE NUMBER OF NANOSECONDS UNTIL CENSORSHIP
+	int64_t censorshipCountdown;
+
+	// IF THE CENSORSHIP IS CURRENTLY HAPPENING
+	bool censoring;
+
 	// THE BITWISE FLAGS FOR THE CURRENT LEVEL
 	int levelFlags = 0;
 
@@ -95,13 +101,31 @@ public:
 	wstring				getCurrentLevelName()	{ return levelNames[currentLevelIndex];	}
 	b2World*			getB2World()			{ return myWorld;						}
 	int					getFlags()				{ return levelFlags;					}
+	bool				getCensoring()			{ return censoring;						}
 	bool				getCensorship(int c)	{ return censorshipTargets[c];			}
+	int64_t				getCensorshipCountdown(){ return censorshipCountdown;			}
 
 	// INLINED MUTATOR METHODS
 	void setGameStateMachine(GameStateMachine *initBotStateManager) { gameStateMachine = initBotStateManager; }
 	void setFlag(int flag) { levelFlags = levelFlags | flag; }
 	void setLevelCompletionFlag(int flag) { levelCompletionFlag = flag; }
 	void setCensorship(int c, bool active) { censorshipTargets[c] = active; }
+	void setCensorshipCountdown(int64_t nanosecs) {
+		censorshipCountdown = nanosecs;
+		if (censorshipCountdown < 0)
+			censorshipCountdown = 0;
+	}
+	void setCensoring(bool c) {
+		censoring = c;
+		// IF YOU SET CENSORING TO FALSE, TURN OFF FOR ALL
+		if (!c) {
+			map<int, bool>::iterator key = censorshipTargets.begin();
+			while (key != censorshipTargets.end()) {
+				key->second = false;
+				key++;
+			}
+		}
+	}
 
 	// METHODS FOR TESTING THE CURRENT GAME STATE
 	bool			isAppActive();

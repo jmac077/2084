@@ -5,27 +5,26 @@
 class SecurityCamera
 {
 private:
-	bool armed;
 	bool dead;
 	int censorshipTarget;
 	int direction;
 	int xOffset, yOffset;
+	int time;
 	AnimatedSprite *sprite;
 public:
-	SecurityCamera(int censorshipTarget, int direction, int xOffset, int yOffset, AnimatedSprite *sprite)
+	SecurityCamera(int time, int censorshipTarget, int direction, int xOffset, int yOffset, AnimatedSprite *sprite)
 	{
-		armed = true;
 		dead = false;
+		this->time = time;
 		this->censorshipTarget = censorshipTarget;
 		this->direction = direction;
 		this->xOffset = xOffset;
 		this->yOffset = yOffset;
 		this->sprite = sprite;
 	}
-	void setArmed(bool armed) { this->armed = armed; }
 	void setDead(bool dead) { this->dead = dead; }
-	bool getArmed() { return armed; }
 	bool getDead() { return dead; }
+	int getTime() { return time; }
 	int getCensorshipTarget() { return censorshipTarget; }
 	int getDirection() { return direction; }
 	int getXOffset() { return xOffset; }

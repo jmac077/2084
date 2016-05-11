@@ -238,18 +238,34 @@ void AnimatedSprite::interactWithItem(WorldItem *item) {
 
 void AnimatedSprite::securityCameraDetection(SecurityCamera *cam)
 {
-	if (cam->getArmed()) {
-		GameStateManager *gsm = Game::getSingleton()->getGSM();
+	GameStateManager *gsm = Game::getSingleton()->getGSM();
+	if (!cam->getDead() && !gsm->getCensoring()) {
 		gsm->getSoundManager()->PlaySong(DETECTED_SONG);
 
-		cam->setArmed(false);
+		// RAISE WALL
+		b2BodyDef bodyDef;
+		bodyDef.type = b2_staticBody;
+		bodyDef.position.Set(143, 141);
+		b2Body* body = gsm->getB2World()->CreateBody(&bodyDef);
+		b2PolygonShape dynamicBox;
+		dynamicBox.SetAsBox(7.0f, 2.0f);
+		b2FixtureDef fixtureDef;
+		fixtureDef.shape = &dynamicBox;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.0f;
+		body->CreateFixture(&fixtureDef);
+		gsm->getWorld()->setRenderHiddenStuff(true);
+
 		/*
 		if (cam->getDirection() > 0)
 			cam->getSprite()->setCurrentState(L"DETECTED_R");
 		else
 			cam->getSprite()->setCurrentState(L"DETECTED_L");
 		*/
+
 		gsm->setCensorship(cam->getCensorshipTarget(), true);
+		gsm->setCensoring(true);
+		gsm->setCensorshipCountdown(cam->getTime() * 1000000000);
 	}
 }
 
@@ -264,6 +280,9 @@ void AnimatedSprite::killSprite() {
 void AnimatedSprite::respawnAtLastCheckpoint() {
 	dead = false;
 	Checkpoint *lastCheckpoint = Game::getSingleton()->getGSM()->getWorld()->getCurrentCheckpoint();
+	GameStateManager *gsm = Game::getSingleton()->getGSM();
+	gsm->setCensoring(false);
+	gsm->setCensorshipCountdown(0);
 	if (lastCheckpoint == nullptr)
 		return;
 	// MOVE PLAYER TO WHERE THEY HIT THE LAST CHECKPOINT
@@ -271,5 +290,5 @@ void AnimatedSprite::respawnAtLastCheckpoint() {
 	m_contacting = false;
 	getB2Body()->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 	// SWITCH CURRENT LEVEL SECTION
-	Game::getSingleton()->getGSM()->getWorld()->setCurrentLevelSection(lastCheckpoint->getLevelSection());
+	gsm->getWorld()->setCurrentLevelSection(lastCheckpoint->getLevelSection());
 }

@@ -31,6 +31,7 @@ private:
 
 	// AND THE RIGHT COLUMN
 	void appendBotRecycler();
+	void appendCensorshipCountdown();
 
 public:
 	// NOTHING TO INITIALIZE OR DESTROY

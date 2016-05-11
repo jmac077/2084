@@ -11,6 +11,7 @@
 #include "mg_VS\stdafx.h"
 #include "mg\game\Game.h"
 #include "mg\game\GameTypes.h"
+#include "mg\gsm\state\GameStateManager.h"
 #include "mg\clock\GameClock.h"
 #include "mg\resources\EngineConfigProperties.h"
 #include "mg\resources\GameResources.h"
