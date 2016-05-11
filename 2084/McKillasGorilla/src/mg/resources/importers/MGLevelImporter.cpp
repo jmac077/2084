@@ -91,6 +91,11 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		SpriteManager *spriteManager = gsm->getSpriteManager();
 		BotRecycler *botRecycler = spriteManager->getBotRecycler();
 
+		// player_position
+		TiXmlElement *playerPosition = levelSpriteTypes->NextSiblingElement();
+		int playerX = xmlReader.extractIntAtt(playerPosition, MG_X_ATT);
+		int playerY = xmlReader.extractIntAtt(playerPosition, MG_Y_ATT);
+
 		// Relevant box2d objects to be reused
 		b2BodyDef bodyDef;
 		b2Body* body;
@@ -105,7 +110,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		player->setRotationInRadians(0);
 		spriteManager->setPlayer(player);
 		bodyDef.type = b2_dynamicBody;
-		bodyDef.position.Set(57.0f, 51.0f);
+		bodyDef.position.Set(playerX, playerY);
 		bodyDef.fixedRotation = true;
 		body = gsm->getB2World()->CreateBody(&bodyDef);
 		dynamicBox.SetAsBox(.8125f, .8125f);
@@ -119,7 +124,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		player->setCollisionBehavior(player->getCollisionHandler());
 
 		// level_sections
-		TiXmlElement *levelSections = levelSpriteTypes->NextSiblingElement();
+		TiXmlElement *levelSections = playerPosition->NextSiblingElement();
 		TiXmlElement *levelSection = levelSections->FirstChildElement();
 		while (levelSection != nullptr)
 		{

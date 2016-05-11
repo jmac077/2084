@@ -10,6 +10,8 @@
   <!-- COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME -->
   <level_sprite_types sprite_types_dir="data/sprite_types/" sprite_types_file="BeginnerBugs.xml" />
 
+  <player_position x="0" y="0" />
+
   <!-- SECTIONS OF THE LEVEL FOR THE VIEWPORT TO CLAMP TO -->
   <level_sections>
     <level_section id="1" x="0" y="0" width="3200" height="3200" />
