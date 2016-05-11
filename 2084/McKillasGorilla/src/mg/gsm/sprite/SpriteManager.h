@@ -33,6 +33,9 @@ private:
 	// AND THIS IS THE PLAYER. AS-IS, WE ONLY ALLOW FOR ONE PLAYER AT A TIME
 	AnimatedSprite *player;
 
+	// LIST OF TELEPORTERS THAT WILL BE RENDERED FOR THEIR SPECIFIC CENSORSHIP PARTS
+	list<Teleporter*> teleporters;
+
 	// THE LIST OF WORLD ITEMS (COLLECTIBLES, INTERACTIBLES, ETC.) IN THIS LEVEL
 	list<WorldItem*> worldItems;
 
@@ -76,6 +79,10 @@ public:
 	void setPlayer(AnimatedSprite *initPlayer)
 	{
 		player = initPlayer;
+	}
+	void addTeleporter(Teleporter *teleporter)
+	{
+		teleporters.push_back(teleporter);
 	}
 	void addWorldItem(WorldItem *item)
 	{

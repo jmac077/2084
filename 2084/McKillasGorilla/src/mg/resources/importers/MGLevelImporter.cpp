@@ -65,8 +65,60 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		TMXMapImporter *mapImporter = (TMXMapImporter*)resources->getMapImporter();
 		mapImporter->load(wDir, wFile);
 
+		// level_sprite_types
+		TiXmlElement *levelSpriteTypes = levelMap->NextSiblingElement();
+
+		// sprite_types DIR
+		const char* spriteTypesDir = levelSpriteTypes->Attribute(MG_SPRITE_TYPES_DIR_ATT.c_str());
+		dir = string(spriteTypesDir);
+		wDir = wstring(dir.begin(), dir.end());
+		text->writeDebugOutput(L"Sprite Types Dir: " + wDir);
+
+		// sprite_types FILE
+		const char* spriteTypesFile = levelSpriteTypes->Attribute(MG_SPRITE_TYPES_FILE_ATT.c_str());
+		file = string(spriteTypesFile);
+		wFile = wstring(file.begin(), file.end());
+		text->writeDebugOutput(L"Sprite Types File: " + wFile);
+
+		// AND LOAD THE SPRITE TYPES
+		PoseurSpriteTypeImporter *spriteTypesImporter = (PoseurSpriteTypeImporter*)resources->getSpriteTypeImporter();
+		spriteTypesImporter->load(wDir, wFile);
+
+		// NOW THAT WE KNOW THE SPRITE TYPES LET'S SETUP
+		// THE BotRecycler SO THAT WE CAN EASILY
+		// MAKE AnimatedSprites AND SPAWN WITHOUT PENALTY
+		SpriteManager *spriteManager = gsm->getSpriteManager();
+		BotRecycler *botRecycler = spriteManager->getBotRecycler();
+
+		// Relevant box2d objects to be reused
+		b2BodyDef bodyDef;
+		b2Body* body;
+		b2PolygonShape dynamicBox;
+		b2FixtureDef fixtureDef;
+
+		//init player sprite
+		AnimatedSprite* player = new AnimatedSprite();
+		player->setSpriteType(spriteManager->getSpriteType(L"Guy"));
+		player->setAlpha(255);
+		player->setCurrentState(L"WALKING_DOWN");
+		player->setRotationInRadians(0);
+		spriteManager->setPlayer(player);
+		bodyDef.type = b2_dynamicBody;
+		bodyDef.position.Set(57.0f, 51.0f);
+		bodyDef.fixedRotation = true;
+		body = gsm->getB2World()->CreateBody(&bodyDef);
+		dynamicBox.SetAsBox(.8125f, .8125f);
+		fixtureDef.shape = &dynamicBox;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.0f;
+		fixtureDef.isSensor = false;
+		body->CreateFixture(&fixtureDef);
+		player->setB2Body(body);
+		body->SetUserData(player);
+		player->setCollisionBehavior(player->getCollisionHandler());
+
 		// level_sections
-		TiXmlElement *levelSections = levelMap->NextSiblingElement();
+		TiXmlElement *levelSections = levelSpriteTypes->NextSiblingElement();
 		TiXmlElement *levelSection = levelSections->FirstChildElement();
 		while (levelSection != nullptr)
 		{
@@ -86,12 +138,6 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			levelSection = levelSection->NextSiblingElement();
 		}
 
-		// Relevant box2d objects to be reused
-		b2BodyDef bodyDef;
-		b2Body* body;
-		b2PolygonShape dynamicBox;
-		b2FixtureDef fixtureDef;
-
 		// teleports
 		TiXmlElement *teleports = levelSections->NextSiblingElement();
 		TiXmlElement *teleport = teleports->FirstChildElement();
@@ -104,7 +150,25 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			int destX = xmlReader.extractIntAtt(teleport, MG_DEST_X);
 			int destY = xmlReader.extractIntAtt(teleport, MG_DEST_Y);
 			int targetSection = xmlReader.extractIntAtt(teleport, MG_TARGET_SECTION_ATT);
-			Teleporter *teleportTarget = new Teleporter(destX, destY, targetSection);
+			bool censorship = xmlReader.extractBoolAtt(teleport, MG_CENSORSHIP_ATT);
+			int censorshipTarget = xmlReader.extractIntAtt(teleport, MG_CENSORSHIP_TARGET_ATT);
+
+			AnimatedSprite *teleporterSprite = NULL;
+
+			// IF TELEPORTER IS USED FOR CENSORSHIP PART, CREATE ANIMATED SPRITE
+			if (censorship)
+			{
+				// CREATE ANIMATED SPRITE FOR TELEPORTER
+				teleporterSprite = new AnimatedSprite();
+				teleporterSprite->setSpriteType(spriteManager->getSpriteType(L"StaticColumn"));
+				teleporterSprite->setAlpha(255);
+				teleporterSprite->setCurrentState(L"IDLE");
+				teleporterSprite->setRotationInRadians(0);
+
+				gsm->setCensorship(censorshipTarget, false);
+			}
+
+			Teleporter *teleporter = new Teleporter(destX, destY, targetSection, censorship, censorshipTarget, teleporterSprite);
 
 			// CREATE TELEPORTER ZONE AS BOX2D SENSOR BOX
 			bodyDef.type = b2_staticBody;
@@ -116,7 +180,12 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			fixtureDef.friction = 0.0f;
 			fixtureDef.isSensor = true;
 			body->CreateFixture(&fixtureDef);
-			body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
+			body->SetUserData(new CollidableZone(teleporter, TeleporterFlag));
+
+			if (censorship) {
+				teleporterSprite->setB2Body(body);
+				spriteManager->addTeleporter(teleporter);
+			}
 
 			teleport = teleport->NextSiblingElement();
 		}
@@ -147,6 +216,7 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			
 			checkpoint = checkpoint->NextSiblingElement();
 		}
+
 		HiddenWall *hidden = new HiddenWall(1,1,1,1);
 		//camera sensor to be added in xml
 		bodyDef.type = b2_staticBody;
@@ -159,54 +229,9 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		fixtureDef.isSensor = true;
 		body->CreateFixture(&fixtureDef);
 		body->SetUserData(new CollidableZone(hidden, HiddenWallFlag));
-		// level_sprite_types
-		TiXmlElement *levelSpriteTypes = checkpoints->NextSiblingElement();
-
-		// sprite_types DIR
-		const char* spriteTypesDir = levelSpriteTypes->Attribute(MG_SPRITE_TYPES_DIR_ATT.c_str());
-		dir = string(spriteTypesDir);
-		wDir = wstring(dir.begin(), dir.end());
-		text->writeDebugOutput(L"Sprite Types Dir: " + wDir);
-
-		// sprite_types FILE
-		const char* spriteTypesFile = levelSpriteTypes->Attribute(MG_SPRITE_TYPES_FILE_ATT.c_str());
-		file = string(spriteTypesFile);
-		wFile = wstring(file.begin(), file.end());
-		text->writeDebugOutput(L"Sprite Types File: " + wFile);
-
-		// AND LOAD THE SPRITE TYPES
-		PoseurSpriteTypeImporter *spriteTypesImporter = (PoseurSpriteTypeImporter*)resources->getSpriteTypeImporter();
-		spriteTypesImporter->load(wDir, wFile);
-
-		// NOW THAT WE KNOW THE SPRITE TYPES LET'S SETUP
-		// THE BotRecycler SO THAT WE CAN EASILY
-		// MAKE AnimatedSprites AND SPAWN WITHOUT PENALTY
-		SpriteManager *spriteManager = gsm->getSpriteManager();
-		BotRecycler *botRecycler = spriteManager->getBotRecycler();
-
-		//init player sprite
-		AnimatedSprite* player = new AnimatedSprite();
-		player->setSpriteType(spriteManager->getSpriteType(L"Guy"));
-		player->setAlpha(255);
-		player->setCurrentState(L"WALKING_DOWN");
-		player->setRotationInRadians(0);
-		spriteManager->setPlayer(player);
-		bodyDef.type = b2_dynamicBody;
-		bodyDef.position.Set(57.0f,51.0f);
-		bodyDef.fixedRotation = true;
-		body = gsm->getB2World()->CreateBody(&bodyDef);
-		dynamicBox.SetAsBox(.8125f,.8125f);
-		fixtureDef.shape = &dynamicBox;
-		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.0f;
-		fixtureDef.isSensor = false;
-		body->CreateFixture(&fixtureDef);
-		player->setB2Body(body);
-		body->SetUserData(player);
-		player->setCollisionBehavior(player->getCollisionHandler());
 
 		// world_items
-		TiXmlElement *worldItems = levelSpriteTypes->NextSiblingElement();
+		TiXmlElement *worldItems = checkpoints->NextSiblingElement();
 		TiXmlElement *worldItem = worldItems->FirstChildElement();
 		while (worldItem != nullptr)
 		{

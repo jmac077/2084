@@ -178,8 +178,13 @@ void AnimatedSprite::handleCollision() {
 
 void AnimatedSprite::teleportPlayer(Teleporter *teleportTarget) {
 	GameStateManager *gsm = Game::getSingleton()->getGSM();
-	if (gsm->getWorld()->getRenderHiddenStuff())
+	
+	if (teleportTarget->getCensorship()) {
+		// DON'T TELEPORT IF THIS IS A CENSORSHIP TELEPORTER AND IT IS INACTIVE
+		if (!gsm->getCensorship(teleportTarget->getCensorshipTarget()))
+			return;
 		gsm->getSoundManager()->PlaySoundEffect(TELEPORT_SFX);
+	}		
 	// MOVE PLAYER TO TELEPORT LOCATION
 	getB2Body()->SetTransform(b2Vec2(teleportTarget->getDestX(), teleportTarget->getDestY()), 0.0f);
 	m_contacting = false;
@@ -199,7 +204,9 @@ void AnimatedSprite::hitCheckpoint(Checkpoint *checkpoint) {
 void AnimatedSprite::raiseWall() {
 	GameStateManager *gsm = Game::getSingleton()->getGSM();
 	gsm->getSoundManager()->PlaySong(DETECTED_SONG);
-
+	gsm->setCensorship(0, true);
+	
+	
 	//get dimensions of wall create body and add it to wall
 	//add graphics to world renderer
 	b2BodyDef bodyDef;
@@ -213,6 +220,7 @@ void AnimatedSprite::raiseWall() {
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.0f;
 	body->CreateFixture(&fixtureDef);
+	/*
 	//also add static tiles that teleport player
 	Teleporter *teleportTarget = new Teleporter(176, 22, 4);
 
@@ -319,6 +327,7 @@ void AnimatedSprite::raiseWall() {
 	body->SetUserData(new CollidableZone(teleportTarget, TeleporterFlag));
 
 	gsm->getWorld()->setRenderHiddenStuff(true);
+	*/
 }
 
 void AnimatedSprite::interactWithItem(WorldItem *item) {

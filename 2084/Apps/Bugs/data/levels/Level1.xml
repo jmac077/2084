@@ -7,17 +7,29 @@
   <!-- MAP TO BE USED FOR THIS LEVEL -->
   <level_map map_dir="data/maps/damndaniel/" map_file="2084_level_1.tmx" />
 
+  <!-- COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME -->
+  <level_sprite_types sprite_types_dir="data/sprite_types/" sprite_types_file="BeginnerBugs.xml" />
+
   <!-- SECTIONS OF THE LEVEL FOR THE VIEWPORT TO CLAMP TO -->
   <level_sections>
     <level_section id="1" x="0" y="0" width="-1" height="1440" />
     <level_section id="2" x="0" y="1408" width="1728" height="-1" />
     <level_section id="3" x="1728" y="1536" width="-1" height="-1" />
+    <level_section id="4" x="0" y="0" width="3200" height="3200" />
   </level_sections>
 
   <!-- TELEPORTERS AND THEIR TARGETS -->
   <teleports>
-    <teleport x="58" y="5" width="6" height="1" dest_x="65" dest_y="93" target_section="2" />
-    <teleport x="82" y="193" width="8" height="1" dest_x="142" dest_y="194" target_section="3" />
+    <teleport x="58" y="5" width="6" height="1" dest_x="65" dest_y="93" target_section="2" censorship="false" censorship_target="-1" />
+    <teleport x="82" y="193" width="8" height="1" dest_x="142" dest_y="194" target_section="3" censorship="false" censorship_target="-1" />
+    <teleport x="168" y="154" width="2" height="2" dest_x="176" dest_y="22" target_section="4" censorship="true" censorship_target="0" />
+    <teleport x="126" y="164" width="2" height="2" dest_x="122" dest_y="74" target_section="4" censorship="true" censorship_target="0" />
+    <teleport x="148" y="82" width="4" height="4" dest_x="120" dest_y="12" target_section="4" censorship="true" censorship_target="0" />
+    <teleport x="142" y="12" width="2" height="2" dest_x="166" dest_y="175" target_section="4" censorship="true" censorship_target="0" />
+    <teleport x="122" y="22" width="2" height="2" dest_x="120" dest_y="40" target_section="4" censorship="true" censorship_target="0" />
+    <teleport x="120" y="56" width="2" height="2" dest_x="122" dest_y="180" target_section="4" censorship="true" censorship_target="0" />
+    <teleport x="176" y="56" width="2" height="2" dest_x="178" dest_y="74" target_section="4" censorship="true" censorship_target="0" />
+    <teleport x="178" y="88" width="2" height="2" dest_x="156" dest_y="122" target_section="4" censorship="true" censorship_target="0" />
   </teleports>
 
   <!-- CHECKPOINTS -->
@@ -25,13 +37,10 @@
     <checkpoint x="60" y="98" width="10" height="1" target_section="2" />
     <checkpoint x="138" y="188" width="12" height="1" target_section="3" />
   </checkpoints>
-  
-  <!-- COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME -->
-  <level_sprite_types sprite_types_dir="data/sprite_types/" sprite_types_file="BeginnerBugs.xml" />
 
   <!-- LIST OF WORLD ITEMS (COLLECTIBLES, INTERACTIBLES, STATICS OBJECTS) IN THE LEVEL -->
   <world_items>
-    <world_item type="TV" x="50" y="38" width="4" height="4" flag="0" collectible="false" />
+    <world_item type="TV" x="58" y="38" width="4" height="4" flag="0" collectible="false" />
     <world_item type="KeyCard" x="20" y="176" width="2" height="2" flag="1" collectible="true" />
     <world_item type="Computer" x="144" y="124" width="4" height="4" flag="2" collectible="false" />
   </world_items>
@@ -43,7 +52,8 @@
   
   <!-- INITIAL BOTS WHEN THE LEVEL STARTS -->
   <bots_list>
-	  <bot type="drone" init_x="51" init_y="139" init_vx="0" init_vy="0" init_bot_state="MOVING" init_sprite_state="IDLE" />
+	  <bot type="drone" init_x="51" init_y="139" init_vx="0" init_vy="0" wp1_x="1095" wp1_y="2024" wp2_x="816" wp2_y="2320" init_bot_state="MOVING" init_sprite_state="IDLE" />
+	  <bot type="drone" init_x="151" init_y="55" init_vx="0" init_vy="0" wp1_x="1920" wp1_y="880" wp2_x="2816" wp2_y="880" init_bot_state="MOVING" init_sprite_state="IDLE" />
   </bots_list>
   
   <!-- WE CAN EVEN SPECIFY BOT SPAWN LOCATIONS -->

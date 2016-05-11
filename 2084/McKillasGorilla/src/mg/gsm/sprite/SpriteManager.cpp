@@ -73,10 +73,16 @@ void SpriteManager::addSpriteItemsToRenderList()
 		RenderList *renderList = graphics->getWorldRenderList();
 		Viewport *viewport = gui->getViewport();
 
-		// ADD THE PLAYER SPRITE, IF THERE IS ONE
-		if (player != nullptr)
-			addSpriteToRenderList(player, renderList, viewport, 0, -28);
-		// NOW ADD THE REST OF THE SPRITES
+		// ADD TELEPORTERS
+		list<Teleporter*>::iterator teleporter = teleporters.begin();
+		while (teleporter != teleporters.end())
+		{
+			// RENDER TELEPORTER IF ITS CENSORSHIP IS GOING ON RIGHT NOW
+			if (gsm->getCensorship((*teleporter)->getCensorshipTarget()))
+				addSpriteToRenderList((*teleporter)->getSprite(), renderList, viewport, 0, 0);
+			teleporter++;
+		}
+		// ADD WORLD ITEMS
 		list<WorldItem*>::iterator worldItem = worldItems.begin();
 		while (worldItem != worldItems.end())
 		{
@@ -86,6 +92,7 @@ void SpriteManager::addSpriteItemsToRenderList()
 				addSpriteToRenderList(item->getSprite(), renderList, viewport, 0, 0);
 			worldItem++;
 		}
+		// ADD BOTS
 		list<Bot*>::iterator botIterator;
 		botIterator = bots.begin();
 		while (botIterator != bots.end())
@@ -94,6 +101,9 @@ void SpriteManager::addSpriteItemsToRenderList()
 			addSpriteToRenderList(bot, renderList, viewport, 0, 0);
 			botIterator++;
 		}
+		// ADD THE PLAYER SPRITE, IF THERE IS ONE
+		if (player != nullptr)
+			addSpriteToRenderList(player, renderList, viewport, 0, -28);
 	}
 }
 
@@ -153,14 +163,7 @@ void SpriteManager::unloadSprites()
 	// CLEAR OUT THE PLAYER, BUT NOT ITS SpriteType
 	if (player != nullptr)
 		delete player;
-	// CLEAR OUT worldItems BUT NOT SpriteTypes
-	list<WorldItem*>::iterator item = worldItems.begin();
-	while (item != worldItems.end())
-	{
-		list<WorldItem*>::iterator tempIt = item;
-		item++;
-		delete (*tempIt);
-	}
+	teleporters.clear();
 	worldItems.clear();
 	// CLEAR OUT THE BOTS, BUT NOT THEIR SpriteTypes
 	list<Bot*>::iterator botsIt = bots.begin();
@@ -224,6 +227,13 @@ void SpriteManager::update()
 		player->updateSprite();
 
 	// NOW UPDATE THE REST OF THE SPRITES ANIMATION FRAMES/STATES/ROTATIONS
+	list<Teleporter*>::iterator teleporter = teleporters.begin();
+	while (teleporter != teleporters.end())
+	{
+		(*teleporter)->getSprite()->updateSprite();
+		teleporter++;
+	}
+
 	list<WorldItem*>::iterator item = worldItems.begin();
 	while (item != worldItems.end())
 	{
