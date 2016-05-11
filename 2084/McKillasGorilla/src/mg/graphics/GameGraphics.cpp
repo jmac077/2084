@@ -121,12 +121,14 @@ void GameGraphics::shutDown()
 */
 void GameGraphics::renderAllText()
 {
-	GameText *text = Game::getSingleton()->getText();
-	int numTextObjects = text->getRenderTextSize();
-	for (int i = 0; i < numTextObjects; i++)
-	{
-		RenderText *textToDraw = text->getRenderTextAtIndex(i);
-		renderText(textToDraw);
+	if (debugTextShouldBeRendered) {
+		GameText *text = Game::getSingleton()->getText();
+		int numTextObjects = text->getRenderTextSize();
+		for (int i = 0; i < numTextObjects; i++)
+		{
+			RenderText *textToDraw = text->getRenderTextAtIndex(i);
+			renderText(textToDraw);
+		}
 	}
 }
 

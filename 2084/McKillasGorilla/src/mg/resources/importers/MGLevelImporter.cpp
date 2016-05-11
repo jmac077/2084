@@ -218,21 +218,6 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			checkpoint = checkpoint->NextSiblingElement();
 		}
 
-		/*
-		HiddenWall *hidden = new HiddenWall(1,1,1,1);
-		//camera sensor to be added in xml
-		bodyDef.type = b2_staticBody;
-		bodyDef.position.Set(143,147);
-		body = gsm->getB2World()->CreateBody(&bodyDef);
-		dynamicBox.SetAsBox(7, 2);
-		fixtureDef.shape = &dynamicBox;
-		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.0f;
-		fixtureDef.isSensor = true;
-		body->CreateFixture(&fixtureDef);
-		body->SetUserData(new CollidableZone(hidden, HiddenWallFlag));
-		*/
-
 		// world_items
 		TiXmlElement *worldItems = checkpoints->NextSiblingElement();
 		TiXmlElement *worldItem = worldItems->FirstChildElement();
@@ -325,8 +310,30 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 			securityCamera = securityCamera->NextSiblingElement();
 		}
 
+		TiXmlElement *hiddenWalls = securityCameras->NextSiblingElement();
+		TiXmlElement *hiddenWall = hiddenWalls->FirstChildElement();
+		while (hiddenWall != nullptr)
+		{
+			int x = xmlReader.extractIntAtt(hiddenWall, MG_X_ATT);
+			int y = xmlReader.extractIntAtt(hiddenWall, MG_Y_ATT);
+			int width = xmlReader.extractIntAtt(hiddenWall, MG_WIDTH_ATT);
+			int height = xmlReader.extractIntAtt(hiddenWall, MG_HEIGHT_ATT);
+
+			bodyDef.type = b2_staticBody;
+			bodyDef.position.Set(x, y);
+			body = gsm->getB2World()->CreateBody(&bodyDef);
+			dynamicBox.SetAsBox(width, height);
+			fixtureDef.shape = &dynamicBox;
+			fixtureDef.density = 1.0f;
+			fixtureDef.friction = 0.0f;
+			fixtureDef.isSensor = false;
+			body->CreateFixture(&fixtureDef);
+
+			hiddenWall = hiddenWall->NextSiblingElement();
+		}
+
 		// level_bot_types
-		TiXmlElement *botTypesList = securityCameras->NextSiblingElement();
+		TiXmlElement *botTypesList = hiddenWalls->NextSiblingElement();
 		TiXmlElement *botType = botTypesList->FirstChildElement();
 		while (botType != nullptr)
 		{

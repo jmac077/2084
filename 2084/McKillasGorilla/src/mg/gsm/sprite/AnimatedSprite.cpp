@@ -242,18 +242,6 @@ void AnimatedSprite::securityCameraDetection(SecurityCamera *cam)
 	if (!cam->getDead() && !gsm->getCensoring()) {
 		gsm->getSoundManager()->PlaySong(DETECTED_SONG);
 
-		// RAISE WALL
-		b2BodyDef bodyDef;
-		bodyDef.type = b2_staticBody;
-		bodyDef.position.Set(143, 141);
-		b2Body* body = gsm->getB2World()->CreateBody(&bodyDef);
-		b2PolygonShape dynamicBox;
-		dynamicBox.SetAsBox(7.0f, 2.0f);
-		b2FixtureDef fixtureDef;
-		fixtureDef.shape = &dynamicBox;
-		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.0f;
-		body->CreateFixture(&fixtureDef);
 		gsm->getWorld()->setRenderHiddenStuff(true);
 
 		/*

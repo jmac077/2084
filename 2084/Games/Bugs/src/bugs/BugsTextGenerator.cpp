@@ -127,11 +127,11 @@ void BugsTextGenerator::startUp()
 	text->setTextGenerator((TextGenerator*)this);
 
 	// THEN GENERATE THE INITIAL TEXT TO DISPLAY
-	//appendMouseCoords();
-	//appendClock();
-	//appendBotCount();
-	//appendBotRecycler();
-	appendCensorshipCountdown();
+	appendMouseCoords();
+	appendClock();
+	appendBotCount();
+	appendBotRecycler();
+	//appendCensorshipCountdown();
 
 	// AND THEN ADD IT TO THE TEXT MANAGER, SPECIFYING WHERE IT SHOULD BE RENDERED
 	text->addRenderText(&leftTextToGenerate, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
@@ -150,10 +150,10 @@ void BugsTextGenerator::update()
 	// WHAT WE WANT.
 	leftTextToGenerate.clear();
 	rightTextToGenerate.clear();
-	//appendMouseCoords();
-	//appendClock();
-	//appendBotCount();
-	//appendBotRecycler();
-	appendCensorshipCountdown();
+	appendMouseCoords();
+	appendClock();
+	appendBotCount();
+	appendBotRecycler();
+	//appendCensorshipCountdown();
 }
 

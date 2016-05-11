@@ -49,6 +49,11 @@
   <security_cameras>
     <security_camera time="5" x="143" y="147" draw_x="151" draw_y="146" width="8" height="4" censorship_target="0" direction="-1" />
   </security_cameras>
+
+  <!-- LIST OF INVISIBLE WALLS THAT AREN'T LOADED FROM TILED LEVEL -->
+  <hidden_walls>
+    <hidden_wall x="143" y="141" width="7" height="2" />
+  </hidden_walls>
   
   <!-- THESE ARE THE BOT TYPES THE LEVEL WILL BE SPAWNING -->
   <level_bot_types>
