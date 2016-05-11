@@ -2,7 +2,7 @@
 
 <!-- THIS FILE LISTS ALL THE DATA ASSOCIATED WITH Level 1 FOR THE BUGS GAME -->
 
-<level level_name="Home" completion_flag="2" >
+<level level_name="Society" completion_flag="2" >
   
   <!-- MAP TO BE USED FOR THIS LEVEL -->
   <level_map map_dir="data/maps/damndaniel2/" map_file="2084_level_2.tmx" />
@@ -10,7 +10,7 @@
   <!-- COMPLETE LIST OF SPRITE TYPES USED FOR THIS LEVEL TO BE LOADED AT LEVEL LOAD TIME -->
   <level_sprite_types sprite_types_dir="data/sprite_types/" sprite_types_file="BeginnerBugs.xml" />
 
-  <player_position x="0" y="0" />
+  <player_position x="9" y="28" />
 
   <!-- SECTIONS OF THE LEVEL FOR THE VIEWPORT TO CLAMP TO -->
   <level_sections>

@@ -219,6 +219,7 @@ void GameStateManager::loadLevel(unsigned int initLevel)
 		GameResources *resources = game->getResources();
 		MGImporter *levelImporter = resources->getLevelImporter();
 		levelImporter->load(fileDirToLoad, fileToLoad);
+		levelFlags = 0;
 	}
 }
 

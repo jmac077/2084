@@ -45,7 +45,7 @@ void BugsKeyEventHandler::handleKeyEvents()
 	{
 		if (input->isKeyDownForFirstTime(P_KEY))
 		{
-
+			gsm->setFlag(gsm->getLevelCompletionFlag());
 		}
 		if (input->isKeyDownForFirstTime(T_KEY))
 		{
