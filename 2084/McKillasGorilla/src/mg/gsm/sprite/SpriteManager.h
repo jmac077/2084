@@ -100,7 +100,7 @@ public:
 	void				addBot(Bot *botToAdd);
 	void				addSpriteItemsToRenderList();
 	unsigned int		addSpriteType(wstring spriteTypeName, AnimatedSpriteType *spriteTypeToAdd);
-	void				addSpriteToRenderList(AnimatedSprite *sprite, RenderList *renderList, Viewport *viewport, int offsetX, int offsetY);
+	void				addSpriteToRenderList(AnimatedSprite *sprite, RenderList *renderList, Viewport *viewport, int zVal, int offsetX, int offsetY);
 	AnimatedSpriteType* getSpriteType(unsigned int typeIndex);
 	AnimatedSpriteType* getSpriteType(wstring spriteTypeName);
 	Bot*				removeBot(Bot *botToRemove);

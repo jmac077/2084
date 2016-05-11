@@ -26,6 +26,7 @@
 void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 										  RenderList *renderList,
 										  Viewport *viewport,
+										  int zVal,
 										  int offsetX, int offsetY)
 {
 	// GET THE SPRITE TYPE INFO FOR THIS SPRITE
@@ -49,7 +50,7 @@ void SpriteManager::addSpriteToRenderList(AnimatedSprite *sprite,
 		renderList->addRenderItem(	currentImageId,
 									round(spriteX - viewport->getViewportX()),
 									round(spriteY - viewport->getViewportY()),
-									100,
+									zVal,
 									sprite->getAlpha(),
 									spriteType->getTextureWidth(),
 									spriteType->getTextureHeight(),
@@ -75,14 +76,14 @@ void SpriteManager::addSpriteItemsToRenderList()
 
 		// ADD THE PLAYER SPRITE, IF THERE IS ONE
 		if (player != nullptr)
-			addSpriteToRenderList(player, renderList, viewport, 0, -28);
+			addSpriteToRenderList(player, renderList, viewport, 200, 0, -28);
 		// ADD TELEPORTERS
 		list<Teleporter*>::iterator teleporter = teleporters.begin();
 		while (teleporter != teleporters.end())
 		{
 			// RENDER TELEPORTER IF ITS CENSORSHIP IS GOING ON RIGHT NOW
 			if (gsm->getCensorship((*teleporter)->getCensorshipTarget()))
-				addSpriteToRenderList((*teleporter)->getSprite(), renderList, viewport, 0, 0);
+				addSpriteToRenderList((*teleporter)->getSprite(), renderList, viewport, 100, 0, 0);
 			teleporter++;
 		}
 		// ADD WORLD ITEMS
@@ -92,7 +93,7 @@ void SpriteManager::addSpriteItemsToRenderList()
 			WorldItem *item = (*worldItem);
 			// DO NOT RENDER ITEM IF IT IS INACTIVE AND A COLLECTIBLE
 			if (item->getActive() || !item->getCollectible())
-				addSpriteToRenderList(item->getSprite(), renderList, viewport, 0, 0);
+				addSpriteToRenderList(item->getSprite(), renderList, viewport, 100, 0, 0);
 			worldItem++;
 		}
 		// ADD SECURITY CAMS
@@ -100,7 +101,7 @@ void SpriteManager::addSpriteItemsToRenderList()
 		while (cam != securityCameras.end())
 		{
 			// DRAW CAM AT TOP LEFT OR RIGHT CORNER OF BOX
-			addSpriteToRenderList((*cam)->getSprite(), renderList, viewport, (*cam)->getXOffset() * 16, (*cam)->getYOffset() * 16);
+			addSpriteToRenderList((*cam)->getSprite(), renderList, viewport, 100, (*cam)->getXOffset() * 16, (*cam)->getYOffset() * 16);
 			cam++;
 		}
 		// ADD BOTS
@@ -109,7 +110,7 @@ void SpriteManager::addSpriteItemsToRenderList()
 		while (botIterator != bots.end())
 		{
 			Bot *bot = (*botIterator);
-			addSpriteToRenderList(bot, renderList, viewport, 0, 0);
+			addSpriteToRenderList(bot, renderList, viewport, 100, 0, 0);
 			botIterator++;
 		}
 	}
