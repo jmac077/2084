@@ -43,7 +43,8 @@ bool MGLevelImporter::load(wstring levelFileDir, wstring levelFile)
 		wstring wTextToWrite(textToWrite.begin(), textToWrite.end());
 		text->writeDebugOutput(L"Level Name: " + wTextToWrite);
 		
-		// THE LEVEL NODE HAS 4 CHILD NODES TO LOAD
+		int completionFlag = xmlReader.extractIntAtt(level, MG_COMPLETION_FLAG_ATT);
+		gsm->setLevelCompletionFlag(completionFlag);
 
 		// level_map
 		TiXmlElement *levelMap = level->FirstChildElement();

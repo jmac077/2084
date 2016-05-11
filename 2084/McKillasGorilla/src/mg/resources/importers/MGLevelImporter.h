@@ -21,6 +21,7 @@ static const string MG_SPAWNING_POOL_ELEMENT = "spawning_pool";
 
 // ATTRIBUTES
 static const string MG_LEVEL_NAME_ATT = "level_name";
+static const string MG_COMPLETION_FLAG_ATT = "completion_flag";
 static const string	MG_MAP_DIR_ATT = "map_dir";
 static const string MG_MAP_FILE_ATT = "map_file";
 static const string MG_SPRITE_TYPES_DIR_ATT = "sprite_types_dir";

@@ -75,7 +75,10 @@ private:
 	int32 positionIterations = 3;
 
 	// THE BITWISE FLAGS FOR THE CURRENT LEVEL
-	unsigned int levelFlags = 0;
+	int levelFlags = 0;
+
+	// THE FLAG THAT WHEN ADDED TO levelFlags WILL TRIGGER LEVEL COMPLETION
+	int levelCompletionFlag;
 
 	// A MAP OF CENSORSHIP TARGETS TO IF THEY ARE CURRENTLY ACTIVE OR NOT
 	map<int, bool> censorshipTargets;
@@ -91,12 +94,13 @@ public:
 	GameStateMachine*	getGameStateMachine()	{ return gameStateMachine;				}
 	wstring				getCurrentLevelName()	{ return levelNames[currentLevelIndex];	}
 	b2World*			getB2World()			{ return myWorld;						}
-	int					getFlags()				{ return levelFlags; }
-	bool				getCensorship(int c)	{ return censorshipTargets[c]; }
+	int					getFlags()				{ return levelFlags;					}
+	bool				getCensorship(int c)	{ return censorshipTargets[c];			}
 
 	// INLINED MUTATOR METHODS
 	void setGameStateMachine(GameStateMachine *initBotStateManager) { gameStateMachine = initBotStateManager; }
 	void setFlag(int flag) { levelFlags = levelFlags | flag; }
+	void setLevelCompletionFlag(int flag) { levelCompletionFlag = flag; }
 	void setCensorship(int c, bool active) { censorshipTargets[c] = active; }
 
 	// METHODS FOR TESTING THE CURRENT GAME STATE
