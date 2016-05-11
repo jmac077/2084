@@ -21,6 +21,9 @@ public:
 		this->collectible = collectible;
 		active = true;
 	}
+	~WorldItem() {
+		delete sprite;
+	};
 	AnimatedSprite *getSprite() { return sprite; }
 	int getFlag() { return flag; }
 	bool getCollectible() { return collectible; }

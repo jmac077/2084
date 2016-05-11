@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sprite_type>
- <width>55</width>
- <height>55</height>
+ <width>512</width>
+ <height>128</height>
  <images_list>
   <image_file id="0"  file_name="securitycam.png"/>
   <image_file id="1"  file_name="securitycamred.png"/>
@@ -24,7 +24,7 @@
      <state>IDLE_L</state>
      <animation_sequence>
        <pose image_id="2" duration="20"/>
-       <pose image_id="3" duration="20"/>
+       <pose image_id="7" duration="20"/>
      </animation_sequence>
    </animation_state>
    <animation_state>

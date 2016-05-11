@@ -69,7 +69,7 @@ private:
 	SoundManager *soundManager;
 
 	// FOR DOING ALL COLLISION DETECTION AND RESOLUTION
-	b2World* myWorld;
+	b2World* myWorld = nullptr;
 	float32 timeStep = 1 / 60.0;      //the length of time passed to simulate (seconds)
 	int32 velocityIterations = 8;   //how strongly to correct velocity
 	int32 positionIterations = 3;
@@ -104,6 +104,7 @@ public:
 	bool				getCensoring()			{ return censoring;						}
 	bool				getCensorship(int c)	{ return censorshipTargets[c];			}
 	int64_t				getCensorshipCountdown(){ return censorshipCountdown;			}
+	int					getLevelCompletionFlag() { return levelCompletionFlag;			}
 
 	// INLINED MUTATOR METHODS
 	void setGameStateMachine(GameStateMachine *initBotStateManager) { gameStateMachine = initBotStateManager; }

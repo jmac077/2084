@@ -22,6 +22,9 @@ public:
 		this->yOffset = yOffset;
 		this->sprite = sprite;
 	}
+	~SecurityCamera() {
+		delete sprite;
+	};
 	void setDead(bool dead) { this->dead = dead; }
 	bool getDead() { return dead; }
 	int getTime() { return time; }

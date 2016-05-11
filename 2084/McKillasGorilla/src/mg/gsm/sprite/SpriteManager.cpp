@@ -171,8 +171,34 @@ void SpriteManager::unloadSprites()
 	// CLEAR OUT THE PLAYER, BUT NOT ITS SpriteType
 	if (player != nullptr)
 		delete player;
+
+	list<Teleporter*>::iterator teleIt = teleporters.begin();
+	while (teleIt != teleporters.end())
+	{
+		list<Teleporter*>::iterator tempIt = teleIt;
+		teleIt++;
+		Teleporter *teleToDelete = (*tempIt);
+		delete teleToDelete;
+	}
 	teleporters.clear();
+	list<WorldItem*>::iterator ItemIt = worldItems.begin();
+	while (ItemIt != worldItems.end())
+	{
+		list<WorldItem*>::iterator tempIt = ItemIt;
+		ItemIt++;
+		WorldItem *itemToDelete = (*tempIt);
+		delete itemToDelete;
+	}
 	worldItems.clear();
+	list<SecurityCamera*>::iterator CamIt = securityCameras.begin();
+	while (CamIt != securityCameras.end())
+	{
+		list<SecurityCamera*>::iterator tempIt = CamIt;
+		CamIt++;
+		SecurityCamera *camToDelete = (*tempIt);
+		delete camToDelete;
+	}
+	securityCameras.clear();
 	// CLEAR OUT THE BOTS, BUT NOT THEIR SpriteTypes
 	list<Bot*>::iterator botsIt = bots.begin();
 	while (botsIt != bots.end())

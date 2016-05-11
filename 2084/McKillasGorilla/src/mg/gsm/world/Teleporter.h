@@ -25,6 +25,9 @@ public:
 		this->censorshipTarget = censorshipTarget;
 		this->sprite = sprite;
 	}
+	~Teleporter() {
+		delete sprite;
+	};
 	float getDestX() { return destX; }
 	float getDestY() { return destY; }
 	int getTargetSection() { return targetSection; }

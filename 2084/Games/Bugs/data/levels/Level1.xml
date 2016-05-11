@@ -24,7 +24,7 @@
     <teleport x="82" y="193" width="8" height="1" dest_x="142" dest_y="194" target_section="3" censorship="false" censorship_target="-1" />
     <teleport x="168" y="154" width="2" height="2" dest_x="176" dest_y="22" target_section="4" censorship="true" censorship_target="0" />
     <teleport x="126" y="164" width="2" height="2" dest_x="122" dest_y="74" target_section="4" censorship="true" censorship_target="0" />
-    <teleport x="148" y="82" width="4" height="4" dest_x="120" dest_y="12" target_section="4" censorship="true" censorship_target="0" />
+    <teleport x="148" y="82" width="2" height="2" dest_x="120" dest_y="12" target_section="4" censorship="true" censorship_target="0" />
     <teleport x="142" y="12" width="2" height="2" dest_x="166" dest_y="175" target_section="4" censorship="true" censorship_target="0" />
     <teleport x="122" y="22" width="2" height="2" dest_x="120" dest_y="40" target_section="4" censorship="true" censorship_target="0" />
     <teleport x="120" y="56" width="2" height="2" dest_x="122" dest_y="180" target_section="4" censorship="true" censorship_target="0" />
